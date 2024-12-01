@@ -23,5 +23,15 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(raylib)
 
 
-add_executable(SpaceShooter main.cpp)
+add_executable(SpaceShooter src/EntryPoint.cpp
+        include/framework/Application.h
+        src/framework/Application.cpp
+        include/EntryPoint.h
+        include/framework/Core.h
+        src/framework/Core.cpp)
+
 target_link_libraries(SpaceShooter PRIVATE box2d raylib)
+
+target_include_directories(SpaceShooter PUBLIC
+        include
+)
