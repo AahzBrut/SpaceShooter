@@ -22,11 +22,15 @@ namespace SpaceShooter {
     }
 
     void Actor::UpdateInternal(const float deltaTime) {
+        if (IsPendingDestruction()) return;
+
         LOG("Updating Actor");
         Update(deltaTime);
     }
 
     void Actor::Render() const {
+        if (IsPendingDestruction()) return;
+
         DrawTexture(texture, 0, 0, WHITE);
     }
 }

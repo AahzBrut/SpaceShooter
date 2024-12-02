@@ -25,17 +25,14 @@ namespace SpaceShooter {
             actor->InitializeInternal();
         }
         pendingActors.clear();
+
         for (auto iterator = childActors.begin(); iterator < childActors.end();) {
             if (const auto actor = iterator->get(); actor->IsPendingDestruction()) {
                 iterator = childActors.erase(iterator);
             } else {
-                actor->Update(deltaTime);
+                actor->UpdateInternal(deltaTime);
                 ++iterator;
             }
-        }
-
-        for (const auto &actor: childActors) {
-            actor->UpdateInternal(deltaTime);
         }
 
         Update(deltaTime);
