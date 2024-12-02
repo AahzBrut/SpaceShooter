@@ -4,6 +4,7 @@
 namespace SpaceShooter {
     class World;
 
+    // ReSharper disable once CppClassCanBeFinal
     class Actor: public Object {
     public:
         explicit Actor(World *world);
