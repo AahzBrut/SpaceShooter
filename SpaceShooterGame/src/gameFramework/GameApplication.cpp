@@ -9,6 +9,7 @@ SpaceShooter::Application* GetApplication() {
 
 namespace SpaceShooter {
     GameApplication::GameApplication() {
-        LoadWorld<World>();
+        auto world = LoadWorld<World>();
+        world.lock()->SpawnActor<Actor>();
     }
 }

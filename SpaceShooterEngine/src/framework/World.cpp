@@ -1,5 +1,6 @@
 #include "framework/Core.h"
 #include "framework/World.h"
+#include "framework/Actor.h"
 
 
 namespace SpaceShooter {
@@ -16,7 +17,16 @@ namespace SpaceShooter {
         }
     }
 
-    void World::InternalUpdate(float deltaTime) {
+    void World::InternalUpdate(const float deltaTime) {
+        for (const auto &actor : pendingActors) {
+            childActors.push_back(actor);
+            actor->InitializeInternal();
+        }
+        pendingActors.clear();
+        for (const auto &actor : childActors) {
+            actor->UpdateInternal(deltaTime);
+        }
+
         Update(deltaTime);
         LOG("Updating world\n");
     }

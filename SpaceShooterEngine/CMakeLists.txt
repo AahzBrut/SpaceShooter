@@ -13,6 +13,8 @@ add_library(SpaceShooterEngine STATIC
         src/framework/Core.cpp
         src/framework/World.cpp
         include/framework/World.h
+        include/framework/Actor.h
+        src/framework/Actor.cpp
 )
 
 target_link_libraries(SpaceShooterEngine PRIVATE box2d raylib)
