@@ -5,6 +5,7 @@
 #include <memory>
 #include <set>
 #include <unordered_map>
+#include <unordered_set>
 #include <vector>
 
 namespace SpaceShooter {
@@ -26,8 +27,8 @@ namespace SpaceShooter {
     template<typename Key, typename Value, typename Hasher = std::hash<Key>>
     using Dictionary = std::unordered_map<Key, Value, Hasher>;
 
-    template<typename T, typename Compare = std::less<T>>
-    using Set = std::set<T, Compare>;
+    template<typename T>
+    using Set = std::unordered_set<T>;
 
 #define LOG(M, ...) printf(M "\n", ##__VA_ARGS__)
 }

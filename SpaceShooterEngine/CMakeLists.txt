@@ -11,6 +11,8 @@ add_library(SpaceShooterEngine STATIC
         include/EntryPoint.h
         include/framework/Core.h
         src/framework/Core.cpp
+        src/framework/World.cpp
+        include/framework/World.h
 )
 
 target_link_libraries(SpaceShooterEngine PRIVATE box2d raylib)

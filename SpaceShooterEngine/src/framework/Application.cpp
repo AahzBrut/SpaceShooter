@@ -3,20 +3,25 @@
 
 #include "raylib.h"
 #include "framework/Application.h"
-
 #include "framework/Core.h"
+#include "framework/World.h"
 
 
 namespace SpaceShooter {
+    Application::Application()
+        : currentWorld(nullptr) {
+    }
+
     // ReSharper disable once CppMemberFunctionMayBeStatic
-    void Application::Run() { // NOLINT(*-convert-member-functions-to-static)
+    void Application::Run() {
+        // NOLINT(*-convert-member-functions-to-static)
         InitWindow(800, 950, "Space shooter");
         SetTargetFPS(60);
 
         while (!WindowShouldClose()) {
             UpdateInternal();
             RenderInternal();
-         }
+        }
         CloseWindow();
     }
 
@@ -33,13 +38,17 @@ namespace SpaceShooter {
     }
 
     void Application::UpdateInternal() {
-        Update(GetFrameTime());
+        const auto deltaTime = GetFrameTime();
+        Update(deltaTime);
+
+        if (currentWorld) {
+            currentWorld->InternalUpdate(deltaTime);
+        }
     }
 
     void Application::Render() {
     }
 
     void Application::Update(float deltaTime) {
-
     }
 }
