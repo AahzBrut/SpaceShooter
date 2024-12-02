@@ -10,7 +10,8 @@ SpaceShooter::Application *GetApplication() {
 namespace SpaceShooter {
     GameApplication::GameApplication(): Application{600, 900, "Space Shooter"} {
         const auto world = LoadWorld<World>();
-        world.lock()->SpawnActor<Actor>();
+        auto actor = world.lock()->SpawnActor<Actor>();
+        actor.lock()->SetTexture("assets/SpaceShooterRedux/sample.png");
         actorToDestroy = world.lock()->SpawnActor<Actor>();
         counter = 0;
     }

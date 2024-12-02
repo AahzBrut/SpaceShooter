@@ -28,14 +28,9 @@ namespace SpaceShooter {
 
     // ReSharper disable once CppMemberFunctionMayBeStatic
     void Application::RenderInternal() {// NOLINT(*-convert-member-functions-to-static)
-        BeginDrawing();
-        ClearBackground(SKYBLUE);
-
-        const auto fpsString = std::format("FPS: {}", GetFPS());
-        DrawText(fpsString.c_str(), 10, 10, 32, WHITE);
-
-        LOG("FPS: %i", GetFPS());
-        EndDrawing();
+        if (currentWorld) {
+            currentWorld->Render();
+        }
     }
 
     void Application::UpdateInternal() {

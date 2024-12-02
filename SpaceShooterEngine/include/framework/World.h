@@ -15,6 +15,7 @@ namespace SpaceShooter {
 
         template<typename ActorType>
         Weak<ActorType> SpawnActor();
+        void Render() const;
 
     private:
         Application *application;

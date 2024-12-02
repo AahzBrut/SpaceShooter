@@ -1,13 +1,15 @@
 #include "framework/Core.h"
 #include "framework/World.h"
+
+#include <format>
+
 #include "framework/Actor.h"
 
 
 namespace SpaceShooter {
     World::World(Application *application)
         : application(application),
-          initialized(false) {
-    }
+          initialized(false) {}
 
     void World::InternalInitialize() {
         if (!initialized) {
@@ -38,5 +40,19 @@ namespace SpaceShooter {
 
         Update(deltaTime);
         LOG("Updating world\n");
+    }
+
+    void World::Render() const {
+        BeginDrawing();
+        ClearBackground(SKYBLUE);
+
+        for (const auto &actor: childActors) {
+            actor->Render();
+        }
+
+        const auto fpsString = std::format("FPS: {}", GetFPS());
+        DrawText(fpsString.c_str(), 10, 10, 32, WHITE);
+
+        EndDrawing();
     }
 }

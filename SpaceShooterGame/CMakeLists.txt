@@ -10,4 +10,6 @@ add_executable(SpaceShooterGame
 
 target_include_directories(SpaceShooterGame PUBLIC include)
 
-target_link_libraries(SpaceShooterGame PRIVATE SpaceShooterEngine)
+target_link_libraries(SpaceShooterGame PRIVATE SpaceShooterEngine raylib)
+
+file(COPY ${CMAKE_CURRENT_LIST_DIR}/assets DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
