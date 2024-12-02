@@ -3,7 +3,7 @@
 #include <framework/Application.h>
 
 namespace SpaceShooter {
-    class GameApplication : public Application {
+    class GameApplication final : public Application {
     public:
         GameApplication();
         void Update(float deltaTime) override;

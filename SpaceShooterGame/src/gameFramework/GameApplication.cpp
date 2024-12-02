@@ -8,14 +8,14 @@ SpaceShooter::Application *GetApplication() {
 }
 
 namespace SpaceShooter {
-    GameApplication::GameApplication() {
+    GameApplication::GameApplication(): Application{600, 900, "Space Shooter"} {
         const auto world = LoadWorld<World>();
         world.lock()->SpawnActor<Actor>();
         actorToDestroy = world.lock()->SpawnActor<Actor>();
         counter = 0;
     }
 
-    void GameApplication::Update(float deltaTime) {
+    void GameApplication::Update(const float deltaTime) {
         counter += deltaTime;
 
         if (counter >= 1.0f) {

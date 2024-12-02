@@ -8,14 +8,15 @@
 
 
 namespace SpaceShooter {
-    Application::Application()
-        : currentWorld(nullptr) {
+    Application::Application(const int width, const int height, const std::string& title)
+        : currentWorld(nullptr)
+    {
+        InitWindow(width, height, title.c_str());
     }
 
     // ReSharper disable once CppMemberFunctionMayBeStatic
     void Application::Run() {
         // NOLINT(*-convert-member-functions-to-static)
-        InitWindow(800, 950, "Space shooter");
         SetTargetFPS(60);
 
         while (!WindowShouldClose()) {
