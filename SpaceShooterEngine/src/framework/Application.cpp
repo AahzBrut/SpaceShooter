@@ -3,6 +3,8 @@
 
 #include "raylib.h"
 #include "framework/Application.h"
+
+#include "framework/AssetsManager.h"
 #include "framework/Core.h"
 #include "framework/World.h"
 
@@ -14,20 +16,27 @@ namespace SpaceShooter {
         InitWindow(width, height, title.c_str());
     }
 
-    // ReSharper disable once CppMemberFunctionMayBeStatic
+    Application::~Application() {
+        currentWorld.reset();
+        AssetsManager::Get().CleanCycle();
+    }
+
     void Application::Run() {
-        // NOLINT(*-convert-member-functions-to-static)
         SetTargetFPS(60);
 
+        auto lastAssetsClearTime =  GetTime();
         while (!WindowShouldClose()) {
             UpdateInternal();
             RenderInternal();
+            if (GetTime() - lastAssetsClearTime > cleanInterval) {
+                lastAssetsClearTime = GetTime();
+                AssetsManager::Get().CleanCycle();
+            }
         }
         CloseWindow();
     }
 
-    // ReSharper disable once CppMemberFunctionMayBeStatic
-    void Application::RenderInternal() {// NOLINT(*-convert-member-functions-to-static)
+    void Application::RenderInternal() const {
         if (currentWorld) {
             currentWorld->Render();
         }

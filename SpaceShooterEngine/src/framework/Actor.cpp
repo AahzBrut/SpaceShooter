@@ -1,5 +1,7 @@
 #include "raylib.h"
 #include "framework/Actor.h"
+
+#include "framework/AssetsManager.h"
 #include "framework/Core.h"
 
 namespace SpaceShooter {
@@ -8,12 +10,11 @@ namespace SpaceShooter {
     }
 
     void Actor::SetTexture(const std::string &texturePath) {
-        texture = LoadTexture(texturePath.c_str());
+        texture = AssetsManager::Get().GetTexture(texturePath);
     }
 
     Actor::~Actor() {
         LOG("Destroying Actor");
-        UnloadTexture(texture);
     }
 
     void Actor::InitializeInternal() {
@@ -24,13 +25,12 @@ namespace SpaceShooter {
     void Actor::UpdateInternal(const float deltaTime) {
         if (IsPendingDestruction()) return;
 
-        LOG("Updating Actor");
         Update(deltaTime);
     }
 
     void Actor::Render() const {
         if (IsPendingDestruction()) return;
 
-        DrawTexture(texture, 0, 0, WHITE);
+        DrawTexture(*texture, 0, 0, WHITE);
     }
 }

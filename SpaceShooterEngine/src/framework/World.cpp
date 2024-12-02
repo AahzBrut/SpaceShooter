@@ -11,6 +11,15 @@ namespace SpaceShooter {
         : application(application),
           initialized(false) {}
 
+    World::~World() {
+        for (auto iterator = pendingActors.begin(); iterator < pendingActors.end();) {
+            iterator = pendingActors.erase(iterator);
+        }
+        for (auto iterator = childActors.begin(); iterator < childActors.end();) {
+            iterator = childActors.erase(iterator);
+        }
+    }
+
     void World::InternalInitialize() {
         if (!initialized) {
             initialized = true;
@@ -36,7 +45,6 @@ namespace SpaceShooter {
         }
 
         Update(deltaTime);
-        LOG("Updating world\n");
     }
 
     void World::Render() const {

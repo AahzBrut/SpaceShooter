@@ -17,6 +17,8 @@ add_library(SpaceShooterEngine STATIC
         src/framework/Actor.cpp
         include/framework/Object.h
         src/framework/Object.cpp
+        include/framework/AssetsManager.h
+        src/framework/AssetsManager.cpp
 )
 
 target_link_libraries(SpaceShooterEngine PRIVATE box2d raylib)

@@ -8,7 +8,7 @@ namespace SpaceShooter {
     class World {
     public:
         explicit World(Application *application);
-        virtual ~World() = default;
+        virtual ~World();
 
         void InternalInitialize();
         void InternalUpdate(float deltaTime);

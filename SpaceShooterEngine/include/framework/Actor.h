@@ -1,6 +1,8 @@
 #pragma once
 #include "raylib.h"
 #include <string>
+
+#include "Core.h"
 #include "Object.h"
 
 namespace SpaceShooter {
@@ -23,6 +25,6 @@ namespace SpaceShooter {
     private:
         World *world;
         bool initialized = false;
-        Texture2D texture{};
+        Shared<Texture2D> texture{};
     };
 }
