@@ -5,6 +5,10 @@ namespace SpaceShooter {
     Actor::Actor(World *world) : world(world) {
     }
 
+    Actor::~Actor() {
+        LOG("Destroying Actor");
+    }
+
     void Actor::InitializeInternal() {
         LOG("Initializing Actor");
         Initialize();

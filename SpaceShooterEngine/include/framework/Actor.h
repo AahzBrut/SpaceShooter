@@ -1,12 +1,13 @@
 #pragma once
+#include "Object.h"
 
 namespace SpaceShooter {
     class World;
 
-    class Actor {
+    class Actor: public Object {
     public:
         explicit Actor(World *world);
-        virtual ~Actor() = default;
+        ~Actor() override;
 
         void InitializeInternal();
         void UpdateInternal(float deltaTime);
