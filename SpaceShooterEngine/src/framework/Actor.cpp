@@ -7,8 +7,8 @@
 
 namespace SpaceShooter {
     Actor::Actor(World *world, const std::string &texturePath) : world{world} {
-        SetTexture(texturePath);
         transform.scale = 1;
+        SetTexture(texturePath);
     }
 
     void Actor::SetTexture(const std::string &texturePath) {
@@ -74,7 +74,7 @@ namespace SpaceShooter {
     }
 
     void Actor::SetScale(const float scale) {
-        pivotOffset = Vector2(pivotOffset.x * (scale-transform.scale), pivotOffset.y * (scale-transform.scale));
+        pivotOffset = Vector2(pivotOffset.x * (1 + scale - transform.scale), pivotOffset.y * (1 + scale - transform.scale));
         transform.scale = scale;
         size = Vector2{textureRect.width * transform.scale, textureRect.height * transform.scale};
     }
@@ -91,8 +91,8 @@ namespace SpaceShooter {
         return RotationToVector(transform.rotation + 90.f);
     }
 
-    void Actor::SetPivotOffset(const Vector2 &pivot) {
-        pivotOffset = Vector2{pivot.x * transform.scale, pivot.y * transform.scale};
+    void Actor::CenterPivotOffset() {
+        pivotOffset = Vector2{textureRect.width * 0.5f * transform.scale, textureRect.height * 0.5f * transform.scale};
     }
 
     Vector2 Actor::GetTextureSize() const {

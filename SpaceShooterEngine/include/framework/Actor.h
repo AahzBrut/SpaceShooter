@@ -31,7 +31,7 @@ namespace SpaceShooter {
         void SetScaleOffset(float scale);
         [[nodiscard]] Vector2 GetForwardVector() const;
         [[nodiscard]] Vector2 GetRightVector() const;
-        void SetPivotOffset(const Vector2 &pivot);
+        void CenterPivotOffset();
         [[nodiscard]] Vector2 GetTextureSize() const;
 
         virtual void Initialize() {}
