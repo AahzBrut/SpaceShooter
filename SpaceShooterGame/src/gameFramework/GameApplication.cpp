@@ -19,19 +19,18 @@ namespace SpaceShooter {
         playerShip = world.lock()->SpawnActor<PlayerSpaceShip>();
         playerShip.lock()->SetPosition(Vector2{200, 600});
         playerShip.lock()->CenterPivotOffset();
-        playerShip.lock()->SetVelocity(Vector2{0.0f, -100.0f});
         counter = 0;
     }
 
     void GameApplication::Update(const float deltaTime) {
         counter += deltaTime;
 
-        if (!playerShip.expired()) playerShip.lock()->SetRotation(counter * 90);
-
-         if (counter >= 3.0f) {
-             if (!playerShip.expired()) {
-                 playerShip.lock()->Destroy();
-             }
-         }
+        // if (!playerShip.expired()) playerShip.lock()->SetRotation(counter * 90);
+        //
+        //  if (counter >= 3.0f) {
+        //      if (!playerShip.expired()) {
+        //          playerShip.lock()->Destroy();
+        //      }
+        //  }
     }
 }
