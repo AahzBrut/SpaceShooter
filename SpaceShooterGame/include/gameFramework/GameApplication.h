@@ -2,6 +2,8 @@
 
 #include <framework/Application.h>
 
+#include "spaceShip/SpaceShip.h"
+
 namespace SpaceShooter {
     class GameApplication final : public Application {
     public:
@@ -9,6 +11,6 @@ namespace SpaceShooter {
         void Update(float deltaTime) override;
     private:
         float counter;
-        Weak<Actor> actorToDestroy;
+        Weak<SpaceShip> playerShip;
     };
 }

@@ -43,7 +43,6 @@ namespace SpaceShooter {
         Shared<Texture2D> texture{};
         Transform transform{};
         Vector2 pivotOffset{};
-        Vector2 scaledPivotOffset{};
         Rectangle textureRect{};
         Vector2 size{};
     };

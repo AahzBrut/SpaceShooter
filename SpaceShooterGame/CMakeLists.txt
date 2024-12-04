@@ -6,6 +6,10 @@ set(CMAKE_CXX_STANDARD 23)
 add_executable(SpaceShooterGame
         include/gameFramework/GameApplication.h
         src/gameFramework/GameApplication.cpp
+        include/spaceShip/SpaceShip.h
+        src/spaceShip/SpaceShip.cpp
+        include/player/PlayerSpaceShip.h
+        src/player/PlayerSpaceShip.cpp
 )
 
 target_include_directories(SpaceShooterGame PUBLIC include)
