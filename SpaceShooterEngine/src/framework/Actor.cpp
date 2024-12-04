@@ -41,7 +41,7 @@ namespace SpaceShooter {
             size.x,
             size.y);
         DrawTexturePro(*texture, textureRect, destRect,
-                       Vector2{pivotOffset.x * transform.scale, pivotOffset.y * transform.scale}, transform.rotation,
+                       scaledPivotOffset, transform.rotation,
                        WHITE);
     }
 
@@ -77,6 +77,7 @@ namespace SpaceShooter {
     void Actor::SetScale(const float scale) {
         transform.scale = scale;
         size = Vector2{textureRect.width * transform.scale, textureRect.height * transform.scale};
+        scaledPivotOffset = Vector2{pivotOffset.x * transform.scale, pivotOffset.y * transform.scale};
     }
 
     void Actor::SetScaleOffset(const float scale) {
@@ -93,6 +94,7 @@ namespace SpaceShooter {
 
     void Actor::SetPivotOffset(const Vector2 &pivot) {
         pivotOffset = pivot;
+        scaledPivotOffset = Vector2{pivot.x * transform.scale, pivot.y * transform.scale};
     }
 
     Vector2 Actor::GetTextureSize() const {
