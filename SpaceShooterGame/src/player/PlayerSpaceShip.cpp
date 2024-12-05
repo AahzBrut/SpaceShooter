@@ -3,7 +3,11 @@
 #include <cmath>
 
 namespace SpaceShooter {
-    PlayerSpaceShip::PlayerSpaceShip(World *world, const std::string &texturePath): SpaceShip(world, texturePath), bulletShooter{new BulletShooter(this)} {}
+    PlayerSpaceShip::PlayerSpaceShip(World *world, const std::string &texturePath)
+    : SpaceShip(world, texturePath),
+    bulletShooter{new BulletShooter(this, 0.1f)} {
+        SetRotation(-90);
+    }
 
     void PlayerSpaceShip::Update(const float deltaTime) {
         SpaceShip::Update(deltaTime);

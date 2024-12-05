@@ -16,6 +16,7 @@ namespace SpaceShooter {
         actor.lock()->SetTexture("assets/SpaceShooterRedux/PNG/playerShip1_blue.png");
         actor.lock()->SetPosition(Vector2{100, 100});
         actor.lock()->CenterPivotOffset();
+        actor.lock()->SetRotation(-90);
         playerShip = world.lock()->SpawnActor<PlayerSpaceShip>();
         playerShip.lock()->SetPosition(Vector2{200, 600});
         playerShip.lock()->CenterPivotOffset();

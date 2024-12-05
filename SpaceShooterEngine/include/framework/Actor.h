@@ -33,8 +33,10 @@ namespace SpaceShooter {
         [[nodiscard]] Vector2 GetRightVector() const;
         void CenterPivotOffset();
         [[nodiscard]] Vector2 GetTextureSize() const;
-        Vector2 GetWindowSize() const;
-        Transform GetTransform() const;
+        [[nodiscard]] Vector2 GetWindowSize() const;
+        [[nodiscard]] Transform GetTransform() const;
+        [[nodiscard]] World *GetWorld() const { return world; }
+        bool IsOutOfWindowBounds() const;
 
         virtual void Initialize() {}
         virtual void Update(float deltaTime) {}

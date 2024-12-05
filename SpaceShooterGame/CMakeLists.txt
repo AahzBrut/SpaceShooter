@@ -14,6 +14,8 @@ add_executable(SpaceShooterGame
         src/weapon/Shooter.cpp
         include/weapon/BulletShooter.h
         src/weapon/BulletShooter.cpp
+        include/weapon/Bullet.h
+        src/weapon/Bullet.cpp
 )
 
 target_include_directories(SpaceShooterGame PUBLIC include)

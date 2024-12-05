@@ -13,8 +13,8 @@ namespace SpaceShooter {
         void InternalInitialize();
         void InternalUpdate(float deltaTime);
 
-        template<typename ActorType>
-        Weak<ActorType> SpawnActor();
+        template<typename ActorType, typename ... Args>
+        Weak<ActorType> SpawnActor(Args ...args);
         void Render() const;
 
         Vector2 GetWindowSize() const;
@@ -29,9 +29,9 @@ namespace SpaceShooter {
         virtual void Update(float deltaTime) {}
     };
 
-    template<typename ActorType>
-    Weak<ActorType> World::SpawnActor() {
-        Shared<ActorType> actor{new ActorType{this}};
+    template<typename ActorType, typename ... Args>
+    Weak<ActorType> World::SpawnActor(Args ...args) {
+        Shared<ActorType> actor{new ActorType(this, args...)};
         pendingActors.push_back(actor);
         return actor;
     }

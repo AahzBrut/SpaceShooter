@@ -7,7 +7,7 @@ namespace SpaceShooter {
         virtual ~Shooter() = default;
 
         void Shoot();
-        Actor *GetOwner() const;
+        [[nodiscard]] Actor *GetOwner() const;
 
         virtual bool CanShoot() { return true; }
         virtual bool IsOnCooldown() { return false; }

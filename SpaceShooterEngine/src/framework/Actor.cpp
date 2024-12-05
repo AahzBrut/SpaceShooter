@@ -107,4 +107,9 @@ namespace SpaceShooter {
     Transform Actor::GetTransform() const {
         return transform;
     }
+
+    bool Actor::IsOutOfWindowBounds() const {
+        const auto [windowWidth, windowHeight] = GetWindowSize();
+        return transform.position.x < -textureRect.width || transform.position.x > windowWidth + textureRect.width || transform.position.y < -textureRect.height || transform.position.y > windowHeight+ textureRect.height;
+    }
 }
