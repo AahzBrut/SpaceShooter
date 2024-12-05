@@ -11,6 +11,12 @@ namespace SpaceShooter {
         SetPositionOffset(Vector2{velocity.x * deltaTime, velocity.y * deltaTime});
     }
 
+    void SpaceShip::Initialize() {
+        Actor::Initialize();
+
+        SetPhysicsEnabled(true);
+    }
+
     void SpaceShip::SetVelocity(const Vector2 &velocity) {
         this->velocity = velocity;
     }

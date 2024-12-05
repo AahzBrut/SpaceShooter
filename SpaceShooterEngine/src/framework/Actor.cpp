@@ -4,6 +4,7 @@
 #include "framework/AssetsManager.h"
 #include "framework/Core.h"
 #include "framework/MathUtility.h"
+#include "framework/PhysicsSystem.h"
 #include "framework/World.h"
 
 namespace SpaceShooter {
@@ -111,5 +112,37 @@ namespace SpaceShooter {
     bool Actor::IsOutOfWindowBounds() const {
         const auto [windowWidth, windowHeight] = GetWindowSize();
         return transform.position.x < -textureRect.width || transform.position.x > windowWidth + textureRect.width || transform.position.y < -textureRect.height || transform.position.y > windowHeight+ textureRect.height;
+    }
+
+    void Actor::SetPhysicsEnabled(const bool enablePhysics) {
+        physicsEnabled = enablePhysics;
+        if (physicsEnabled) {
+            InitializePhysics();
+        } else {
+            UnInitializePhysics();
+        }
+    }
+
+    void Actor::UpdatePhysicsBodyTransform() const {
+        if (b2Body_IsValid(bodyId)) {
+            const auto scale = PhysicsSystem::Get().GetScale();
+            b2Vec2 position{transform.position.x * scale, transform.position.y * scale};
+            const auto rotation = DegreesToRadians(transform.rotation);
+            b2Body_SetTransform(bodyId, position, b2MakeRot(rotation));
+        }
+    }
+
+    void Actor::InitializePhysics() {
+        if (!b2Body_IsValid(bodyId)) {
+            bodyId = PhysicsSystem::Get().AddListener(this);
+        }
+    }
+
+    void Actor::UnInitializePhysics() {
+        if (b2Body_IsValid(bodyId)) {
+            PhysicsSystem::RemoveListener(bodyId);
+            bodyId = b2_nullBodyId;
+            physicsEnabled = false;
+        }
     }
 }

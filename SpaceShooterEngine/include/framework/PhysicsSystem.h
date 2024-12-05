@@ -1,7 +1,5 @@
 #pragma once
 #include "Core.h"
-#include <box2d/box2d.h>
-
 #include "Actor.h"
 
 
@@ -12,6 +10,8 @@ namespace SpaceShooter {
 
         void Update(float deltaTime) const;
         b2BodyId AddListener(const Actor* listener) const;
+        static void RemoveListener(b2BodyId bodyId);
+        [[nodiscard]] float GetScale() const { return scale; }
 
     protected:
         PhysicsSystem();

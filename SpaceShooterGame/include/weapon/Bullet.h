@@ -11,6 +11,7 @@ namespace SpaceShooter {
         void SetDamage(const float damage) { this->damage = damage; }
         [[nodiscard]] float GetDamage() const { return this->damage; }
 
+        void Initialize() override;
         void Update(float deltaTime) override;
 
     private:

@@ -7,6 +7,7 @@ namespace SpaceShooter {
     public:
         explicit SpaceShip(World* world, const std::string& texturePath = "");
         void Update(float deltaTime) override;
+        void Initialize() override;
         void SetVelocity(const Vector2& velocity);
         [[nodiscard]] Vector2 GetVelocity() const { return velocity; }
 

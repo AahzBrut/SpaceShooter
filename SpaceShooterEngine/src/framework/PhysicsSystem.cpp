@@ -45,4 +45,8 @@ namespace SpaceShooter {
 
         return bodyId;
     }
+
+    void PhysicsSystem::RemoveListener(const b2BodyId bodyId) {
+        b2DestroyBody(bodyId);
+    }
 }

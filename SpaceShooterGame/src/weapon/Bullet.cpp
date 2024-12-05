@@ -9,6 +9,12 @@ namespace SpaceShooter {
         CenterPivotOffset();
     }
 
+    void Bullet::Initialize() {
+        Actor::Initialize();
+
+        SetPhysicsEnabled(true);
+    }
+
     void Bullet::Update(const float deltaTime) {
         Actor::Update(deltaTime);
         Move(deltaTime);

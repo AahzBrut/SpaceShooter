@@ -1,15 +1,15 @@
 #pragma once
-#include "raylib.h"
+#include <raylib.h>
 #include <string>
 
 #include "Core.h"
 #include "Object.h"
 #include "Transform.h"
+#include <box2d/box2d.h>
 
 namespace SpaceShooter {
     class World;
 
-    // ReSharper disable once CppClassCanBeFinal
     class Actor : public Object {
     public:
         explicit Actor(World *world, const std::string &texturePath = "");
@@ -38,6 +38,8 @@ namespace SpaceShooter {
         [[nodiscard]] World *GetWorld() const { return world; }
         [[nodiscard]] bool IsOutOfWindowBounds() const;
         [[nodiscard]] Vector2 GetSize() const { return size; }
+        void SetPhysicsEnabled(bool enablePhysics);
+        void UpdatePhysicsBodyTransform() const;
 
         virtual void Initialize() {}
         virtual void Update(float deltaTime) {}
@@ -50,5 +52,10 @@ namespace SpaceShooter {
         Vector2 pivotOffset{};
         Rectangle textureRect{};
         Vector2 size{};
+        b2BodyId bodyId{};
+        bool physicsEnabled{false};
+
+        void InitializePhysics();
+        void UnInitializePhysics();
     };
 }
