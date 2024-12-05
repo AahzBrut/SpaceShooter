@@ -15,9 +15,10 @@ namespace SpaceShooter {
 
         template<typename ActorType, typename ... Args>
         Weak<ActorType> SpawnActor(Args ...args);
-        void Render() const;
 
-        Vector2 GetWindowSize() const;
+        void Render() const;
+        [[nodiscard]] Vector2 GetWindowSize() const;
+        void CleanCycle();
 
     private:
         Application *application;

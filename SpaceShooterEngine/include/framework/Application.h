@@ -16,7 +16,7 @@ namespace SpaceShooter {
 
     private:
         Shared<World> currentWorld;
-        double cleanInterval{5};
+        double cleanInterval{2.5f};
         Vector2 windowSize{};
 
         void UpdateInternal();

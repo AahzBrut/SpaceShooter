@@ -37,12 +37,8 @@ namespace SpaceShooter {
         pendingActors.clear();
 
         for (auto iterator = childActors.begin(); iterator < childActors.end();) {
-            if (const auto actor = iterator->get(); actor->IsPendingDestruction()) {
-                iterator = childActors.erase(iterator);
-            } else {
-                actor->UpdateInternal(deltaTime);
-                ++iterator;
-            }
+            iterator->get()->UpdateInternal(deltaTime);
+            ++iterator;
         }
 
         Update(deltaTime);
@@ -64,5 +60,15 @@ namespace SpaceShooter {
 
     Vector2 World::GetWindowSize() const {
         return application->GetWindowSize();
+    }
+
+    void World::CleanCycle() {
+        for (auto iterator = childActors.begin(); iterator < childActors.end();) {
+            if (const auto actor = iterator->get(); actor->IsPendingDestruction()) {
+                iterator = childActors.erase(iterator);
+            } else {
+                ++iterator;
+            }
+        }
     }
 }
