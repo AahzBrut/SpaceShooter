@@ -14,4 +14,6 @@ namespace SpaceShooter {
     void SpaceShip::SetVelocity(const Vector2 &velocity) {
         this->velocity = velocity;
     }
+
+    void SpaceShip::Shoot() {}
 }

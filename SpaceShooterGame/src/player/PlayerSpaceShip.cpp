@@ -3,7 +3,7 @@
 #include <cmath>
 
 namespace SpaceShooter {
-    PlayerSpaceShip::PlayerSpaceShip(World *world, const std::string &texturePath): SpaceShip(world, texturePath) {}
+    PlayerSpaceShip::PlayerSpaceShip(World *world, const std::string &texturePath): SpaceShip(world, texturePath), bulletShooter{new BulletShooter(this)} {}
 
     void PlayerSpaceShip::Update(const float deltaTime) {
         SpaceShip::Update(deltaTime);
@@ -20,7 +20,17 @@ namespace SpaceShooter {
         if (currentY > windowHeight && moveInput.y > 0.f) moveInput.y = 0.f;
     }
 
+    void PlayerSpaceShip::Shoot() {
+        if (bulletShooter) {
+            bulletShooter->Shoot();
+        }
+    }
+
     void PlayerSpaceShip::HandleInput() {
+        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
+            Shoot();
+        }
+
         if (IsKeyDown(KEY_W)) {
             moveInput.y = -1.f;
         } else if (IsKeyDown(KEY_S)) {

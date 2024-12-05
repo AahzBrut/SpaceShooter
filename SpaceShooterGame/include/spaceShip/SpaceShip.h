@@ -10,6 +10,7 @@ namespace SpaceShooter {
         void SetVelocity(const Vector2& velocity);
         [[nodiscard]] Vector2 GetVelocity() const { return velocity; }
 
+        virtual void Shoot();
     private:
         Vector2 velocity{};
     };

@@ -10,6 +10,10 @@ add_executable(SpaceShooterGame
         src/spaceShip/SpaceShip.cpp
         include/player/PlayerSpaceShip.h
         src/player/PlayerSpaceShip.cpp
+        include/weapon/Shooter.h
+        src/weapon/Shooter.cpp
+        include/weapon/BulletShooter.h
+        src/weapon/BulletShooter.cpp
 )
 
 target_include_directories(SpaceShooterGame PUBLIC include)
