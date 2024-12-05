@@ -11,6 +11,15 @@ namespace SpaceShooter {
         ConsumeInput(deltaTime);
     }
 
+    void PlayerSpaceShip::ClampInputOnEdge() {
+        const auto [windowWidth, windowHeight] = GetWindowSize();
+        const auto [currentX, currentY] = GetTransform().position;
+        if (currentX < 0.0f && moveInput.x < 0.0f) moveInput.x = 0.f;
+        if (currentX > windowWidth && moveInput.x > 0.f) moveInput.x = 0.f;
+        if (currentY < 0.0f && moveInput.y < 0.0f) moveInput.y = 0.f;
+        if (currentY > windowHeight && moveInput.y > 0.f) moveInput.y = 0.f;
+    }
+
     void PlayerSpaceShip::HandleInput() {
         if (IsKeyDown(KEY_W)) {
             moveInput.y = -1.f;
@@ -22,6 +31,7 @@ namespace SpaceShooter {
         } else if (IsKeyDown(KEY_D)) {
             moveInput.x = 1.f;
         }
+        ClampInputOnEdge();
         if (moveInput.x == 0 && moveInput.y == 0) return;
 
         const auto length = std::sqrt(moveInput.x * moveInput.x + moveInput.y * moveInput.y);

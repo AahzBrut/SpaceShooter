@@ -33,6 +33,8 @@ namespace SpaceShooter {
         [[nodiscard]] Vector2 GetRightVector() const;
         void CenterPivotOffset();
         [[nodiscard]] Vector2 GetTextureSize() const;
+        Vector2 GetWindowSize() const;
+        Transform GetTransform() const;
 
         virtual void Initialize() {}
         virtual void Update(float deltaTime) {}

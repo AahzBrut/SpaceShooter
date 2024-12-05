@@ -17,6 +17,8 @@ namespace SpaceShooter {
         Weak<ActorType> SpawnActor();
         void Render() const;
 
+        Vector2 GetWindowSize() const;
+
     private:
         Application *application;
         bool initialized;

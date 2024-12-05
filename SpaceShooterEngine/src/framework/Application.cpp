@@ -13,6 +13,7 @@ namespace SpaceShooter {
     Application::Application(const int width, const int height, const std::string& title)
         : currentWorld(nullptr)
     {
+        windowSize = Vector2( static_cast<float>(width), static_cast<float>(height) );
         InitWindow(width, height, title.c_str());
     }
 
@@ -34,6 +35,10 @@ namespace SpaceShooter {
             }
         }
         CloseWindow();
+    }
+
+    Vector2 Application::GetWindowSize() const {
+        return windowSize;
     }
 
     void Application::RenderInternal() const {

@@ -4,6 +4,7 @@
 #include "framework/AssetsManager.h"
 #include "framework/Core.h"
 #include "framework/MathUtility.h"
+#include "framework/World.h"
 
 namespace SpaceShooter {
     Actor::Actor(World *world, const std::string &texturePath) : world{world} {
@@ -97,5 +98,13 @@ namespace SpaceShooter {
 
     Vector2 Actor::GetTextureSize() const {
         return Vector2{textureRect.width, textureRect.height};
+    }
+
+    Vector2 Actor::GetWindowSize() const {
+        return world->GetWindowSize();
+    }
+
+    Transform Actor::GetTransform() const {
+        return transform;
     }
 }

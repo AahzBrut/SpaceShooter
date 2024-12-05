@@ -9,6 +9,7 @@ namespace SpaceShooter {
                                  const std::string &texturePath = "assets/SpaceShooterRedux/PNG/playerShip1_blue.png");
 
         void Update(float deltaTime) override;
+        void ClampInputOnEdge();
 
     private:
         float speed = 200.f;

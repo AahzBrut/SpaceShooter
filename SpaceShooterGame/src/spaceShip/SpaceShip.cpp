@@ -1,7 +1,6 @@
 #include "spaceShip/SpaceShip.h"
 
 
-
 namespace SpaceShooter {
     SpaceShip::SpaceShip(World *world, const std::string &texturePath): Actor(world, texturePath) {
 
@@ -9,7 +8,6 @@ namespace SpaceShooter {
 
     void SpaceShip::Update(const float deltaTime) {
         Actor::Update(deltaTime);
-
         SetPositionOffset(Vector2{velocity.x * deltaTime, velocity.y * deltaTime});
     }
 

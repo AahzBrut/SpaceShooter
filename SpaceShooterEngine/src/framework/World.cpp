@@ -4,6 +4,7 @@
 #include <format>
 
 #include "framework/Actor.h"
+#include "framework/Application.h"
 
 
 namespace SpaceShooter {
@@ -59,5 +60,9 @@ namespace SpaceShooter {
         DrawText(fpsString.c_str(), 10, 10, 32, WHITE);
 
         EndDrawing();
+    }
+
+    Vector2 World::GetWindowSize() const {
+        return application->GetWindowSize();
     }
 }

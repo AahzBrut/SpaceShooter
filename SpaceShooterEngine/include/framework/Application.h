@@ -12,10 +12,12 @@ namespace SpaceShooter {
 
         template<typename WorldType>
         Weak<WorldType> LoadWorld();
+        [[nodiscard]] Vector2 GetWindowSize() const;
 
     private:
         Shared<World> currentWorld;
         double cleanInterval{5};
+        Vector2 windowSize{};
 
         void UpdateInternal();
         void RenderInternal() const;
