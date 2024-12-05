@@ -6,6 +6,7 @@
 
 #include "framework/AssetsManager.h"
 #include "framework/Core.h"
+#include "framework/PhysicsSystem.h"
 #include "framework/World.h"
 
 
@@ -26,8 +27,11 @@ namespace SpaceShooter {
 
         auto lastAssetsClearTime = GetTime();
         while (!WindowShouldClose()) {
-            UpdateInternal();
+            const auto deltaTime = GetFrameTime();
+            UpdateInternal(deltaTime);
             RenderInternal();
+
+            PhysicsSystem::Get().Update(deltaTime);
             if (GetTime() - lastAssetsClearTime > cleanInterval) {
                 lastAssetsClearTime = GetTime();
                 AssetsManager::Get().CleanCycle();
@@ -49,8 +53,7 @@ namespace SpaceShooter {
         }
     }
 
-    void Application::UpdateInternal() {
-        const auto deltaTime = GetFrameTime();
+    void Application::UpdateInternal(const float deltaTime) {
         Update(deltaTime);
 
         if (currentWorld) {

@@ -19,7 +19,7 @@ namespace SpaceShooter {
         double cleanInterval{2.5f};
         Vector2 windowSize{};
 
-        void UpdateInternal();
+        void UpdateInternal(float deltaTime);
         void RenderInternal() const;
         virtual void Render();
         virtual void Update(float deltaTime);

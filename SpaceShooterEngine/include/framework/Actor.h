@@ -36,7 +36,8 @@ namespace SpaceShooter {
         [[nodiscard]] Vector2 GetWindowSize() const;
         [[nodiscard]] Transform GetTransform() const;
         [[nodiscard]] World *GetWorld() const { return world; }
-        bool IsOutOfWindowBounds() const;
+        [[nodiscard]] bool IsOutOfWindowBounds() const;
+        [[nodiscard]] Vector2 GetSize() const { return size; }
 
         virtual void Initialize() {}
         virtual void Update(float deltaTime) {}

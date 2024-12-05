@@ -23,6 +23,8 @@ add_library(SpaceShooterEngine STATIC
         src/framework/Transform.cpp
         include/framework/MathUtility.h
         src/framework/MathUtility.cpp
+        include/framework/PhysicsSystem.h
+        src/framework/PhysicsSystem.cpp
 )
 
 target_link_libraries(SpaceShooterEngine PRIVATE box2d raylib)
