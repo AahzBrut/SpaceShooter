@@ -11,7 +11,6 @@ namespace SpaceShooter {
         void Update(float deltaTime) const;
         b2BodyId AddListener(const Actor* listener) const;
         static void RemoveListener(b2BodyId bodyId);
-        [[nodiscard]] float GetScale() const { return scale; }
 
     protected:
         PhysicsSystem();
@@ -19,6 +18,5 @@ namespace SpaceShooter {
     private:
         static Unique<PhysicsSystem> instance;
         b2WorldId physicsWorld{};
-        float scale{0.01f};
     };
 }

@@ -11,7 +11,6 @@ FetchContent_Declare(
         GIT_SHALLOW TRUE
         GIT_PROGRESS TRUE
 )
-FetchContent_MakeAvailable(box2d)
 
 FetchContent_Declare(
         raylib
@@ -20,7 +19,7 @@ FetchContent_Declare(
         GIT_SHALLOW TRUE
         GIT_PROGRESS TRUE
 )
-FetchContent_MakeAvailable(raylib)
+FetchContent_MakeAvailable(raylib box2d)
 
 add_subdirectory(SpaceShooterEngine)
 add_subdirectory(SpaceShooterGame)

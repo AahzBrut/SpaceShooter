@@ -12,7 +12,7 @@ SpaceShooter::Application *GetApplication() {
 namespace SpaceShooter {
     GameApplication::GameApplication(): Application{600, 900, "Space Shooter"} {
         const auto world = LoadWorld<World>();
-        const auto actor = world.lock()->SpawnActor<Actor>();
+        const auto actor = world.lock()->SpawnActor<SpaceShip>();
         actor.lock()->SetTexture("assets/SpaceShooterRedux/PNG/playerShip1_blue.png");
         actor.lock()->SetPosition(Vector2{100, 100});
         actor.lock()->CenterPivotOffset();

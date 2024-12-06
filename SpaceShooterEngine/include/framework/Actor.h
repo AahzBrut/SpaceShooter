@@ -53,7 +53,6 @@ namespace SpaceShooter {
         Rectangle textureRect{};
         Vector2 size{};
         b2BodyId bodyId{};
-        bool physicsEnabled{false};
 
         void InitializePhysics();
         void UnInitializePhysics();

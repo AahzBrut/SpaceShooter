@@ -9,38 +9,51 @@ namespace SpaceShooter {
         auto worldDefinition = b2DefaultWorldDef();
         worldDefinition.gravity = b2Vec2(0.0f, 0.0f);
         physicsWorld = b2CreateWorld(&worldDefinition);
+        b2SetLengthUnitsPerMeter(100.0f);
     }
 
-    PhysicsSystem& PhysicsSystem::Get() {
+    PhysicsSystem &PhysicsSystem::Get() {
         if (!instance) {
             if (!instance) {
                 instance = Unique<PhysicsSystem>{new PhysicsSystem()};
             }
         }
-            return *instance;
+        return *instance;
     }
 
     void PhysicsSystem::Update(const float deltaTime) const {
         b2World_Step(physicsWorld, deltaTime, 4);
+        const auto contactEvents = b2World_GetContactEvents(physicsWorld);
+        for (auto index = 0; index < contactEvents.beginCount; index++) {
+            const auto [shapeIdA, shapeIdB] = contactEvents.beginEvents[index];
+            const auto firstBody = b2Shape_GetBody(shapeIdA);
+            const auto secondBody = b2Shape_GetBody(shapeIdB);
+            const auto firstActor = static_cast<Actor*>(b2Body_GetUserData(firstBody));
+            const auto secondActor = static_cast<Actor*>(b2Body_GetUserData(secondBody));
+
+            LOG("Contact: %s with %s", typeid(*firstActor).name(), typeid(*secondActor).name());
+        }
     }
 
-    b2BodyId PhysicsSystem::AddListener(const Actor* listener) const {
+    b2BodyId PhysicsSystem::AddListener(const Actor *listener) const {
         if (listener->IsPendingDestruction()) return b2_nullBodyId;
         const auto [actorX, actorY] = listener->Position();
 
         auto bodyDef = b2DefaultBodyDef();
         bodyDef.type = b2_dynamicBody;
-        bodyDef.position = b2Vec2{actorX * scale, actorY * scale};
+        bodyDef.position = b2Vec2{actorX, actorY};
         bodyDef.rotation = b2MakeRot(DegreesToRadians(listener->Rotation()));
-        bodyDef.userData = &listener;
+        // ReSharper disable once CppCStyleCast
+        bodyDef.userData = (void *)listener;
+        bodyDef.enableSleep = false;
         const auto bodyId = b2CreateBody(physicsWorld, &bodyDef);
 
         const auto [actorWidth, actorHeight] = listener->GetSize();
-        const auto polygonBox = b2MakeBox(actorWidth * 0.5f * scale, actorHeight * 0.5f * scale);
+        const auto polygonBox = b2MakeBox(actorWidth * 0.5f, actorHeight * 0.5f);
         auto shapeDef = b2DefaultShapeDef();
         shapeDef.density = 1.0f;
         shapeDef.friction = 0.3f;
-        shapeDef.isSensor = true;
+        shapeDef.enableContactEvents = true;
         b2CreatePolygonShape(bodyId, &shapeDef, &polygonBox);
 
         return bodyId;

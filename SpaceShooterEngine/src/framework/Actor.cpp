@@ -20,12 +20,14 @@ namespace SpaceShooter {
     }
 
     Actor::~Actor() {
+        SetPhysicsEnabled(false);
         LOG("Destroying Actor");
     }
 
     void Actor::InitializeInternal() {
         LOG("Initializing Actor");
         Initialize();
+        initialized = true;
     }
 
     void Actor::UpdateInternal(const float deltaTime) {
@@ -44,6 +46,11 @@ namespace SpaceShooter {
         DrawTexturePro(*texture, textureRect, destRect,
                        pivotOffset, transform.rotation,
                        WHITE);
+
+        if (b2Body_IsValid(bodyId)) {
+            const auto [x, y] = b2Body_GetPosition(bodyId);
+            DrawRectangle(static_cast<int>(x) - static_cast<int>(size.x * 0.5f), static_cast<int>(y - size.y * 0.5f), static_cast<int>(size.x), static_cast<int>(size.y), BLUE);
+        }
     }
 
     Vector2 Actor::Position() const {
@@ -52,11 +59,11 @@ namespace SpaceShooter {
 
     void Actor::SetPosition(const Vector2 &position) {
         transform.position = position;
+        UpdatePhysicsBodyTransform();
     }
 
     void Actor::SetPositionOffset(const Vector2 &position) {
-        transform.position.x += position.x;
-        transform.position.y += position.y;
+        SetPosition(Vector2(transform.position.x + position.x, transform.position.y + position.y));
     }
 
     float Actor::Rotation() const {
@@ -65,10 +72,11 @@ namespace SpaceShooter {
 
     void Actor::SetRotation(const float rotation) {
         transform.rotation = rotation;
+        UpdatePhysicsBodyTransform();
     }
 
     void Actor::SetRotationOffset(const float rotation) {
-        transform.rotation += rotation;
+        SetRotation(transform.rotation + rotation);
     }
 
     float Actor::Scale() const {
@@ -76,7 +84,8 @@ namespace SpaceShooter {
     }
 
     void Actor::SetScale(const float scale) {
-        pivotOffset = Vector2(pivotOffset.x * (1 + scale - transform.scale), pivotOffset.y * (1 + scale - transform.scale));
+        pivotOffset = Vector2(pivotOffset.x * (1 + scale - transform.scale),
+                              pivotOffset.y * (1 + scale - transform.scale));
         transform.scale = scale;
         size = Vector2{textureRect.width * transform.scale, textureRect.height * transform.scale};
     }
@@ -111,12 +120,12 @@ namespace SpaceShooter {
 
     bool Actor::IsOutOfWindowBounds() const {
         const auto [windowWidth, windowHeight] = GetWindowSize();
-        return transform.position.x < -textureRect.width || transform.position.x > windowWidth + textureRect.width || transform.position.y < -textureRect.height || transform.position.y > windowHeight+ textureRect.height;
+        return transform.position.x < -textureRect.width || transform.position.x > windowWidth + textureRect.width ||
+               transform.position.y < -textureRect.height || transform.position.y > windowHeight + textureRect.height;
     }
 
     void Actor::SetPhysicsEnabled(const bool enablePhysics) {
-        physicsEnabled = enablePhysics;
-        if (physicsEnabled) {
+        if (enablePhysics) {
             InitializePhysics();
         } else {
             UnInitializePhysics();
@@ -125,8 +134,7 @@ namespace SpaceShooter {
 
     void Actor::UpdatePhysicsBodyTransform() const {
         if (b2Body_IsValid(bodyId)) {
-            const auto scale = PhysicsSystem::Get().GetScale();
-            b2Vec2 position{transform.position.x * scale, transform.position.y * scale};
+            const b2Vec2 position{transform.position.x + pivotOffset.x, transform.position.y + pivotOffset.y};
             const auto rotation = DegreesToRadians(transform.rotation);
             b2Body_SetTransform(bodyId, position, b2MakeRot(rotation));
         }
@@ -142,7 +150,6 @@ namespace SpaceShooter {
         if (b2Body_IsValid(bodyId)) {
             PhysicsSystem::RemoveListener(bodyId);
             bodyId = b2_nullBodyId;
-            physicsEnabled = false;
         }
     }
 }
