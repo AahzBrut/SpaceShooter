@@ -43,6 +43,8 @@ namespace SpaceShooter {
 
         virtual void Initialize() {}
         virtual void Update(float deltaTime) {}
+        virtual void OnContactBegin(Actor * actor);
+        virtual void OnContactEnd(Actor * actor);
 
     private:
         World *world;

@@ -46,11 +46,6 @@ namespace SpaceShooter {
         DrawTexturePro(*texture, textureRect, destRect,
                        pivotOffset, transform.rotation,
                        WHITE);
-
-        if (b2Body_IsValid(bodyId)) {
-            const auto [x, y] = b2Body_GetPosition(bodyId);
-            DrawRectangle(static_cast<int>(x) - static_cast<int>(size.x * 0.5f), static_cast<int>(y - size.y * 0.5f), static_cast<int>(size.x), static_cast<int>(size.y), BLUE);
-        }
     }
 
     Vector2 Actor::Position() const {
@@ -138,6 +133,14 @@ namespace SpaceShooter {
             const auto rotation = DegreesToRadians(transform.rotation);
             b2Body_SetTransform(bodyId, position, b2MakeRot(rotation));
         }
+    }
+
+    void Actor::OnContactBegin(Actor *actor) {
+        LOG("OnContactBegin");
+    }
+
+    void Actor::OnContactEnd(Actor *actor) {
+        LOG("OnContactEnd");
     }
 
     void Actor::InitializePhysics() {

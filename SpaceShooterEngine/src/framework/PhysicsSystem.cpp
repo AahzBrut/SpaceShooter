@@ -30,8 +30,25 @@ namespace SpaceShooter {
             const auto secondBody = b2Shape_GetBody(shapeIdB);
             const auto firstActor = static_cast<Actor*>(b2Body_GetUserData(firstBody));
             const auto secondActor = static_cast<Actor*>(b2Body_GetUserData(secondBody));
-
-            LOG("Contact: %s with %s", typeid(*firstActor).name(), typeid(*secondActor).name());
+            if (firstActor && !firstActor->IsPendingDestruction()) {
+                firstActor->OnContactBegin(secondActor);
+            }
+            if (secondActor && !secondActor->IsPendingDestruction()) {
+                secondActor->OnContactBegin(firstActor);
+            }
+        }
+        for (auto index = 0; index < contactEvents.endCount; index++) {
+            const auto [shapeIdA, shapeIdB] = contactEvents.endEvents[index];
+            const auto firstBody = b2Shape_GetBody(shapeIdA);
+            const auto secondBody = b2Shape_GetBody(shapeIdB);
+            const auto firstActor = static_cast<Actor*>(b2Body_GetUserData(firstBody));
+            const auto secondActor = static_cast<Actor*>(b2Body_GetUserData(secondBody));
+            if (firstActor && !firstActor->IsPendingDestruction()) {
+                firstActor->OnContactEnd(secondActor);
+            }
+            if (secondActor && !secondActor->IsPendingDestruction()) {
+                secondActor->OnContactEnd(firstActor);
+            }
         }
     }
 
