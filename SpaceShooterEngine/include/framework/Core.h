@@ -43,4 +43,24 @@ namespace SpaceShooter {
     using Set = std::unordered_set<T>;
 
 #define LOG(M, ...) printf(M "\n", ##__VA_ARGS__)
+
+    enum class CollisionLayers {
+        None = 0,
+        Player = 1,
+        PlayerBullet = 2,
+        Enemy = 4,
+        EnemyBullet = 8
+    };
+
+    inline CollisionLayers operator|(CollisionLayers lhs, CollisionLayers rhs) {
+        return static_cast<CollisionLayers>(static_cast<int>(lhs) | static_cast<int>(rhs));
+    }
+
+    const Map<int, std::string> CollisionLayersNames = {
+        {0, "None"},
+        {1, "Player"},
+        {2, "PlayerBullet"},
+        {4, "Enemy"},
+        {8, "EnemyBullet"},
+    };
 }

@@ -12,7 +12,7 @@ namespace SpaceShooter {
 
     class Actor : public Object {
     public:
-        explicit Actor(World *world, const std::string &texturePath = "");
+        explicit Actor(World *world, const std::string &texturePath = "", CollisionLayers selfCollisionLayers = CollisionLayers::None, CollisionLayers contactCollisionLayers = CollisionLayers::None);
         ~Actor() override;
 
         void SetTexture(const std::string &texturePath);
@@ -46,6 +46,10 @@ namespace SpaceShooter {
         virtual void OnContactBegin(Actor * actor);
         virtual void OnContactEnd(Actor * actor);
         void Destroy() override;
+
+    protected:
+        CollisionLayers selfCollisionLayers;
+        CollisionLayers contactCollisionLayers;
 
     private:
         World *world;

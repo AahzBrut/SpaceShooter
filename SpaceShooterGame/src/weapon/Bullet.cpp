@@ -1,8 +1,8 @@
 #include "weapon/Bullet.h"
 
 namespace SpaceShooter {
-    Bullet::Bullet(World *world, Actor *owner, const std::string &texturePath, const float speed, const float damage)
-        : Actor(world, texturePath),
+    Bullet::Bullet(World *world, Actor *owner, const CollisionLayers bulletLayer, const CollisionLayers bulletMaskLayer, const std::string &texturePath, const float speed, const float damage)
+        : Actor(world, texturePath, bulletLayer, bulletMaskLayer),
           owner{owner},
           speed{speed},
           damage{damage} {

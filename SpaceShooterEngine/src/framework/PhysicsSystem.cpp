@@ -57,7 +57,7 @@ namespace SpaceShooter {
         }
     }
 
-    b2BodyId PhysicsSystem::AddListener(const Actor *listener) const {
+    b2BodyId PhysicsSystem::AddListener(const Actor *listener, const CollisionLayers selfCollisionLayers, const CollisionLayers contactCollisionLayers) const {
         if (listener->IsPendingDestruction()) return b2_nullBodyId;
         const auto [actorX, actorY] = listener->Position();
 
@@ -75,6 +75,10 @@ namespace SpaceShooter {
         shapeDef.density = 1.0f;
         shapeDef.friction = 0.3f;
         shapeDef.enableContactEvents = true;
+        if (selfCollisionLayers != CollisionLayers::None && contactCollisionLayers != CollisionLayers::None) {
+            shapeDef.filter.categoryBits = static_cast<uint32_t>(selfCollisionLayers);
+            shapeDef.filter.maskBits = static_cast<uint32_t>(contactCollisionLayers);
+        }
         b2CreatePolygonShape(bodyId, &shapeDef, &polygonBox);
 
         return bodyId;

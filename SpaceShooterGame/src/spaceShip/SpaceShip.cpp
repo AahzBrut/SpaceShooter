@@ -2,8 +2,7 @@
 
 
 namespace SpaceShooter {
-    SpaceShip::SpaceShip(World *world, const std::string &texturePath): Actor(world, texturePath) {
-
+    SpaceShip::SpaceShip(World *world, const std::string &texturePath, const CollisionLayers selfCollisionLayers, const CollisionLayers contactCollisionLayers): Actor(world, texturePath, selfCollisionLayers, contactCollisionLayers) {
     }
 
     void SpaceShip::Update(const float deltaTime) {

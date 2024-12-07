@@ -4,7 +4,7 @@
 #include "weapon/Bullet.h"
 
 namespace SpaceShooter {
-    BulletShooter::BulletShooter(Actor *owner, const float coolDownTimeout) : Shooter(owner) {
+    BulletShooter::BulletShooter(Actor *owner, const float coolDownTimeout, const CollisionLayers bulletLayer, const CollisionLayers bulletMaskLayer) : Shooter(owner), bulletLayer{bulletLayer}, bulletMaskLayer{bulletMaskLayer} {
         this->coolDownTimeout = coolDownTimeout;
     }
 
@@ -14,7 +14,7 @@ namespace SpaceShooter {
 
     void BulletShooter::ShootImpl() {
         lastShootTime = static_cast<float>(GetTime());
-        const Weak<Bullet> newBullet = GetOwner()->GetWorld()->SpawnActor<Bullet>(GetOwner());
+        const Weak<Bullet> newBullet = GetOwner()->GetWorld()->SpawnActor<Bullet>(GetOwner(), bulletLayer, bulletMaskLayer);
         newBullet.lock()->SetPosition(GetOwner()->Position());
         newBullet.lock()->SetRotation(GetOwner()->Rotation());
     }

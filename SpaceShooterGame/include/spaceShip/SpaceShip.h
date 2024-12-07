@@ -6,7 +6,7 @@
 namespace SpaceShooter {
     class SpaceShip : public Actor {
     public:
-        explicit SpaceShip(World* world, const std::string& texturePath = "");
+        explicit SpaceShip(World* world, const std::string& texturePath = "", CollisionLayers selfCollisionLayers = CollisionLayers::None, CollisionLayers contactCollisionLayers = CollisionLayers::None);
         void Update(float deltaTime) override;
         void Initialize() override;
         void SetVelocity(const Vector2& velocity);

@@ -4,8 +4,8 @@
 
 namespace SpaceShooter {
     PlayerSpaceShip::PlayerSpaceShip(World *world, const std::string &texturePath)
-    : SpaceShip(world, texturePath),
-    bulletShooter{new BulletShooter(this, 0.1f)} {
+    : SpaceShip(world, texturePath, CollisionLayers::Player, CollisionLayers::EnemyBullet | CollisionLayers::Enemy),
+    bulletShooter{new BulletShooter(this, 0.1f, CollisionLayers::PlayerBullet, CollisionLayers::Enemy)} {
         SetRotation(-90);
     }
 

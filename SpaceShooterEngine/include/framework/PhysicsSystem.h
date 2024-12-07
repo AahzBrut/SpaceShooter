@@ -10,7 +10,7 @@ namespace SpaceShooter {
         static void Restart();
 
         void Update(float deltaTime);
-        b2BodyId AddListener(const Actor* listener) const;
+        b2BodyId AddListener(const Actor* listener, CollisionLayers selfCollisionLayers, CollisionLayers contactCollisionLayers) const;
         void RemoveListener(b2BodyId bodyId);
         void ClearRemovedBodies();
 

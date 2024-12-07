@@ -8,7 +8,9 @@
 #include "framework/World.h"
 
 namespace SpaceShooter {
-    Actor::Actor(World *world, const std::string &texturePath) : world{world} {
+    Actor::Actor(World *world, const std::string &texturePath, const CollisionLayers selfCollisionLayers,
+                 const CollisionLayers contactCollisionLayers) : world{world}, selfCollisionLayers{selfCollisionLayers},
+                                                                 contactCollisionLayers{contactCollisionLayers} {
         transform.scale = 1;
         SetTexture(texturePath);
     }
@@ -136,11 +138,15 @@ namespace SpaceShooter {
     }
 
     void Actor::OnContactBegin(Actor *actor) {
-        LOG("OnContactBegin");
+        if (const auto iterator = CollisionLayersNames.find(static_cast<int>(selfCollisionLayers)); iterator != CollisionLayersNames.end()) {
+            LOG("OnContactBegin - %s", iterator->second.c_str());
+        }
     }
 
     void Actor::OnContactEnd(Actor *actor) {
-        LOG("OnContactEnd");
+        if (const auto iterator = CollisionLayersNames.find(static_cast<int>(selfCollisionLayers)); iterator != CollisionLayersNames.end()) {
+            LOG("OnContactEnd - %s", iterator->second.c_str());
+        }
     }
 
     void Actor::Destroy() {
@@ -150,7 +156,7 @@ namespace SpaceShooter {
 
     void Actor::InitializePhysics() {
         if (!b2Body_IsValid(bodyId)) {
-            bodyId = PhysicsSystem::Get().AddListener(this);
+            bodyId = PhysicsSystem::Get().AddListener(this, selfCollisionLayers, contactCollisionLayers);
         }
     }
 
