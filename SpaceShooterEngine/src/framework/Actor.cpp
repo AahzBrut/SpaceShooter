@@ -48,8 +48,7 @@ namespace SpaceShooter {
         DrawTexturePro(*texture, textureRect, destRect,
                        pivotOffset, transform.rotation,
                        WHITE);
-
-        DrawRectanglePro(destRect, pivotOffset, transform.rotation, (Color){ 0, 121, 241, 127 });
+       // DrawRectanglePro(destRect, pivotOffset, transform.rotation, (Color){ 0, 121, 241, 127 });
     }
 
     Vector2 Actor::Position() const {

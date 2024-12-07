@@ -1,4 +1,5 @@
 #pragma once
+#include "framework/Delegate.h"
 
 namespace SpaceShooter {
     class HealthComponent {
@@ -10,10 +11,15 @@ namespace SpaceShooter {
         [[nodiscard]] float GetHealth() const { return health; }
         [[nodiscard]] float GetMaxHealth() const { return maxHealth; }
 
+        Delegate<float, float, float> HealthChanged;
+        Delegate<float, float, float> DamageTaken;
+        Delegate<float, float, float> HealthRegenerated;
+        Delegate<> Death;
+
     private:
-        void DamageTaken(float amount);
+        void TakeDamage(float amount);
         void HealthEmpty();
-        void HealthRegenerated(float amount);
+        void RegenerateHealth(float amount);
         float health;
         float maxHealth;
     };

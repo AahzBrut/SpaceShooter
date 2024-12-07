@@ -11,8 +11,8 @@ namespace SpaceShooter {
 
         virtual void Destroy();
         [[nodiscard]] bool IsPendingDestruction() const;
-        Weak<Object> GetWeakPtr() { return shared_from_this(); }
-        Weak<const Object> GetWeakPtr() const { return shared_from_this(); }
+        Weak<Object> GetWeakRef() { return shared_from_this(); }
+        Weak<const Object> GetWeakRef() const { return shared_from_this(); }
 
     private:
         bool isPendingDestruction = false;

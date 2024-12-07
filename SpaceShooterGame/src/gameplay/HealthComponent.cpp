@@ -1,5 +1,4 @@
 #include "gameplay/HealthComponent.h"
-#include "framework/Core.h"
 
 namespace SpaceShooter {
     HealthComponent::HealthComponent(const float health, const float maxHealth) : health{health}, maxHealth{maxHealth} {
@@ -9,30 +8,33 @@ namespace SpaceShooter {
         if (amount == 0 || health == 0) return;
         health -= amount;
 
-        if (health < 0) {
+        if (health <= 0) {
             health = 0;
             HealthEmpty();
+        } else {
+            HealthChanged.Emit(amount, GetHealth(), GetMaxHealth());
         }
+
         if (health > maxHealth) {
             health = maxHealth;
         }
 
         if (amount > 0) {
-            DamageTaken(amount);
+            TakeDamage(amount);
         } else {
-            HealthRegenerated(amount);
+            RegenerateHealth(amount);
         }
     }
 
-    void HealthComponent::DamageTaken(const float amount) {
-        LOG("Damage taken: %f (%f/%f)", amount, health, maxHealth);
+    void HealthComponent::TakeDamage(const float amount) {
+        DamageTaken.Emit(amount, health, maxHealth);
     }
 
     void HealthComponent::HealthEmpty() {
-        LOG("Health is empty");
+        Death.Emit();
     }
 
-    void HealthComponent::HealthRegenerated(const float amount) {
-        LOG("Health regenerated: %f, (%f/%f)", amount,  health, maxHealth);
+    void HealthComponent::RegenerateHealth(const float amount) {
+        HealthRegenerated.Emit(amount, health, maxHealth);
     }
 }
