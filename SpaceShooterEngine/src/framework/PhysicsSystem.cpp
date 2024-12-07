@@ -60,6 +60,7 @@ namespace SpaceShooter {
     b2BodyId PhysicsSystem::AddListener(const Actor *listener, const CollisionLayers selfCollisionLayers, const CollisionLayers contactCollisionLayers) const {
         if (listener->IsPendingDestruction()) return b2_nullBodyId;
         const auto [actorX, actorY] = listener->Position();
+        const auto [actorWidth, actorHeight] = listener->GetSize();
 
         auto bodyDef = b2DefaultBodyDef();
         bodyDef.type = b2_dynamicBody;
@@ -69,7 +70,6 @@ namespace SpaceShooter {
         bodyDef.enableSleep = false;
         const auto bodyId = b2CreateBody(physicsWorld, &bodyDef);
 
-        const auto [actorWidth, actorHeight] = listener->GetSize();
         const auto polygonBox = b2MakeBox(actorWidth * 0.5f, actorHeight * 0.5f);
         auto shapeDef = b2DefaultShapeDef();
         shapeDef.density = 1.0f;

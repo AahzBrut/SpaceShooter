@@ -48,6 +48,8 @@ namespace SpaceShooter {
         DrawTexturePro(*texture, textureRect, destRect,
                        pivotOffset, transform.rotation,
                        WHITE);
+
+        DrawRectanglePro(destRect, pivotOffset, transform.rotation, (Color){ 0, 121, 241, 127 });
     }
 
     Vector2 Actor::Position() const {
@@ -131,7 +133,7 @@ namespace SpaceShooter {
 
     void Actor::UpdatePhysicsBodyTransform() const {
         if (b2Body_IsValid(bodyId)) {
-            const b2Vec2 position{transform.position.x + pivotOffset.x, transform.position.y + pivotOffset.y};
+            const b2Vec2 position{transform.position.x, transform.position.y};
             const auto rotation = DegreesToRadians(transform.rotation);
             b2Body_SetTransform(bodyId, position, b2MakeRot(rotation));
         }
