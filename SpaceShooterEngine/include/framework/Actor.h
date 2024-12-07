@@ -45,6 +45,7 @@ namespace SpaceShooter {
         virtual void Update(float deltaTime) {}
         virtual void OnContactBegin(Actor * actor);
         virtual void OnContactEnd(Actor * actor);
+        void Destroy() override;
 
     private:
         World *world;

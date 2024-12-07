@@ -28,10 +28,10 @@ namespace SpaceShooter {
 
         // if (!playerShip.expired()) playerShip.lock()->SetRotation(counter * 90);
         //
-        //  if (counter >= 3.0f) {
-        //      if (!playerShip.expired()) {
-        //          playerShip.lock()->Destroy();
-        //      }
-        //  }
+        if (counter >= 3.0f) {
+            if (!playerShip.expired()) {
+                playerShip.lock()->Destroy();
+            }
+        }
     }
 }

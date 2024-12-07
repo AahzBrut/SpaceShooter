@@ -7,10 +7,12 @@ namespace SpaceShooter {
     class PhysicsSystem {
     public:
         static PhysicsSystem &Get();
+        static void Restart();
 
-        void Update(float deltaTime) const;
+        void Update(float deltaTime);
         b2BodyId AddListener(const Actor* listener) const;
-        static void RemoveListener(b2BodyId bodyId);
+        void RemoveListener(b2BodyId bodyId);
+        void ClearRemovedBodies();
 
     protected:
         PhysicsSystem();
@@ -18,5 +20,6 @@ namespace SpaceShooter {
     private:
         static Unique<PhysicsSystem> instance;
         b2WorldId physicsWorld{};
+        Set<b2BodyId> bodiesToRemove{};
     };
 }

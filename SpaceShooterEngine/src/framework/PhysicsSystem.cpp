@@ -21,15 +21,20 @@ namespace SpaceShooter {
         return *instance;
     }
 
-    void PhysicsSystem::Update(const float deltaTime) const {
+    void PhysicsSystem::Restart() {
+        instance = Unique<PhysicsSystem>{new PhysicsSystem()};
+    }
+
+    void PhysicsSystem::Update(const float deltaTime) {
+        ClearRemovedBodies();
         b2World_Step(physicsWorld, deltaTime, 4);
         const auto contactEvents = b2World_GetContactEvents(physicsWorld);
         for (auto index = 0; index < contactEvents.beginCount; index++) {
             const auto [shapeIdA, shapeIdB] = contactEvents.beginEvents[index];
             const auto firstBody = b2Shape_GetBody(shapeIdA);
             const auto secondBody = b2Shape_GetBody(shapeIdB);
-            const auto firstActor = static_cast<Actor*>(b2Body_GetUserData(firstBody));
-            const auto secondActor = static_cast<Actor*>(b2Body_GetUserData(secondBody));
+            const auto firstActor = static_cast<Actor *>(b2Body_GetUserData(firstBody));
+            const auto secondActor = static_cast<Actor *>(b2Body_GetUserData(secondBody));
             if (firstActor && !firstActor->IsPendingDestruction()) {
                 firstActor->OnContactBegin(secondActor);
             }
@@ -41,8 +46,8 @@ namespace SpaceShooter {
             const auto [shapeIdA, shapeIdB] = contactEvents.endEvents[index];
             const auto firstBody = b2Shape_GetBody(shapeIdA);
             const auto secondBody = b2Shape_GetBody(shapeIdB);
-            const auto firstActor = static_cast<Actor*>(b2Body_GetUserData(firstBody));
-            const auto secondActor = static_cast<Actor*>(b2Body_GetUserData(secondBody));
+            const auto firstActor = static_cast<Actor *>(b2Body_GetUserData(firstBody));
+            const auto secondActor = static_cast<Actor *>(b2Body_GetUserData(secondBody));
             if (firstActor && !firstActor->IsPendingDestruction()) {
                 firstActor->OnContactEnd(secondActor);
             }
@@ -60,8 +65,7 @@ namespace SpaceShooter {
         bodyDef.type = b2_dynamicBody;
         bodyDef.position = b2Vec2{actorX, actorY};
         bodyDef.rotation = b2MakeRot(DegreesToRadians(listener->Rotation()));
-        // ReSharper disable once CppCStyleCast
-        bodyDef.userData = (void *)listener;
+        bodyDef.userData = const_cast<void *>(static_cast<void const *>(listener));
         bodyDef.enableSleep = false;
         const auto bodyId = b2CreateBody(physicsWorld, &bodyDef);
 
@@ -77,6 +81,13 @@ namespace SpaceShooter {
     }
 
     void PhysicsSystem::RemoveListener(const b2BodyId bodyId) {
-        b2DestroyBody(bodyId);
+        bodiesToRemove.insert(bodyId);
+    }
+
+    void PhysicsSystem::ClearRemovedBodies() {
+        for (const auto bodyId: bodiesToRemove) {
+            b2DestroyBody(bodyId);
+        }
+        bodiesToRemove.clear();
     }
 }

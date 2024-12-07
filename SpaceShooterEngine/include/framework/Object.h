@@ -3,10 +3,10 @@
 namespace SpaceShooter {
     class Object {
     public:
-        Object();
-        virtual ~Object();
+        Object() = default;
+        virtual ~Object() = default;
 
-        void Destroy();
+        virtual void Destroy();
         [[nodiscard]] bool IsPendingDestruction() const;
 
     private:

@@ -143,6 +143,11 @@ namespace SpaceShooter {
         LOG("OnContactEnd");
     }
 
+    void Actor::Destroy() {
+        UnInitializePhysics();
+        Object::Destroy();
+    }
+
     void Actor::InitializePhysics() {
         if (!b2Body_IsValid(bodyId)) {
             bodyId = PhysicsSystem::Get().AddListener(this);
@@ -151,7 +156,7 @@ namespace SpaceShooter {
 
     void Actor::UnInitializePhysics() {
         if (b2Body_IsValid(bodyId)) {
-            PhysicsSystem::RemoveListener(bodyId);
+            PhysicsSystem::Get().RemoveListener(bodyId);
             bodyId = b2_nullBodyId;
         }
     }

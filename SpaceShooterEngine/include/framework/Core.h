@@ -3,10 +3,22 @@
 #include <cstdio>
 #include <map>
 #include <memory>
-#include <set>
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
+#include <box2d/types.h>
+
+template<> struct std::hash<b2BodyId> {
+    size_t operator()(const b2BodyId& id) const noexcept {
+        return hash<int>()(id.index1) ^ hash<unsigned>()(id.revision) ^ hash<unsigned>()(id.world0);
+    }
+};
+
+template<> struct std::equal_to<b2BodyId> {
+    bool operator() (const b2BodyId& firstId, const b2BodyId& secondId) const {
+        return firstId.index1 == secondId.index1 && firstId.revision == secondId.revision && firstId.world0 == secondId.world0;
+    }
+};
 
 namespace SpaceShooter {
     template<typename T>
