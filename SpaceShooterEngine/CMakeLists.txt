@@ -28,4 +28,4 @@ add_library(SpaceShooterEngine STATIC
 
 target_link_libraries(SpaceShooterEngine PRIVATE box2d raylib)
 
-target_include_directories(SpaceShooterEngine PUBLIC include "E:\\Projects\\Cpp\\SpaceShooter\\cmake-build-debug\\_deps\\box2d-src\\include")
+target_include_directories(SpaceShooterEngine PUBLIC include)

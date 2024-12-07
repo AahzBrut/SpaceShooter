@@ -18,7 +18,7 @@ add_executable(SpaceShooterGame
         src/weapon/Bullet.cpp
 )
 
-target_link_libraries(SpaceShooterGame PRIVATE SpaceShooterEngine raylib)
+target_link_libraries(SpaceShooterGame PRIVATE SpaceShooterEngine raylib box2d)
 
 target_include_directories(SpaceShooterGame PUBLIC include)
 
