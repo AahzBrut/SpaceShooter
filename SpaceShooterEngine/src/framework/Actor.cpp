@@ -9,8 +9,8 @@
 
 namespace SpaceShooter {
     Actor::Actor(World *world, const std::string &texturePath, const CollisionLayers selfCollisionLayers,
-                 const CollisionLayers contactCollisionLayers) : world{world}, selfCollisionLayers{selfCollisionLayers},
-                                                                 contactCollisionLayers{contactCollisionLayers} {
+                 const CollisionLayers contactCollisionLayers) : selfCollisionLayers{selfCollisionLayers}, contactCollisionLayers{contactCollisionLayers},
+                                                                 world{world} {
         transform.scale = 1;
         SetTexture(texturePath);
     }
