@@ -1,5 +1,6 @@
 #pragma once
 #include "framework/Actor.h"
+#include "gameplay/HealthComponent.h"
 
 
 namespace SpaceShooter {
@@ -14,5 +15,6 @@ namespace SpaceShooter {
         virtual void Shoot();
     private:
         Vector2 velocity{};
+        HealthComponent healthComponent{100, 100};
     };
 }
