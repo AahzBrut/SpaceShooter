@@ -92,6 +92,10 @@ namespace SpaceShooter {
         transform.scale += scale;
     }
 
+    void Actor::SetColor(const Color& color) {
+        this->color = color;
+    }
+
     Vector2 Actor::GetForwardVector() const {
         return RotationToVector(transform.rotation);
     }

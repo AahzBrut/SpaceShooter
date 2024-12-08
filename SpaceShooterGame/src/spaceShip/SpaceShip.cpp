@@ -1,6 +1,7 @@
 #include "spaceShip/SpaceShip.h"
 
 #include "framework/MathUtility.h"
+#include "vfx/Explosion.h"
 #include "weapon/Bullet.h"
 
 
@@ -57,6 +58,9 @@ namespace SpaceShooter {
 
     void SpaceShip::OnDeath() {
         LOG("Spaceship destroyed");
+        const auto exp = new Explosion();
+        exp->Spawn(GetWorld(), GetTransform().position);
         Destroy();
+        delete exp;
     }
 }

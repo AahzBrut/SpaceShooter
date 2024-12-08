@@ -23,7 +23,7 @@ namespace SpaceShooter {
         Vector2 velocity{};
         HealthComponent healthComponent{100, 100};
         float blinkTime{0};
-        float blinkDuration{0.2f};
+        float blinkDuration{0.15f};
         Color blinkColorOffset{255, 0,0, 255};
 
         virtual void OnDamageTaken(float amount, float health, float maxHealth);
