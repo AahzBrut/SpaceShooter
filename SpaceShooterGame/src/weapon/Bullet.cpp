@@ -21,6 +21,11 @@ namespace SpaceShooter {
         if (IsOutOfWindowBounds()) Destroy();
     }
 
+    void Bullet::OnContactBegin(Actor *actor) {
+        Actor::OnContactBegin(actor);
+        Destroy();
+    }
+
     void Bullet::Move(const float deltaTime) {
         const auto [directionX, directionY] = GetForwardVector();
         SetPositionOffset(Vector2{directionX * speed * deltaTime, directionY * speed * deltaTime});

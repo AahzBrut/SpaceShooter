@@ -1,5 +1,6 @@
 #include "spaceShip/SpaceShip.h"
 
+#include "framework/MathUtility.h"
 #include "weapon/Bullet.h"
 
 
@@ -10,6 +11,7 @@ namespace SpaceShooter {
     void SpaceShip::Update(const float deltaTime) {
         Actor::Update(deltaTime);
         SetPositionOffset(Vector2{velocity.x * deltaTime, velocity.y * deltaTime});
+        UpdateBlink(deltaTime);
     }
 
     void SpaceShip::Initialize() {
@@ -24,6 +26,20 @@ namespace SpaceShooter {
         this->velocity = velocity;
     }
 
+    void SpaceShip::Blink() {
+        if (blinkTime == 0) {
+            blinkTime = blinkDuration;
+        }
+    }
+
+    void SpaceShip::UpdateBlink(const float deltaTime) {
+        if (blinkTime > 0) {
+            blinkTime -= deltaTime;
+            blinkTime = blinkTime > 0 ? blinkTime : 0;
+            color = LerpColor(WHITE, blinkColorOffset, blinkTime/blinkDuration);
+        }
+    }
+
     void SpaceShip::OnContactBegin(Actor *actor) {
         Actor::OnContactBegin(actor);
         if (actor == dynamic_cast<Bullet*>(actor)) {
@@ -36,6 +52,7 @@ namespace SpaceShooter {
 
     void SpaceShip::OnDamageTaken(const float amount, const float health, const float maxHealth) {
         LOG("Damage taken %f, current health: %f/%f", amount, health, maxHealth);
+        Blink();
     }
 
     void SpaceShip::OnDeath() {

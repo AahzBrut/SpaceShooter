@@ -50,6 +50,7 @@ namespace SpaceShooter {
     protected:
         CollisionLayers selfCollisionLayers;
         CollisionLayers contactCollisionLayers;
+        Color color{255, 255,255, 255};
 
     private:
         World *world;

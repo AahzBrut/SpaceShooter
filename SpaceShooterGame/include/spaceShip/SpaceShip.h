@@ -13,6 +13,8 @@ namespace SpaceShooter {
         void Initialize() override;
         void SetVelocity(const Vector2 &velocity);
         [[nodiscard]] Vector2 GetVelocity() const { return velocity; }
+        void Blink();
+        void UpdateBlink(float deltaTime);
 
         void OnContactBegin(Actor *actor) override;
         virtual void Shoot();
@@ -20,6 +22,9 @@ namespace SpaceShooter {
     private:
         Vector2 velocity{};
         HealthComponent healthComponent{100, 100};
+        float blinkTime{0};
+        float blinkDuration{0.2f};
+        Color blinkColorOffset{255, 0,0, 255};
 
         virtual void OnDamageTaken(float amount, float health, float maxHealth);
         virtual void OnDeath();

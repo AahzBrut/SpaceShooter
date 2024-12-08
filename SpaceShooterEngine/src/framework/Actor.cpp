@@ -47,7 +47,7 @@ namespace SpaceShooter {
             size.y);
         DrawTexturePro(*texture, textureRect, destRect,
                        pivotOffset, transform.rotation,
-                       WHITE);
+                       color);
        // DrawRectanglePro(destRect, pivotOffset, transform.rotation, (Color){ 0, 121, 241, 127 });
     }
 

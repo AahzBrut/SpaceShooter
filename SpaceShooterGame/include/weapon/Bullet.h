@@ -13,6 +13,7 @@ namespace SpaceShooter {
 
         void Initialize() override;
         void Update(float deltaTime) override;
+        void OnContactBegin(Actor *actor) override;
 
     private:
         Actor *owner;
