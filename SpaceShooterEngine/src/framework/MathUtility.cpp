@@ -1,6 +1,8 @@
 #include <cmath>
 #include "framework/MathUtility.h"
 
+#include <random>
+
 
 namespace SpaceShooter {
     Vector2 RotationToVector(const float rotation) {
@@ -33,5 +35,20 @@ namespace SpaceShooter {
         const auto lerpX = LerpFloat(a.x, b.x, alfa);
         const auto lerpY = LerpFloat(a.y, b.y, alfa);
         return Vector2(lerpX, lerpY);
+    }
+
+    float RandomRange(const float min, const float max) {
+        std::random_device rd;
+        std::mt19937 gen(rd()); // NOLINT(*-narrowing-conversions)
+        std::uniform_real_distribution distribution(min, max);
+        return distribution(gen);
+    }
+
+    Vector2 RandomUnitVector() {
+        const auto randomX = RandomRange(-1, 1);
+        const auto randomY = RandomRange(-1, 1);
+        auto length = std::sqrt(randomX * randomX + randomY * randomY);
+        length = length == 0 ? 0.00001f : length;
+        return Vector2(randomX / length, randomY / length);
     }
 }
