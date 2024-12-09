@@ -7,6 +7,7 @@ namespace SpaceShooter {
     : SpaceShip(world, texturePath, CollisionLayers::Player, CollisionLayers::EnemyBullet | CollisionLayers::Enemy),
     bulletShooter{new BulletShooter(this, 0.1f, CollisionLayers::PlayerBullet, CollisionLayers::Enemy)} {
         SetRotation(-90);
+        CenterPivotOffset();
     }
 
     void PlayerSpaceShip::Update(const float deltaTime) {

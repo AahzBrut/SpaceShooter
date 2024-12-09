@@ -1,11 +1,11 @@
 #pragma once
+#include <box2d/box2d.h>
 #include <raylib.h>
 #include <string>
 
 #include "Core.h"
 #include "Object.h"
 #include "Transform.h"
-#include <box2d/box2d.h>
 
 namespace SpaceShooter {
     class World;
@@ -37,7 +37,7 @@ namespace SpaceShooter {
         [[nodiscard]] Vector2 GetWindowSize() const;
         [[nodiscard]] Transform GetTransform() const;
         [[nodiscard]] World *GetWorld() const { return world; }
-        [[nodiscard]] bool IsOutOfWindowBounds() const;
+        [[nodiscard]] bool IsOutOfWindowBounds(float allowance = 10) const;
         [[nodiscard]] Vector2 GetSize() const { return size; }
         void SetPhysicsEnabled(bool enablePhysics);
         void UpdatePhysicsBodyTransform() const;

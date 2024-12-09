@@ -1,6 +1,6 @@
 #pragma once
 #include "Core.h"
-#include "raylib.h"
+#include <raylib.h>
 
 namespace SpaceShooter {
     class AssetsManager {

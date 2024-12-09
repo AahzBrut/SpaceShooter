@@ -1,5 +1,6 @@
 #include "vfx/Explosion.h"
 
+#include "framework/World.h"
 #include "framework/MathUtility.h"
 #include "vfx/Particle.h"
 

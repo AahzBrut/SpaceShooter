@@ -1,7 +1,11 @@
 #pragma once
-#include "framework/World.h"
+#include <string>
+#include <raylib.h>
+#include "framework/Core.h"
 
 namespace SpaceShooter {
+    class World;
+
     class Explosion {
     public:
         explicit Explosion(

@@ -9,7 +9,8 @@
 
 namespace SpaceShooter {
     Actor::Actor(World *world, const std::string &texturePath, const CollisionLayers selfCollisionLayers,
-                 const CollisionLayers contactCollisionLayers) : selfCollisionLayers{selfCollisionLayers}, contactCollisionLayers{contactCollisionLayers},
+                 const CollisionLayers contactCollisionLayers) : selfCollisionLayers{selfCollisionLayers},
+                                                                 contactCollisionLayers{contactCollisionLayers},
                                                                  world{world} {
         transform.scale = 1;
         SetTexture(texturePath);
@@ -48,7 +49,7 @@ namespace SpaceShooter {
         DrawTexturePro(*texture, textureRect, destRect,
                        pivotOffset, transform.rotation,
                        color);
-       // DrawRectanglePro(destRect, pivotOffset, transform.rotation, (Color){ 0, 121, 241, 127 });
+        // DrawRectanglePro(destRect, pivotOffset, transform.rotation, (Color){ 0, 121, 241, 127 });
     }
 
     Vector2 Actor::Position() const {
@@ -92,7 +93,7 @@ namespace SpaceShooter {
         transform.scale += scale;
     }
 
-    void Actor::SetColor(const Color& color) {
+    void Actor::SetColor(const Color &color) {
         this->color = color;
     }
 
@@ -120,10 +121,12 @@ namespace SpaceShooter {
         return transform;
     }
 
-    bool Actor::IsOutOfWindowBounds() const {
+    bool Actor::IsOutOfWindowBounds(const float allowance) const {
         const auto [windowWidth, windowHeight] = GetWindowSize();
-        return transform.position.x < -textureRect.width || transform.position.x > windowWidth + textureRect.width ||
-               transform.position.y < -textureRect.height || transform.position.y > windowHeight + textureRect.height;
+        return transform.position.x < -textureRect.width - allowance ||
+               transform.position.x > windowWidth + textureRect.width + allowance ||
+               transform.position.y < -textureRect.height - allowance ||
+               transform.position.y > windowHeight + textureRect.height + allowance;
     }
 
     void Actor::SetPhysicsEnabled(const bool enablePhysics) {
@@ -143,13 +146,15 @@ namespace SpaceShooter {
     }
 
     void Actor::OnContactBegin(Actor *actor) {
-        if (const auto iterator = CollisionLayersNames.find(static_cast<int>(selfCollisionLayers)); iterator != CollisionLayersNames.end()) {
+        if (const auto iterator = CollisionLayersNames.find(static_cast<int>(selfCollisionLayers));
+            iterator != CollisionLayersNames.end()) {
             LOG("OnContactBegin - %s", iterator->second.c_str());
         }
     }
 
     void Actor::OnContactEnd(Actor *actor) {
-        if (const auto iterator = CollisionLayersNames.find(static_cast<int>(selfCollisionLayers)); iterator != CollisionLayersNames.end()) {
+        if (const auto iterator = CollisionLayersNames.find(static_cast<int>(selfCollisionLayers));
+            iterator != CollisionLayersNames.end()) {
             LOG("OnContactEnd - %s", iterator->second.c_str());
         }
     }

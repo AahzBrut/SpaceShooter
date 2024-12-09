@@ -41,11 +41,14 @@ namespace SpaceShooter {
         }
     }
 
+    void SpaceShip::ApplyDamage(const float amount) {
+        healthComponent.ChangeHealth(amount);
+    }
+
     void SpaceShip::OnContactBegin(Actor *actor) {
         Actor::OnContactBegin(actor);
-        if (actor == dynamic_cast<Bullet*>(actor)) {
-            const auto bullet = dynamic_cast<Bullet*>(actor);
-            healthComponent.ChangeHealth(bullet->GetDamage());
+        if (const auto *bullet = dynamic_cast<Bullet*>(actor)) {
+            ApplyDamage(bullet->GetDamage());
         }
     }
 
@@ -59,7 +62,7 @@ namespace SpaceShooter {
     void SpaceShip::OnDeath() {
         LOG("Spaceship destroyed");
         const auto exp = new Explosion();
-        exp->Spawn(GetWorld(), GetTransform().position);
+        exp->Spawn(GetWorld(), Position());
         Destroy();
         delete exp;
     }

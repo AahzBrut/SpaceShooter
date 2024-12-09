@@ -18,6 +18,10 @@ add_executable(SpaceShooterGame
         src/weapon/Bullet.cpp
         include/gameplay/HealthComponent.h
         src/gameplay/HealthComponent.cpp
+        include/enemy/EnemySpaceship.h
+        src/enemy/EnemySpaceship.cpp
+        include/enemy/Vanguard.h
+        src/enemy/Vanguard.cpp
 )
 
 target_link_libraries(SpaceShooterGame PRIVATE SpaceShooterEngine raylib box2d)

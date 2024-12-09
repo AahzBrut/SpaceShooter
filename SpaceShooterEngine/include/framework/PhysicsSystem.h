@@ -1,9 +1,9 @@
 #pragma once
 #include "Core.h"
-#include "Actor.h"
-
 
 namespace SpaceShooter {
+    class Actor;
+
     class PhysicsSystem {
     public:
         static PhysicsSystem &Get();

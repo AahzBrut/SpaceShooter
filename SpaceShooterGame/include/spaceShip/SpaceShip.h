@@ -15,6 +15,7 @@ namespace SpaceShooter {
         [[nodiscard]] Vector2 GetVelocity() const { return velocity; }
         void Blink();
         void UpdateBlink(float deltaTime);
+        void ApplyDamage(float amount);
 
         void OnContactBegin(Actor *actor) override;
         virtual void Shoot();
