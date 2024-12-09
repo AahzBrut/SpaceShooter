@@ -5,8 +5,8 @@
 #include "framework/Application.h"
 
 #include "framework/AssetsManager.h"
-#include "framework/Core.h"
 #include "framework/PhysicsSystem.h"
+#include "framework/TimerManager.h"
 #include "framework/World.h"
 
 
@@ -31,6 +31,7 @@ namespace SpaceShooter {
             UpdateInternal(deltaTime);
             RenderInternal();
 
+            TimerManager::Get().UpdateTimers(deltaTime);
             PhysicsSystem::Get().Update(deltaTime);
             if (GetTime() - lastAssetsClearTime > cleanInterval) {
                 lastAssetsClearTime = GetTime();

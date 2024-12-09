@@ -5,10 +5,10 @@ namespace SpaceShooter {
     class Application;
 
     // ReSharper disable once CppClassCanBeFinal
-    class World {
+    class World : public Object {
     public:
         explicit World(Application *application);
-        virtual ~World();
+        ~World() override;
 
         void InternalInitialize();
         void InternalUpdate(float deltaTime);

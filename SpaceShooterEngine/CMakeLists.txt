@@ -29,6 +29,8 @@ add_library(SpaceShooterEngine STATIC
         src/vfx/Particle.cpp
         include/vfx/Explosion.h
         src/vfx/Explosion.cpp
+        include/framework/TimerManager.h
+        src/framework/TimerManager.cpp
 )
 
 target_link_libraries(SpaceShooterEngine PRIVATE box2d raylib)

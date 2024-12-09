@@ -6,5 +6,9 @@ namespace SpaceShooter {
     class GameLevelOne : public World {
         public:
         explicit GameLevelOne(Application *application);
+
+    private:
+        void Initialize() override;
+        void OnTimerTimeout();
     };
 }
