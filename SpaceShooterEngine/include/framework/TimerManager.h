@@ -29,21 +29,24 @@ namespace SpaceShooter {
         static TimerManager &Get();
 
         template<typename ClassName>
-        void SetTimer(Weak<Object> object, void (ClassName::*callback)(), float duration, bool repeat = false) {
-            timers.push_back(Timer(
+        unsigned int SetTimer(Weak<Object> object, void (ClassName::*callback)(), float duration, bool repeat = false) {
+            timers.emplace(timerIndexCounter++, Timer(
                 object,
                 [=] { (static_cast<ClassName *>(object.lock().get())->*callback)(); },
                 duration,
                 repeat));
+            return timerIndexCounter - 1;
         }
 
         void UpdateTimers(float deltaTime);
+        void ClearTimer(unsigned int timerIndex);
 
     protected:
         TimerManager() = default;
 
     private:
         static Unique<TimerManager> instance;
-        List<Timer> timers;
+        static unsigned int timerIndexCounter;
+        Dictionary<unsigned int, Timer> timers;
     };
 }

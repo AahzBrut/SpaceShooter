@@ -13,11 +13,17 @@ namespace SpaceShooter {
     }
 
     void GameLevelOne::Initialize() {
-        TimerManager::Get().SetTimer(GetWeakRef(), &GameLevelOne::OnTimerTimeout, 1);
+        timerIndex = TimerManager::Get().SetTimer(GetWeakRef(), &GameLevelOne::OnTimerTimeout, 1, true);
     }
 
     void GameLevelOne::OnTimerTimeout() {
         const auto enemySpaceShip = SpawnActor<Vanguard>();
         enemySpaceShip.lock()->SetPosition(Vector2{300, 100});
+
+        static int counter = 0;
+        counter++;
+        if (counter  == 5) {
+            TimerManager::Get().ClearTimer(timerIndex);
+        }
     }
 }

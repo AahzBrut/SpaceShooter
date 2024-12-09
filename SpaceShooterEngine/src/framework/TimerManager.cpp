@@ -2,6 +2,7 @@
 
 namespace SpaceShooter {
     Unique<TimerManager> TimerManager::instance{nullptr};
+    unsigned int TimerManager::timerIndexCounter = 0;
 
     Timer::Timer(const Weak<Object> &object,
                  const std::function<void()> &callback,
@@ -35,8 +36,20 @@ namespace SpaceShooter {
 
     // ReSharper disable once CppMemberFunctionMayBeConst
     void TimerManager::UpdateTimers(const float deltaTime) {
-        for (auto &timer: timers) {
-            timer.Tick(deltaTime);
+      for (auto iter = timers.begin(); iter != timers.end();) {
+          if (iter->second.Expired()) {
+              iter = timers.erase(iter);
+          } else {
+              iter->second.Tick(deltaTime);
+              ++iter;
+          }
+      }
+    }
+
+    void TimerManager::ClearTimer(const unsigned int timerIndex) {
+        if (const auto iter = timers.find(timerIndex); iter != timers.end()) {
+            iter->second.SetExpired();
         }
+
     }
 }

@@ -8,6 +8,8 @@ namespace SpaceShooter {
         explicit GameLevelOne(Application *application);
 
     private:
+        unsigned int timerIndex{0};
+
         void Initialize() override;
         void OnTimerTimeout();
     };
