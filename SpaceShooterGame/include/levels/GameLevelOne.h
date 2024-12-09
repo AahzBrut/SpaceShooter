@@ -1,4 +1,5 @@
 #pragma once
+#include "framework/TimerManager.h"
 #include "framework/World.h"
 
 
@@ -8,7 +9,7 @@ namespace SpaceShooter {
         explicit GameLevelOne(Application *application);
 
     private:
-        unsigned int timerIndex{0};
+        TimerHandler timerIndex{};
 
         void Initialize() override;
         void OnTimerTimeout();

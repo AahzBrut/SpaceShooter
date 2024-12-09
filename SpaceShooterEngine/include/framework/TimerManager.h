@@ -6,6 +6,23 @@
 
 
 namespace SpaceShooter {
+    struct TimerHandler {
+        TimerHandler() = default;
+        [[nodiscard]] unsigned int GetTimerKey() const { return timerKey; }
+
+    private:
+        static unsigned int timerKeyCounter;
+        unsigned int timerKey{ GetNextTimerKey() };
+
+        static unsigned int GetNextTimerKey() {return  ++timerKeyCounter;}
+    };
+
+    struct TimerHandlerHashFunction {
+        std::size_t operator()(const TimerHandler& key) const { return std::hash<unsigned int>()(key.GetTimerKey()); }
+    };
+
+    inline bool operator==(const TimerHandler& lhs, const TimerHandler& rhs) { return lhs.GetTimerKey() == rhs.GetTimerKey(); }
+
     struct Timer {
         Timer(const Weak<Object>& object, const std::function<void()>& callback, float duration, bool repeat);
         void Tick(float deltaTime);
@@ -29,24 +46,24 @@ namespace SpaceShooter {
         static TimerManager &Get();
 
         template<typename ClassName>
-        unsigned int SetTimer(Weak<Object> object, void (ClassName::*callback)(), float duration, bool repeat = false) {
-            timers.emplace(timerIndexCounter++, Timer(
+        TimerHandler SetTimer(Weak<Object> object, void (ClassName::*callback)(), float duration, bool repeat = false) {
+            TimerHandler handler{};
+            timers.emplace(handler, Timer(
                 object,
                 [=] { (static_cast<ClassName *>(object.lock().get())->*callback)(); },
                 duration,
                 repeat));
-            return timerIndexCounter - 1;
+            return handler;
         }
 
         void UpdateTimers(float deltaTime);
-        void ClearTimer(unsigned int timerIndex);
+        void ClearTimer(TimerHandler timerHandler);
 
     protected:
-        TimerManager() = default;
+        TimerManager();
 
     private:
         static Unique<TimerManager> instance;
-        static unsigned int timerIndexCounter;
-        Dictionary<unsigned int, Timer> timers;
+        Dictionary<TimerHandler, Timer, TimerHandlerHashFunction> timers;
     };
 }
