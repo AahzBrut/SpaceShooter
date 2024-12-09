@@ -3,7 +3,9 @@
 namespace SpaceShooter {
     Unique<TimerManager> TimerManager::instance{nullptr};
 
-    Timer::Timer(const Weak<Object> &object, const std::function<void()> &callback, const float duration,
+    Timer::Timer(const Weak<Object> &object,
+                 const std::function<void()> &callback,
+                 const float duration,
                  const bool repeat)
         : listener{object, callback},
           duration{duration},
