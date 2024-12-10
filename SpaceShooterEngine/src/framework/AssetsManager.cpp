@@ -1,4 +1,5 @@
 #include "framework/AssetsManager.h"
+
 #include "raylib.h"
 
 namespace SpaceShooter {

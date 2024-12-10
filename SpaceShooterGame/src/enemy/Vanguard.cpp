@@ -1,4 +1,5 @@
 #include "enemy/Vanguard.h"
+
 #include "weapon/BulletShooter.h"
 
 namespace SpaceShooter {

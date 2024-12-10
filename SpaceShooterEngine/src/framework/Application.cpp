@@ -1,8 +1,8 @@
-#include <format>
-#include <string>
-
-#include "raylib.h"
 #include "framework/Application.h"
+
+#include <format>
+#include <raylib.h>
+#include <string>
 
 #include "framework/AssetsManager.h"
 #include "framework/PhysicsSystem.h"

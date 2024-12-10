@@ -1,6 +1,6 @@
-#include <memory>
-
 #include "levels/GameLevelOne.h"
+
+#include <memory>
 
 #include "enemy/Vanguard.h"
 #include "framework/TimerManager.h"

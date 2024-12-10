@@ -1,5 +1,5 @@
 #pragma once
-#include "raylib.h"
+#include <raylib.h>
 
 namespace SpaceShooter {
     Vector2 RotationToVector(float rotation);

@@ -1,6 +1,7 @@
 #include "gameplay/GameStage.h"
-#include "framework/World.h"
+
 #include "framework/Core.h"
+#include "framework/World.h"
 
 namespace SpaceShooter {
     GameStage::GameStage(World *world) : world{world}, stageFinished{false} {}
