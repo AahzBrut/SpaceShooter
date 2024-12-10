@@ -5,6 +5,7 @@
 
 #include "framework/Actor.h"
 #include "framework/Application.h"
+#include "gameplay/GameStage.h"
 
 
 namespace SpaceShooter {
@@ -25,6 +26,8 @@ namespace SpaceShooter {
         if (!initialized) {
             initialized = true;
             Initialize();
+            InitStages();
+            NextStage();
             LOG("Initializing world\n");
         }
     }
@@ -39,6 +42,10 @@ namespace SpaceShooter {
         for (auto iterator = childActors.begin(); iterator < childActors.end();) {
             iterator->get()->UpdateInternal(deltaTime);
             ++iterator;
+        }
+
+        if (currentStageIndex >= 0 && currentStageIndex < stages.size()) {
+            stages[currentStageIndex]->Update(deltaTime);
         }
 
         Update(deltaTime);
@@ -69,6 +76,30 @@ namespace SpaceShooter {
             } else {
                 ++iterator;
             }
+        }
+
+        for (auto iterator = stages.begin(); iterator < stages.end();) {
+            if (iterator->get()->IsFinished()) {
+                iterator = stages.erase(iterator);
+            } else {
+                ++iterator;
+            }
+        }
+    }
+
+    void World::AddStage(const Shared<GameStage> &newStage) {
+        stages.push_back(newStage);
+    }
+
+    void World::AllStatesFinished() {}
+
+    void World::NextStage() {
+        ++currentStageIndex;
+        if (currentStageIndex >= 0 && currentStageIndex < stages.size()) {
+            stages[currentStageIndex]->StageFinished.BindAction(GetWeakRef(), &World::NextStage);
+            stages[currentStageIndex]->Initialize();
+        } else {
+            AllStatesFinished();
         }
     }
 }

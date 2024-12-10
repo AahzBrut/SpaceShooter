@@ -11,6 +11,7 @@ namespace SpaceShooter {
     private:
         TimerHandler timerIndex{};
 
+        void InitStages() override;
         void Initialize() override;
         void OnTimerTimeout();
     };

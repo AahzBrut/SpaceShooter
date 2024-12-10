@@ -31,6 +31,8 @@ add_library(SpaceShooterEngine STATIC
         src/vfx/Explosion.cpp
         include/framework/TimerManager.h
         src/framework/TimerManager.cpp
+        include/gameplay/GameStage.h
+        src/gameplay/GameStage.cpp
 )
 
 target_link_libraries(SpaceShooterEngine PRIVATE box2d raylib)
