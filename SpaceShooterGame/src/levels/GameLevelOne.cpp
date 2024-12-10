@@ -1,3 +1,5 @@
+#include <memory>
+
 #include "levels/GameLevelOne.h"
 
 #include "enemy/Vanguard.h"
@@ -14,18 +16,18 @@ namespace SpaceShooter {
     }
 
     void GameLevelOne::InitStages() {
-        AddStage(Shared<GameStage>{new GameStage{this}});
+        AddStage(std::make_shared<GameStage>(this));
     }
 
     void GameLevelOne::Initialize() {
-        timerIndex = TimerManager::Get().SetTimer(GetWeakRef(), &GameLevelOne::OnTimerTimeout, 1, true);
+        timerIndex = TimerManager::Get().SetTimer(GetWeakRef(), &GameLevelOne::OnTimerTimeout, 1.5, true);
     }
 
     void GameLevelOne::OnTimerTimeout() {
         const auto enemySpaceShip = SpawnActor<Vanguard>();
         enemySpaceShip.lock()->SetPosition(Vector2{300, 100});
 
-        static int counter = 0;
+        static auto counter = 0;
         counter++;
         if (counter == 5) {
             TimerManager::Get().ClearTimer(timerIndex);

@@ -46,7 +46,7 @@ namespace SpaceShooter {
         static TimerManager &Get();
 
         template<typename ClassName>
-        TimerHandler SetTimer(Weak<Object> object, void (ClassName::*callback)(), float duration, bool repeat = false) {
+        TimerHandler SetTimer(const Weak<Object>& object, void (ClassName::*callback)(), float duration, bool repeat = false) {
             TimerHandler handler{};
             timers.emplace(handler, Timer(
                 object,
