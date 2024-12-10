@@ -13,6 +13,5 @@ namespace SpaceShooter {
 
         void InitStages() override;
         void Initialize() override;
-        void OnTimerTimeout();
     };
 }

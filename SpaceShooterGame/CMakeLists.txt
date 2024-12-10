@@ -24,6 +24,8 @@ add_executable(SpaceShooterGame
         src/enemy/Vanguard.cpp
         include/levels/GameLevelOne.h
         src/levels/GameLevelOne.cpp
+        include/enemy/VanguardStage.h
+        src/enemy/VanguardStage.cpp
 )
 
 target_link_libraries(SpaceShooterGame PRIVATE SpaceShooterEngine raylib box2d)

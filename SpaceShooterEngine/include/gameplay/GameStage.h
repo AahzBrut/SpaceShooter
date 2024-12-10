@@ -6,7 +6,7 @@
 namespace SpaceShooter {
     class World;
 
-    class GameStage : Object {
+    class GameStage : public Object {
     public:
         explicit GameStage(World *world);
 

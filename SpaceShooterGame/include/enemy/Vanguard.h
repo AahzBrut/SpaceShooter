@@ -1,5 +1,6 @@
 #pragma once
 #include "EnemySpaceShip.h"
+#include "weapon/BulletShooter.h"
 
 namespace SpaceShooter {
     class BulletShooter;
