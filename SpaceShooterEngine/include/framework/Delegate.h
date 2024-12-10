@@ -2,9 +2,10 @@
 #include <functional>
 
 #include "Core.h"
-#include "Object.h"
 
 namespace SpaceShooter {
+    class Object;
+
     template<typename... Args>
     class Delegate {
     public:
