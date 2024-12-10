@@ -9,6 +9,7 @@ namespace SpaceShooter {
         SetRotation(90);
         CenterPivotOffset();
         SetVelocity(velocity);
+        bulletShooter->SetMuzzleOffset(Vector2{0, 30});
     }
 
     void Vanguard::Shoot() {

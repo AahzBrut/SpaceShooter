@@ -8,7 +8,8 @@ namespace SpaceShooter {
     bulletShooter{new BulletShooter(this, 0.1f, CollisionLayers::PlayerBullet, CollisionLayers::Enemy)} {
         SetRotation(-90);
         CenterPivotOffset();
-    }
+         bulletShooter->SetMuzzleOffset(Vector2{0, -30});
+   }
 
     void PlayerSpaceShip::Update(const float deltaTime) {
         SpaceShip::Update(deltaTime);

@@ -53,7 +53,7 @@ namespace SpaceShooter {
 
     void World::Render() const {
         BeginDrawing();
-        ClearBackground(SKYBLUE);
+        ClearBackground(BLACK);
 
         for (const auto &actor: childActors) {
             actor->Render();

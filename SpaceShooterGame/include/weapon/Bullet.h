@@ -2,7 +2,7 @@
 #include "framework/Actor.h"
 
 namespace SpaceShooter {
-    class Bullet : public Actor {
+    class Bullet final : public Actor {
     public:
         Bullet(World *world, Actor *owner, CollisionLayers bulletLayer = CollisionLayers::None, CollisionLayers bulletMaskLayer = CollisionLayers::None, const std::string &texturePath = "assets/SpaceShooterRedux/PNG/Lasers/laserBlue01.png", float speed = 600.f, float damage = 10.f);
 

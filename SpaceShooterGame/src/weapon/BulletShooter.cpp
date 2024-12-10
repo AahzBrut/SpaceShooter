@@ -1,5 +1,6 @@
 #include "weapon/BulletShooter.h"
 
+#include "framework/MathUtility.h"
 #include "framework/World.h"
 #include "weapon/Bullet.h"
 
@@ -15,7 +16,7 @@ namespace SpaceShooter {
     void BulletShooter::ShootImpl() {
         lastShootTime = static_cast<float>(GetTime());
         const Weak<Bullet> newBullet = GetOwner()->GetWorld()->SpawnActor<Bullet>(GetOwner(), bulletLayer, bulletMaskLayer);
-        newBullet.lock()->SetPosition(GetOwner()->Position());
-        newBullet.lock()->SetRotation(GetOwner()->Rotation());
+        newBullet.lock()->SetPosition(GetOwner()->Position() + muzzleOffset);
+        newBullet.lock()->SetRotation(GetOwner()->Rotation() + muzzleRotation);
     }
 }
