@@ -13,9 +13,9 @@ namespace SpaceShooter {
             CenterPivotOffset();
             SetVelocity(velocity);
 
-            leftBulletShooter->SetMuzzleOffset(Vector2{-20, 0});
+            leftBulletShooter->SetMuzzleOffset(Vector2{-20, 30});
             leftBulletShooter->SetMuzzleRotation(15);
-            rightBulletShooter->SetMuzzleOffset(Vector2{20, 0});
+            rightBulletShooter->SetMuzzleOffset(Vector2{20, 30});
             rightBulletShooter->SetMuzzleRotation(-15);
         }
     }

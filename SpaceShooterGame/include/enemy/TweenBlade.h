@@ -1,9 +1,8 @@
 #pragma once
 #include "EnemySpaceShip.h"
+#include "weapon/BulletShooter.h"
 
 namespace SpaceShooter {
-    class BulletShooter;
-
     class TweenBlade final : public EnemySpaceShip {
     public:
         explicit TweenBlade(World *world,
