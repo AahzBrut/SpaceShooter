@@ -4,6 +4,7 @@
 
 #include "enemy/TweenBladeStage.h"
 #include "enemy/VanguardStage.h"
+#include "gameplay/WaitStage.h"
 #include "player/PlayerSpaceShip.h"
 
 namespace SpaceShooter {
@@ -14,6 +15,7 @@ namespace SpaceShooter {
 
     void GameLevelOne::InitStages() {
         AddStage(std::make_shared<VanguardStage>(this));
+        AddStage(std::make_shared<WaitStage>(this, 15));
         AddStage(std::make_shared<TweenBladeStage>(this));
     }
 

@@ -22,7 +22,6 @@ namespace SpaceShooter {
     }
 
     void AssetsManager::CleanCycle() {
-        LOG("Starting cleaning cycle.");
         for (auto iterator = textures.begin(); iterator != textures.end();) {
             if (iterator->second.unique()) {
                 UnloadTexture(*iterator->second);

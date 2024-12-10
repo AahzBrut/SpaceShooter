@@ -26,11 +26,9 @@ namespace SpaceShooter {
 
     Actor::~Actor() {
         SetPhysicsEnabled(false);
-        LOG("Destroying Actor");
     }
 
     void Actor::InitializeInternal() {
-        LOG("Initializing Actor");
         Initialize();
         initialized = true;
     }
@@ -150,14 +148,12 @@ namespace SpaceShooter {
     void Actor::OnContactBegin(Actor *actor) {
         if (const auto iterator = CollisionLayersNames.find(static_cast<int>(selfCollisionLayers));
             iterator != CollisionLayersNames.end()) {
-            LOG("OnContactBegin - %s", iterator->second.c_str());
         }
     }
 
     void Actor::OnContactEnd(Actor *actor) {
         if (const auto iterator = CollisionLayersNames.find(static_cast<int>(selfCollisionLayers));
             iterator != CollisionLayersNames.end()) {
-            LOG("OnContactEnd - %s", iterator->second.c_str());
         }
     }
 

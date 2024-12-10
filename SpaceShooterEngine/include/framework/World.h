@@ -28,13 +28,14 @@ namespace SpaceShooter {
         List<Shared<Actor> > childActors{};
         List<Shared<Actor> > pendingActors{};
         List<Shared<GameStage> > stages{};
-        int currentStageIndex{-1};
+        List<Shared<GameStage> >::iterator currentStage{stages.end()};
 
         virtual void InitStages() {}
         virtual void Initialize() {}
         virtual void Update(float deltaTime) {}
-        virtual void AllStatesFinished();
+        virtual void AllStagesFinished();
 
+        void StartStages();
         void NextStage();
     };
 

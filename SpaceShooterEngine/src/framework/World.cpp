@@ -26,8 +26,9 @@ namespace SpaceShooter {
         if (!initialized) {
             initialized = true;
             Initialize();
+
             InitStages();
-            NextStage();
+            StartStages();
             LOG("Initializing world\n");
         }
     }
@@ -44,9 +45,9 @@ namespace SpaceShooter {
             ++iterator;
         }
 
-        if (currentStageIndex >= 0 && currentStageIndex < stages.size()) {
-            stages[currentStageIndex]->Update(deltaTime);
-        }
+         if (currentStage != stages.end()) {
+             currentStage->get()->Update(deltaTime);
+         }
 
         Update(deltaTime);
     }
@@ -77,29 +78,30 @@ namespace SpaceShooter {
                 ++iterator;
             }
         }
-
-        for (auto iterator = stages.begin(); iterator < stages.end();) {
-            if (iterator->get()->IsFinished()) {
-                iterator = stages.erase(iterator);
-            } else {
-                ++iterator;
-            }
-        }
     }
 
     void World::AddStage(const Shared<GameStage> &newStage) {
         stages.push_back(newStage);
     }
 
-    void World::AllStatesFinished() {}
+    void World::AllStagesFinished() {
+        LOG("All Stages Finished");
+    }
+
+    void World::StartStages() {
+        currentStage = stages.begin();
+        currentStage->get()->Initialize();
+        currentStage->get()->StageFinished.BindAction(GetWeakRef(), &World::NextStage);
+    }
 
     void World::NextStage() {
-        ++currentStageIndex;
-        if (currentStageIndex >= 0 && currentStageIndex < stages.size()) {
-            stages[currentStageIndex]->StageFinished.BindAction(GetWeakRef(), &World::NextStage);
-            stages[currentStageIndex]->Initialize();
+        LOG("Next stage\n");
+        currentStage = stages.erase(currentStage);
+        if (currentStage != stages.end()) {
+            currentStage->get()->Initialize();
+            currentStage->get()->StageFinished.BindAction(GetWeakRef(), &World::NextStage);
         } else {
-            AllStatesFinished();
+            AllStagesFinished();
         }
     }
 }

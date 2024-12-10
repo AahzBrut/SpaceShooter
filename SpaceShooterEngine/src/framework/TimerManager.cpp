@@ -4,8 +4,6 @@ namespace SpaceShooter {
     Unique<TimerManager> TimerManager::instance{nullptr};
     unsigned int TimerHandler::timerKeyCounter = 0;
 
-    TimerManager::TimerManager() : timers{} {}
-
     Timer::Timer(const Weak<Object> &object,
                  const std::function<void()> &callback,
                  const float duration,

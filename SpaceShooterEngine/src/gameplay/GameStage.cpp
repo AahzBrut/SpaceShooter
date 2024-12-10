@@ -8,9 +8,9 @@ namespace SpaceShooter {
     void GameStage::Update(float deltaTime) {}
 
     void GameStage::FinishStage() {
-        StageFinished.Emit();
         stageFinished = true;
         OnStageFinished();
+        StageFinished.Emit();
     }
 
     void GameStage::OnStageFinished() {}

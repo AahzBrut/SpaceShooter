@@ -8,8 +8,8 @@
 namespace SpaceShooter {
     VanguardStage::VanguardStage(World *world)
         : GameStage(world),
-          spawnInterval{3.5},
-          waveInterval{8},
+          spawnInterval{0.5},
+          waveInterval{1},
           spawnOffsetX{100},
           leftSpawnPosition{0, 0},
           rightSpawnPosition{0, 0},

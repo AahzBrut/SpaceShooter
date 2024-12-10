@@ -60,7 +60,7 @@ namespace SpaceShooter {
         void ClearTimer(TimerHandler timerHandler);
 
     protected:
-        TimerManager();
+        TimerManager() = default;
 
     private:
         static Unique<TimerManager> instance;
