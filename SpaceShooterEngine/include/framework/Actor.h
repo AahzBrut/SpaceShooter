@@ -54,7 +54,7 @@ namespace SpaceShooter {
 
     private:
         World *world;
-        bool initialized = false;
+        bool initialized{false};
         Shared<Texture2D> texture{};
         Transform transform{};
         Vector2 pivotOffset{};
