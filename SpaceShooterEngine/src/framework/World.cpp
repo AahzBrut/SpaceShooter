@@ -90,8 +90,10 @@ namespace SpaceShooter {
 
     void World::StartStages() {
         currentStage = stages.begin();
-        currentStage->get()->Initialize();
-        currentStage->get()->StageFinished.BindAction(GetWeakRef(), &World::NextStage);
+        if (currentStage != stages.end()) {
+            currentStage->get()->Initialize();
+            currentStage->get()->StageFinished.BindAction(GetWeakRef(), &World::NextStage);
+        }
     }
 
     void World::NextStage() {
