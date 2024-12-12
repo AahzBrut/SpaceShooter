@@ -6,7 +6,7 @@ namespace SpaceShooter {
     WaitStage::WaitStage(World *world, const float waitDuration)
     : GameStage(world), waitDuration(waitDuration){}
 
-    void WaitStage::Initialize() {
+    void WaitStage::StartStage() {
         TimerManager::Get().SetTimer(GetWeakRef(), &WaitStage::FinishStage, waitDuration);
     }
 }

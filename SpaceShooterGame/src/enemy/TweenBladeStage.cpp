@@ -1,12 +1,13 @@
-#include "enemy/TweenBlade.h"
 #include "enemy/TweenBladeStage.h"
+
+#include "enemy/TweenBlade.h"
 #include "framework/World.h"
 
 namespace SpaceShooter {
     TweenBladeStage::TweenBladeStage(World *world)
         : GameStage(world) {}
 
-    void TweenBladeStage::Initialize() {
+    void TweenBladeStage::StartStage() {
         const auto [windowWidth, _] = GetWorld()->GetWindowSize();
         leftSpawnPosition = Vector2{windowWidth * 0.5f - spawnDistanceFromCenter, -150.f};
         rightSpawnPosition = Vector2{windowWidth * 0.5f + spawnDistanceFromCenter, -150.f};

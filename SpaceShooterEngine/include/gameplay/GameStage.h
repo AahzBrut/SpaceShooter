@@ -15,7 +15,7 @@ namespace SpaceShooter {
 
         Delegate<> StageFinished;
 
-        virtual void Initialize();
+        virtual void StartStage();
         virtual void Update(float deltaTime);
         void FinishStage();
         bool IsFinished() const { return stageFinished; }

@@ -3,7 +3,7 @@
 namespace SpaceShooter {
     GameStage::GameStage(World *world) : world{world}, stageFinished{false} {}
 
-    void GameStage::Initialize() {}
+    void GameStage::StartStage() {}
 
     void GameStage::Update(float deltaTime) {}
 

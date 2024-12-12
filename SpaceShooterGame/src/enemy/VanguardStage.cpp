@@ -19,7 +19,7 @@ namespace SpaceShooter {
           vanguardsPerWave{5},
           vanguardCounter{0} {}
 
-    void VanguardStage::Initialize() {
+    void VanguardStage::StartStage() {
         const auto [windowWidth, windowHeight] = GetWorld()->GetWindowSize();
         leftSpawnPosition = Vector2{spawnOffsetX, -100};
         rightSpawnPosition = Vector2{windowWidth - spawnOffsetX, -100};

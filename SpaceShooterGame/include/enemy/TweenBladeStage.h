@@ -11,7 +11,7 @@ namespace SpaceShooter {
     public:
         explicit TweenBladeStage(World* world);
 
-        void Initialize() override;
+        void StartStage() override;
         void SpawnTweenBlade();
 
     private:

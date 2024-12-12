@@ -7,7 +7,7 @@ namespace SpaceShooter {
         public:
         explicit WaitStage(World* world, float waitDuration = 5.0f);
 
-        void Initialize() override;
+        void StartStage() override;
 
     private:
         float waitDuration;

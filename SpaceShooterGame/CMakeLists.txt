@@ -29,11 +29,13 @@ add_executable(SpaceShooterGame
         include/enemy/TweenBlade.h
         src/enemy/TweenBlade.cpp
         include/enemy/TweenBladeStage.h
-        src/enemy/TweenBaldeStage.cpp
+        src/enemy/TweenBladeStage.cpp
         include/gameplay/WaitStage.h
         src/gameplay/WaitStage.cpp
         include/enemy/Hexagon.h
         src/enemy/Hexagon.cpp
+        include/enemy/HexagonStage.h
+        src/enemy/HexagonStage.cpp
 )
 
 target_link_libraries(SpaceShooterGame PRIVATE SpaceShooterEngine raylib box2d)

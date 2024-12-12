@@ -10,7 +10,7 @@ namespace SpaceShooter {
     void EnemySpaceShip::Update(const float deltaTime) {
         SpaceShip::Update(deltaTime);
 
-        if (IsOutOfWindowBounds(GetSize().x)) Destroy();
+        if (IsOutOfWindowBounds(GetSize().x * 3)) Destroy();
     }
 
     void EnemySpaceShip::OnContactBegin(Actor *actor) {

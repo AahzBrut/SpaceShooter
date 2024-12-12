@@ -91,7 +91,7 @@ namespace SpaceShooter {
     void World::StartStages() {
         currentStage = stages.begin();
         if (currentStage != stages.end()) {
-            currentStage->get()->Initialize();
+            currentStage->get()->StartStage();
             currentStage->get()->StageFinished.BindAction(GetWeakRef(), &World::NextStage);
         }
     }
@@ -100,7 +100,7 @@ namespace SpaceShooter {
         LOG("Next stage\n");
         currentStage = stages.erase(currentStage);
         if (currentStage != stages.end()) {
-            currentStage->get()->Initialize();
+            currentStage->get()->StartStage();
             currentStage->get()->StageFinished.BindAction(GetWeakRef(), &World::NextStage);
         } else {
             AllStagesFinished();

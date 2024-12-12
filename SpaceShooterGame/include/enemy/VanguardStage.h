@@ -9,7 +9,7 @@ namespace SpaceShooter {
     class VanguardStage : public GameStage {
     public:
         explicit VanguardStage(World *world);
-        void Initialize() override;
+        void StartStage() override;
 
     private:
         float spawnInterval;
