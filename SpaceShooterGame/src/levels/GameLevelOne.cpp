@@ -15,11 +15,11 @@ namespace SpaceShooter {
     }
 
     void GameLevelOne::InitStages() {
-        AddStage(std::make_shared<HexagonStage>(this));
-        AddStage(std::make_shared<WaitStage>(this, 15));
         AddStage(std::make_shared<VanguardStage>(this));
         AddStage(std::make_shared<WaitStage>(this, 15));
         AddStage(std::make_shared<TweenBladeStage>(this));
+        AddStage(std::make_shared<WaitStage>(this, 15));
+        AddStage(std::make_shared<HexagonStage>(this));
     }
 
     void GameLevelOne::Initialize() {

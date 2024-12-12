@@ -16,17 +16,10 @@ namespace SpaceShooter {
     }
 
     void HexagonStage::SpawnHexagon() {
-        auto hexagon = GetWorld()->SpawnActor<Hexagon>();
-        hexagon.lock()->SetPosition(leftSpawnPosition);
+        GetWorld()->SpawnActor<Hexagon>().lock()->SetPosition(leftSpawnPosition);
+        GetWorld()->SpawnActor<Hexagon>().lock()->SetPosition(rightSpawnPosition);
+        GetWorld()->SpawnActor<Hexagon>().lock()->SetPosition(leftSpawnPosition + spawnSideOffset);
 
-        hexagon = GetWorld()->SpawnActor<Hexagon>();
-        hexagon.lock()->SetPosition(rightSpawnPosition);
-
-        hexagon = GetWorld()->SpawnActor<Hexagon>();
-        hexagon.lock()->SetPosition(leftSpawnPosition + spawnSideOffset);
-
-        if (++waveCount == waveAmount) {
-            FinishStage();
-        }
+        if (++waveCount == waveAmount) FinishStage();
     }
 }
