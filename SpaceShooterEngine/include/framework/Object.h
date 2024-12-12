@@ -9,8 +9,8 @@ namespace SpaceShooter {
         Object() = default;
         virtual ~Object() = default;
 
-        virtual void Destroy();
-        [[nodiscard]] bool IsPendingDestruction() const;
+        virtual void Destroy() { isPendingDestruction = true; }
+        [[nodiscard]] bool IsPendingDestruction() const { return isPendingDestruction; }
         Weak<Object> GetWeakRef() { return shared_from_this(); }
         Weak<const Object> GetWeakRef() const { return shared_from_this(); }
 

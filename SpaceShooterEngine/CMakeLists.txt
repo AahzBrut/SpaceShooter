@@ -15,7 +15,6 @@ add_library(SpaceShooterEngine STATIC
         include/framework/Actor.h
         src/framework/Actor.cpp
         include/framework/Object.h
-        src/framework/Object.cpp
         include/framework/AssetsManager.h
         src/framework/AssetsManager.cpp
         include/framework/Transform.h

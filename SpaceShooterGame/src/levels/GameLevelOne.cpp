@@ -10,8 +10,9 @@
 
 namespace SpaceShooter {
     GameLevelOne::GameLevelOne(Application *application) : World(application) {
-        const auto playerShip = SpawnActor<PlayerSpaceShip>();
-        playerShip.lock()->SetPosition(Vector2{200, 600});
+        SpawnActor<PlayerSpaceShip>().lock()->SetPosition(Vector2{200, 600});
+
+//        SpawnActor<UFO>().lock()->SetPosition(Vector2{300, 200});
     }
 
     void GameLevelOne::InitStages() {

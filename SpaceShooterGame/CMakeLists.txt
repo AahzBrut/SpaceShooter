@@ -36,6 +36,8 @@ add_executable(SpaceShooterGame
         src/enemy/Hexagon.cpp
         include/enemy/HexagonStage.h
         src/enemy/HexagonStage.cpp
+        include/enemy/UFO.h
+        src/enemy/UFO.cpp
 )
 
 target_link_libraries(SpaceShooterGame PRIVATE SpaceShooterEngine raylib box2d)

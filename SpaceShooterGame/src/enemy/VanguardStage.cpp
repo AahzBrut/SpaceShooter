@@ -8,7 +8,7 @@
 namespace SpaceShooter {
     VanguardStage::VanguardStage(World *world)
         : GameStage(world),
-          spawnInterval{0.5},
+          spawnInterval{2.5f},
           waveInterval{1},
           spawnOffsetX{100},
           leftSpawnPosition{0, 0},
@@ -32,8 +32,7 @@ namespace SpaceShooter {
     }
 
     void VanguardStage::SpawnVanguard() {
-        const auto vanguard = GetWorld()->SpawnActor<Vanguard>();
-        vanguard.lock()->SetPosition(spawnPosition);
+        GetWorld()->SpawnActor<Vanguard>().lock()->SetPosition(spawnPosition);
 
         if (++vanguardCounter == vanguardsPerWave) {
             vanguardCounter = 0;
