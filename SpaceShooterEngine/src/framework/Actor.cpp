@@ -10,10 +10,12 @@
 #include "framework/World.h"
 
 namespace SpaceShooter {
-    Actor::Actor(World *world, const std::string &texturePath, const CollisionLayers selfCollisionLayers,
-                 const CollisionLayers contactCollisionLayers) : selfCollisionLayers{selfCollisionLayers},
-                                                                 contactCollisionLayers{contactCollisionLayers},
-                                                                 world{world} {
+    Actor::Actor(World *world, const std::string &texturePath,
+                 const CollisionLayers selfCollisionLayers,
+                 const CollisionLayers contactCollisionLayers)
+        : selfCollisionLayers{selfCollisionLayers},
+          contactCollisionLayers{contactCollisionLayers},
+          world{world} {
         transform.scale = 1;
         SetTexture(texturePath);
     }
@@ -142,18 +144,6 @@ namespace SpaceShooter {
             const b2Vec2 position{transform.position.x, transform.position.y};
             const auto rotation = DegreesToRadians(transform.rotation);
             b2Body_SetTransform(bodyId, position, b2MakeRot(rotation));
-        }
-    }
-
-    void Actor::OnContactBegin(Actor *actor) {
-        if (const auto iterator = CollisionLayersNames.find(static_cast<int>(selfCollisionLayers));
-            iterator != CollisionLayersNames.end()) {
-        }
-    }
-
-    void Actor::OnContactEnd(Actor *actor) {
-        if (const auto iterator = CollisionLayersNames.find(static_cast<int>(selfCollisionLayers));
-            iterator != CollisionLayersNames.end()) {
         }
     }
 

@@ -16,6 +16,7 @@ namespace SpaceShooter {
         void Blink();
         void UpdateBlink(float deltaTime);
         void ApplyDamage(float amount);
+        HealthComponent& GetHealthComponent() { return healthComponent; }
 
         void OnContactBegin(Actor *actor) override;
         virtual void Shoot();

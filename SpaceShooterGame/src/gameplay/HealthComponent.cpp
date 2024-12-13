@@ -35,6 +35,7 @@ namespace SpaceShooter {
     }
 
     void HealthComponent::RegenerateHealth(const float amount) {
+        LOG("Regenerating health");
         HealthRegenerated.Emit(amount, health, maxHealth);
     }
 }

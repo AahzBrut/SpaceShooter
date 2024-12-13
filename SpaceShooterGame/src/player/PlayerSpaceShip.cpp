@@ -2,12 +2,13 @@
 
 #include <cmath>
 
+#include "player/Reward.h"
 #include "weapon/FrontalWiper.h"
 #include "weapon/ThreeWayShooter.h"
 
 namespace SpaceShooter {
     PlayerSpaceShip::PlayerSpaceShip(World *world, const std::string &texturePath)
-    : SpaceShip(world, texturePath, CollisionLayers::Player, CollisionLayers::EnemyBullet | CollisionLayers::Enemy),
+    : SpaceShip(world, texturePath, CollisionLayers::Player, CollisionLayers::EnemyBullet | CollisionLayers::Enemy | CollisionLayers::Reward),
     bulletShooter{new FrontalWiper(this, 0.1f, {0, -20})} {
         SetRotation(-90);
         CenterPivotOffset();
@@ -32,6 +33,10 @@ namespace SpaceShooter {
         if (bulletShooter) {
             bulletShooter->Shoot();
         }
+    }
+
+    void PlayerSpaceShip::SetShooter(Unique<Shooter> &&shooter) {
+        bulletShooter = std::move(shooter);
     }
 
     void PlayerSpaceShip::HandleInput() {

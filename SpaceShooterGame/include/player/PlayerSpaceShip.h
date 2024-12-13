@@ -12,6 +12,7 @@ namespace SpaceShooter {
         void Update(float deltaTime) override;
         void ClampInputOnEdge();
         void Shoot() override;
+        void SetShooter(Unique<Shooter>&& shooter);
 
     private:
         float speed = 200.f;

@@ -49,7 +49,8 @@ namespace SpaceShooter {
         Player = 1,
         PlayerBullet = 2,
         Enemy = 4,
-        EnemyBullet = 8
+        EnemyBullet = 8,
+        Reward = 16,
     };
 
     inline CollisionLayers operator|(CollisionLayers lhs, CollisionLayers rhs) {
@@ -62,5 +63,6 @@ namespace SpaceShooter {
         {2, "PlayerBullet"},
         {4, "Enemy"},
         {8, "EnemyBullet"},
+        {16, "Reward"},
     };
 }

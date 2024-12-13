@@ -8,12 +8,17 @@
 #include "enemy/VanguardStage.h"
 #include "gameplay/WaitStage.h"
 #include "player/PlayerSpaceShip.h"
+#include "player/Reward.h"
 
 namespace SpaceShooter {
     GameLevelOne::GameLevelOne(Application *application) : World(application) {
-        SpawnActor<PlayerSpaceShip>().lock()->SetPosition(Vector2{200, 600});
+        const auto player = SpawnActor<PlayerSpaceShip>().lock();
+        player->SetPosition(Vector2{200, 600});
 
 //        SpawnActor<UFO>().lock()->SetPosition(Vector2{300, 200});
+
+        const auto reward = CreateHealthReward(this);
+        reward.lock()->SetPosition(Vector2{300, 200});
     }
 
     void GameLevelOne::InitStages() {
