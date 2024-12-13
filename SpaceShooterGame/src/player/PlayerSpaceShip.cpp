@@ -2,13 +2,14 @@
 
 #include <cmath>
 
+#include "weapon/ThreeWayShooter.h"
+
 namespace SpaceShooter {
     PlayerSpaceShip::PlayerSpaceShip(World *world, const std::string &texturePath)
     : SpaceShip(world, texturePath, CollisionLayers::Player, CollisionLayers::EnemyBullet | CollisionLayers::Enemy),
-    bulletShooter{new BulletShooter(this, 0.1f, CollisionLayers::PlayerBullet, CollisionLayers::Enemy)} {
+    bulletShooter{new ThreeWayShooter(this, 0.1f, {0, -50})} {
         SetRotation(-90);
         CenterPivotOffset();
-         bulletShooter->SetMuzzleOffset(Vector2{0, -30});
    }
 
     void PlayerSpaceShip::Update(const float deltaTime) {

@@ -16,6 +16,7 @@ namespace SpaceShooter {
     void BulletShooter::ShootImpl() {
         lastShootTime = static_cast<float>(GetTime());
         const Weak<Bullet> newBullet = GetOwner()->GetWorld()->SpawnActor<Bullet>(GetOwner(), bulletLayer, bulletMaskLayer);
+        if (!bulletTexturePath.empty()) newBullet.lock()->SetTexture(bulletTexturePath);
         newBullet.lock()->SetPosition(GetOwner()->Position() + muzzleOffset);
         newBullet.lock()->SetRotation(GetOwner()->Rotation() + muzzleRotation);
     }

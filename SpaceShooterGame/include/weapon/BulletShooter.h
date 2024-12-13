@@ -11,6 +11,7 @@ namespace SpaceShooter {
 
         void SetMuzzleOffset(const Vector2 &offset) { muzzleOffset = offset; }
         void SetMuzzleRotation(const float rotation) { muzzleRotation = rotation; }
+        void SetBulletTexture(const std::string &path) { bulletTexturePath = path; }
 
     private:
         Vector2 muzzleOffset{};
@@ -19,6 +20,7 @@ namespace SpaceShooter {
         float lastShootTime{0};
         CollisionLayers bulletLayer;
         CollisionLayers bulletMaskLayer;
+        std::string bulletTexturePath;
 
         void ShootImpl() override;
     };
