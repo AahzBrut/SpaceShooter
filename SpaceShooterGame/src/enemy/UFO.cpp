@@ -7,9 +7,9 @@ using enum SpaceShooter::CollisionLayers;
 namespace SpaceShooter {
     UFO::UFO(World *world, const std::string &texturePath, const Vector2 &velocity)
         : EnemySpaceShip(world, texturePath),
-          shooter1{new BulletShooter{this, 1, EnemyBullet, Player}},
-          shooter2{new BulletShooter{this, 1, EnemyBullet, Player}},
-          shooter3{new BulletShooter{this, 1, EnemyBullet, Player}} {
+          shooter1{new BulletShooter{this, .5f, EnemyBullet, Player}},
+          shooter2{new BulletShooter{this, .5f, EnemyBullet, Player}},
+          shooter3{new BulletShooter{this, .5f, EnemyBullet, Player}} {
         SetRotation(90);
         CenterPivotOffset();
         SetVelocity(velocity);

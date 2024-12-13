@@ -6,7 +6,7 @@
 
 
 namespace SpaceShooter {
-    class VanguardStage : public GameStage {
+    class VanguardStage final : public GameStage {
     public:
         explicit VanguardStage(World *world);
         void StartStage() override;

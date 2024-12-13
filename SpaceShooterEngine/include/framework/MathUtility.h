@@ -10,6 +10,8 @@ namespace SpaceShooter {
     Vector2 LerpVector(const Vector2 &a, const Vector2 &b, float alfa);
     float RandomRange(float min, float max);
     Vector2 RandomUnitVector();
+    void NormalizeVector(Vector2& vector);
+    float VectorLength(const Vector2& vector);
 
     inline bool operator==(const Vector2 &lhs, const Vector2 &rhs) {
         return lhs.x == rhs.x && lhs.y == rhs.y;
@@ -17,6 +19,10 @@ namespace SpaceShooter {
 
     inline Vector2 operator+(const Vector2 &lhs, const Vector2 &rhs) {
         return Vector2{lhs.x + rhs.x, lhs.y + rhs.y};
+    }
+
+    inline Vector2 operator-(const Vector2 &lhs, const Vector2 &rhs) {
+        return Vector2{lhs.x - rhs.x, lhs.y - rhs.y};
     }
 
     inline Vector2 operator*(const Vector2 &lhs, const float rhs) {
