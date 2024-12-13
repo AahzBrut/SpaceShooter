@@ -30,16 +30,18 @@ namespace SpaceShooter {
     }
 
     Weak<Reward> CreateHealthReward(World *world) {
-        return CreateReward(world, "assets/SpaceShooterRedux/PNG/Power-ups/powerupRed_shield.png", RewardHealth);
+        return CreateReward(world, "assets/SpaceShooterRedux/PNG/Pickups/playerLife1_blue.png",
+                            RewardHealth);
     }
 
     Weak<Reward> CreateThreeWayReward(World *world) {
-        return CreateReward(world, "assets/SpaceShooterRedux/PNG/Power-ups/powerupRed_shield.png",
+        return CreateReward(world, "assets/SpaceShooterRedux/PNG/Pickups/three_shooter_pickup.png",
                             RewardThreeWayShooter);
     }
 
     Weak<Reward> CreateFrontalWiperReward(World *world) {
-        return CreateReward(world, "assets/SpaceShooterRedux/PNG/Power-ups/powerupRed_shield.png", RewardFrontalWiper);
+        return CreateReward(world, "assets/SpaceShooterRedux/PNG/Pickups/front_row_shooter_pickup.png",
+                            RewardFrontalWiper);
     }
 
     Weak<Reward> CreateReward(World *world, const std::string &texturePath, const RewardFunction &rewardFunction) {
