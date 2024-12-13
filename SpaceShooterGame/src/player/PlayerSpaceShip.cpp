@@ -2,12 +2,13 @@
 
 #include <cmath>
 
+#include "weapon/FrontalWiper.h"
 #include "weapon/ThreeWayShooter.h"
 
 namespace SpaceShooter {
     PlayerSpaceShip::PlayerSpaceShip(World *world, const std::string &texturePath)
     : SpaceShip(world, texturePath, CollisionLayers::Player, CollisionLayers::EnemyBullet | CollisionLayers::Enemy),
-    bulletShooter{new ThreeWayShooter(this, 0.1f, {0, -50})} {
+    bulletShooter{new FrontalWiper(this, 0.1f, {0, -20})} {
         SetRotation(-90);
         CenterPivotOffset();
    }

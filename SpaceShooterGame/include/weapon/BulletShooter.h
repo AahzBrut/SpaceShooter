@@ -2,7 +2,7 @@
 #include "Shooter.h"
 
 namespace SpaceShooter {
-    class BulletShooter final : public Shooter {
+    class BulletShooter : public Shooter {
     public:
         explicit BulletShooter(Actor *owner, float coolDownTimeout = 1.f,
                                CollisionLayers bulletLayer = CollisionLayers::None,

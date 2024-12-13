@@ -42,6 +42,8 @@ add_executable(SpaceShooterGame
         src/enemy/UFOStage.cpp
         include/weapon/ThreeWayShooter.h
         src/weapon/ThreeWayShooter.cpp
+        include/weapon/FrontalWiper.h
+        src/weapon/FrontalWiper.cpp
 )
 
 target_link_libraries(SpaceShooterGame PRIVATE SpaceShooterEngine raylib box2d)
