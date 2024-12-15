@@ -44,9 +44,16 @@ namespace SpaceShooter {
         return distribution(gen);
     }
 
+    int RandomIntRange(const int min, const int max) {
+        std::random_device rd;
+        std::mt19937 gen(rd()); // NOLINT(*-narrowing-conversions)
+        std::uniform_int_distribution distribution(min, max);
+        return distribution(gen);
+    }
+
     Vector2 RandomUnitVector() {
-        const auto randomX = RandomRange(-1, 1);
-        const auto randomY = RandomRange(-1, 1);
+        const auto randomX = RandomRange(-1.f, 1.f);
+        const auto randomY = RandomRange(-1.f, 1.f);
         auto length = std::sqrt(randomX * randomX + randomY * randomY);
         length = length == 0 ? 0.00001f : length;
         return Vector2(randomX / length, randomY / length);

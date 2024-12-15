@@ -16,19 +16,20 @@ namespace SpaceShooter {
         void Blink();
         void UpdateBlink(float deltaTime);
         void ApplyDamage(float amount);
-        HealthComponent& GetHealthComponent() { return healthComponent; }
+        HealthComponent &GetHealthComponent() { return healthComponent; }
 
         void OnContactBegin(Actor *actor) override;
         virtual void Shoot();
+
+    protected:
+        virtual void OnDamageTaken(float amount, float health, float maxHealth);
+        virtual void OnDeath();
 
     private:
         Vector2 velocity{};
         HealthComponent healthComponent{100, 100};
         float blinkTime{0};
         float blinkDuration{0.15f};
-        Color blinkColorOffset{255, 0,0, 255};
-
-        virtual void OnDamageTaken(float amount, float health, float maxHealth);
-        virtual void OnDeath();
+        Color blinkColorOffset{255, 0, 0, 255};
     };
 }

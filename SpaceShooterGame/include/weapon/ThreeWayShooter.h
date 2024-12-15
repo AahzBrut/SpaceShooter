@@ -3,7 +3,7 @@
 #include "Shooter.h"
 
 namespace SpaceShooter {
-    class ThreeWayShooter : public Shooter {
+    class ThreeWayShooter final : public Shooter {
     public:
         explicit ThreeWayShooter(Actor* actor, float coolDownTime = 0.3f, const Vector2& localOffset = {0, 0});
 

@@ -60,7 +60,6 @@ namespace SpaceShooter {
     }
 
     void SpaceShip::OnDeath() {
-        LOG("Spaceship destroyed");
         const auto exp = new Explosion();
         exp->Spawn(GetWorld(), Position());
         Destroy();

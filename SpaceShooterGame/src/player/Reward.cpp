@@ -2,7 +2,10 @@
 
 #include <utility>
 
+#include "framework/MathUtility.h"
 #include "player/PlayerSpaceShip.h"
+#include "weapon/FrontalWiper.h"
+#include "weapon/ThreeWayShooter.h"
 
 namespace SpaceShooter {
     Reward::Reward(
@@ -20,6 +23,9 @@ namespace SpaceShooter {
 
     void Reward::Update(const float deltaTime) {
         Actor::Update(deltaTime);
+
+
+        SetPositionOffset(speed * deltaTime * Vector2{0.f, 1.f});
     }
 
     void Reward::OnContactBegin(Actor *actor) {
@@ -49,15 +55,14 @@ namespace SpaceShooter {
     }
 
     void RewardHealth(PlayerSpaceShip *player) {
-        LOG("RewardHealth");
         player->GetHealthComponent().ChangeHealth(-10);
     }
 
     void RewardThreeWayShooter(PlayerSpaceShip *player) {
-        LOG("Reward three way shooter");
+        player->SetShooter(std::make_unique<ThreeWayShooter>(player, .1f, Vector2{0.f, 0.f}));
     }
 
     void RewardFrontalWiper(PlayerSpaceShip *player) {
-        LOG("Reward frontal wiper");
+        player->SetShooter(std::make_unique<FrontalWiper>(player, .1f, Vector2{0.f, 0.f}));
     }
 }
