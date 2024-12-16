@@ -6,8 +6,7 @@
 
 namespace SpaceShooter {
     Weak<PlayerSpaceShip> Player::SpawnSpaceship(World *world) {
-        if (lifeCount > 0) {
-            --lifeCount;
+        if (--lifeCount > 0) {
             const auto [windowWidth, windowHeight] = world->GetWindowSize();
             spaceShip = world->SpawnActor<PlayerSpaceShip>();
             spaceShip.lock()->SetPosition({windowWidth * 0.5f, windowHeight * 0.9f});

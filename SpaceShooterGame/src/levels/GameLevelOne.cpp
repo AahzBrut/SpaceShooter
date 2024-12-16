@@ -9,6 +9,7 @@
 #include "gameplay/WaitStage.h"
 #include "player/Player.h"
 #include "player/PlayerManager.h"
+#include "player/PlayerSpaceShip.h"
 
 namespace SpaceShooter {
     GameLevelOne::GameLevelOne(Application *application) : World(application) {}
@@ -25,6 +26,20 @@ namespace SpaceShooter {
 
     void GameLevelOne::Initialize() {
         auto newPlayer = PlayerManager::Get().CreateNewPlayer();
-        newPlayer.SpawnSpaceship(this);
+        playerSpaceShip = newPlayer.SpawnSpaceship(this);
+        playerSpaceShip.lock()->Destroyed.BindAction(GetWeakRef(), &GameLevelOne::OnPlayerShipDestroyed);
+    }
+
+    void GameLevelOne::OnPlayerShipDestroyed([[maybe_unused]] Actor *actor) {
+        playerSpaceShip = PlayerManager::Get().GetPlayer()->SpawnSpaceship(this);
+        if (!playerSpaceShip.expired()) {
+            playerSpaceShip.lock()->Destroyed.BindAction(GetWeakRef(), &GameLevelOne::OnPlayerShipDestroyed);
+        } else {
+            GameOver();
+        }
+    }
+
+    void GameLevelOne::GameOver() {
+        LOG("GAME OVER");
     }
 }

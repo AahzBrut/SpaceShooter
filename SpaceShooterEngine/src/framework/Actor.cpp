@@ -149,6 +149,7 @@ namespace SpaceShooter {
 
     void Actor::Destroy() {
         UnInitializePhysics();
+        Destroyed.Emit(this);
         Object::Destroy();
     }
 

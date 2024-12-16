@@ -3,6 +3,7 @@
 #include <string>
 
 #include "Core.h"
+#include "Delegate.h"
 #include "Object.h"
 #include "Transform.h"
 
@@ -11,7 +12,9 @@ namespace SpaceShooter {
 
     class Actor : public Object {
     public:
-        explicit Actor(World *world, const std::string &texturePath = "", CollisionLayers selfCollisionLayers = CollisionLayers::None, CollisionLayers contactCollisionLayers = CollisionLayers::None);
+        explicit Actor(World *world, const std::string &texturePath = "",
+                       CollisionLayers selfCollisionLayers = CollisionLayers::None,
+                       CollisionLayers contactCollisionLayers = CollisionLayers::None);
         ~Actor() override;
 
         void SetTexture(const std::string &texturePath);
@@ -28,7 +31,7 @@ namespace SpaceShooter {
         [[nodiscard]] float Scale() const;
         void SetScale(float scale);
         void SetScaleOffset(float scale);
-        void SetColor(const Color& color);
+        void SetColor(const Color &color);
         [[nodiscard]] Vector2 GetForwardVector() const;
         [[nodiscard]] Vector2 GetRightVector() const;
         void CenterPivotOffset();
@@ -43,14 +46,16 @@ namespace SpaceShooter {
 
         virtual void Initialize() {}
         virtual void Update(float deltaTime) {}
-        virtual void OnContactBegin(Actor * actor) {}
-        virtual void OnContactEnd(Actor * actor) {}
+        virtual void OnContactBegin(Actor *actor) {}
+        virtual void OnContactEnd(Actor *actor) {}
         void Destroy() override;
+
+        Delegate<Actor *> Destroyed;
 
     protected:
         CollisionLayers selfCollisionLayers;
         CollisionLayers contactCollisionLayers;
-        Color color{255, 255,255, 255};
+        Color color{255, 255, 255, 255};
 
     private:
         World *world;
