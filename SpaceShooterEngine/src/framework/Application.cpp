@@ -22,6 +22,14 @@ namespace SpaceShooter {
         AssetsManager::Get().CleanCycle();
     }
 
+    bool Application::DispatchEvent() {
+        if (currentWorld) {
+            return currentWorld->DispatchEvent();
+        }
+
+        return false;
+    }
+
     void Application::Run() {
         SetTargetFPS(60);
 
@@ -36,10 +44,9 @@ namespace SpaceShooter {
             if (GetTime() - lastAssetsClearTime > cleanInterval) {
                 lastAssetsClearTime = GetTime();
                 AssetsManager::Get().CleanCycle();
-                if (currentWorld) {
-                    currentWorld->CleanCycle();
-                }
+                if (currentWorld) currentWorld->CleanCycle();
             }
+            DispatchEvent();
         }
         CloseWindow();
     }

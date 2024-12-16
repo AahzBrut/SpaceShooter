@@ -6,6 +6,7 @@
 #include "framework/Application.h"
 #include "framework/Core.h"
 #include "gameplay/GameStage.h"
+#include "widgets/HUD.h"
 
 
 namespace SpaceShooter {
@@ -50,6 +51,14 @@ namespace SpaceShooter {
          }
 
         Update(deltaTime);
+
+        if (hud && hud->IsInitialized()) {
+            hud->Initialize();
+        }
+    }
+
+    void World::RenderHUD() const {
+        if (hud) hud->Draw();
     }
 
     void World::Render() const {
@@ -59,6 +68,8 @@ namespace SpaceShooter {
         for (const auto &actor: childActors) {
             actor->Render();
         }
+
+        RenderHUD();
 
         const auto fpsString = std::format("FPS: {}", GetFPS());
         DrawText(fpsString.c_str(), 10, 10, 32, WHITE);
@@ -105,5 +116,13 @@ namespace SpaceShooter {
         } else {
             AllStagesFinished();
         }
+    }
+
+    bool World::DispatchEvent() {
+        if (hud) {
+            return hud->HandleEvent();
+        }
+
+        return false;
     }
 }

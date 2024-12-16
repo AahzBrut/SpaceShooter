@@ -8,6 +8,7 @@ namespace SpaceShooter {
         Application(int width, int height, const std::string &title);
         virtual ~Application();
 
+        bool DispatchEvent();
         void Run();
 
         template<typename WorldType>
