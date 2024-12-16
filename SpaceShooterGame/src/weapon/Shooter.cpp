@@ -1,6 +1,14 @@
 #include "weapon/Shooter.h"
 
 namespace SpaceShooter {
+    void Shooter::IncreaseLevel(const int amount) {
+        if (currentLevel + amount <= maxLevel) {
+            currentLevel += amount;
+        } else if (currentLevel + amount > maxLevel) {
+            currentLevel = maxLevel;
+        }
+    }
+
     Shooter::Shooter(Actor *owner) {
         this->owner = owner;
     }
@@ -9,9 +17,5 @@ namespace SpaceShooter {
         if (CanShoot() && !IsOnCooldown()) {
             ShootImpl();
         }
-    }
-
-    Actor * Shooter::GetOwner() const {
-        return owner;
     }
 }

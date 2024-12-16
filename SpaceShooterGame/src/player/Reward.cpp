@@ -32,6 +32,7 @@ namespace SpaceShooter {
         if (const auto player = dynamic_cast<PlayerSpaceShip *>(actor);
             player != nullptr && !player->IsPendingDestruction()) {
             rewardFunction(player);
+            Destroy();
         }
     }
 

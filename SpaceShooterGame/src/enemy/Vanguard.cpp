@@ -2,10 +2,13 @@
 
 #include "weapon/BulletShooter.h"
 
+
 namespace SpaceShooter {
+    using enum CollisionLayers;
+
     Vanguard::Vanguard(World *world, const std::string &texturePath, const Vector2 &velocity)
         : EnemySpaceShip(world, texturePath),
-          bulletShooter{new BulletShooter{this, 1, CollisionLayers::EnemyBullet, CollisionLayers::Player}} {
+          bulletShooter{new BulletShooter{this, 1, EnemyBullet, Player | PlayerBullet}} {
         SetRotation(90);
         CenterPivotOffset();
         SetVelocity(velocity);

@@ -2,17 +2,18 @@
 
 #include "weapon/BulletShooter.h"
 
-using enum SpaceShooter::CollisionLayers;
 
 namespace SpaceShooter {
+    using enum CollisionLayers;
+
     Hexagon::Hexagon(World *world, const std::string &texturePath, const Vector2 &velocity)
         : EnemySpaceShip(world, texturePath),
-          forwardBulletShooter{new BulletShooter{this, 1, EnemyBullet, Player}},
-          leftForwardBulletShooter{new BulletShooter{this, 1, EnemyBullet, Player}},
-          rightForwardBulletShooter{new BulletShooter{this, 1, EnemyBullet, Player}},
-          leftBackwardBulletShooter{new BulletShooter{this, 1, EnemyBullet, Player}},
-          rightBackwardBulletShooter{new BulletShooter{this, 1, EnemyBullet, Player}},
-          backwardBulletShooter{new BulletShooter{this, 1, EnemyBullet, Player}} {
+          forwardBulletShooter{new BulletShooter{this, 1, EnemyBullet, Player | PlayerBullet}},
+          leftForwardBulletShooter{new BulletShooter{this, 1, EnemyBullet, Player | PlayerBullet}},
+          rightForwardBulletShooter{new BulletShooter{this, 1, EnemyBullet, Player | PlayerBullet}},
+          leftBackwardBulletShooter{new BulletShooter{this, 1, EnemyBullet, Player | PlayerBullet}},
+          rightBackwardBulletShooter{new BulletShooter{this, 1, EnemyBullet, Player | PlayerBullet}},
+          backwardBulletShooter{new BulletShooter{this, 1, EnemyBullet, Player | PlayerBullet}} {
         SetRotation(90);
         CenterPivotOffset();
         SetVelocity(velocity);

@@ -3,16 +3,17 @@
 #include <cmath>
 
 #include "player/Reward.h"
-#include "weapon/FrontalWiper.h"
 #include "weapon/ThreeWayShooter.h"
+
+using enum SpaceShooter::CollisionLayers;
 
 namespace SpaceShooter {
     PlayerSpaceShip::PlayerSpaceShip(World *world, const std::string &texturePath)
-    : SpaceShip(world, texturePath, CollisionLayers::Player, CollisionLayers::EnemyBullet | CollisionLayers::Enemy | CollisionLayers::Reward),
-    bulletShooter{new FrontalWiper(this, 0.1f, {0, -20})} {
+        : SpaceShip(world, texturePath, Player, EnemyBullet | Enemy | CollisionLayers::Reward),
+          bulletShooter{new BulletShooter(this, 0.1f, PlayerBullet, Enemy | EnemyBullet)} {
         SetRotation(-90);
         CenterPivotOffset();
-   }
+    }
 
     void PlayerSpaceShip::Update(const float deltaTime) {
         SpaceShip::Update(deltaTime);
@@ -36,6 +37,10 @@ namespace SpaceShooter {
     }
 
     void PlayerSpaceShip::SetShooter(Unique<Shooter> &&shooter) {
+        if (shooter && typeid(*shooter.get()) == typeid(*bulletShooter.get())) {
+            bulletShooter->IncreaseLevel(1);
+            return;
+        }
         bulletShooter = std::move(shooter);
     }
 

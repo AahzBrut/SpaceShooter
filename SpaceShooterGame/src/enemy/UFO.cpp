@@ -2,14 +2,15 @@
 
 #include "weapon/BulletShooter.h"
 
-using enum SpaceShooter::CollisionLayers;
 
 namespace SpaceShooter {
+    using enum CollisionLayers;
+
     UFO::UFO(World *world, const std::string &texturePath, const Vector2 &velocity)
         : EnemySpaceShip(world, texturePath),
-          shooter1{new BulletShooter{this, .5f, EnemyBullet, Player}},
-          shooter2{new BulletShooter{this, .5f, EnemyBullet, Player}},
-          shooter3{new BulletShooter{this, .5f, EnemyBullet, Player}} {
+          shooter1{new BulletShooter{this, .5f, EnemyBullet, Player | PlayerBullet}},
+          shooter2{new BulletShooter{this, .5f, EnemyBullet, Player | PlayerBullet}},
+          shooter3{new BulletShooter{this, .5f, EnemyBullet, Player | PlayerBullet}} {
         SetRotation(90);
         CenterPivotOffset();
         SetVelocity(velocity);

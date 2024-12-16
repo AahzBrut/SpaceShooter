@@ -16,7 +16,7 @@ namespace SpaceShooter {
     }
 
     bool BulletShooter::IsOnCooldown() {
-        return lastShootTime + this->coolDownTimeout > GetTime();
+        return lastShootTime + coolDownTimeout / static_cast<float>(GetCurrentLevel() + 1) > GetTime();
     }
 
     void BulletShooter::ShootImpl() {

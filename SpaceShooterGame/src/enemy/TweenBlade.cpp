@@ -4,10 +4,12 @@
 
 
 namespace SpaceShooter {
+    using enum CollisionLayers;
+
     TweenBlade::TweenBlade(World *world, const std::string &texturePath, const Vector2 &velocity)
         : EnemySpaceShip(world, texturePath),
-          leftBulletShooter{new BulletShooter{this, 1, CollisionLayers::EnemyBullet, CollisionLayers::Player}},
-          rightBulletShooter{new BulletShooter{this, 1, CollisionLayers::EnemyBullet, CollisionLayers::Player}} {
+          leftBulletShooter{new BulletShooter{this, 1, EnemyBullet, Player | PlayerBullet}},
+          rightBulletShooter{new BulletShooter{this, 1, EnemyBullet, Player | PlayerBullet}} {
         {
             SetRotation(90);
             CenterPivotOffset();
