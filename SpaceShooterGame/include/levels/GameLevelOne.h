@@ -4,8 +4,8 @@
 
 
 namespace SpaceShooter {
-    class GameLevelOne : public World {
-        public:
+    class GameLevelOne final : public World {
+    public:
         explicit GameLevelOne(Application *application);
 
     private:

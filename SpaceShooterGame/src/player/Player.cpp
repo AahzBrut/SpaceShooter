@@ -12,10 +12,10 @@ namespace SpaceShooter {
             spaceShip = world->SpawnActor<PlayerSpaceShip>();
             spaceShip.lock()->SetPosition({windowWidth * 0.5f, windowHeight * 0.9f});
             LifeCountChanged.Emit(lifeCount);
-        } else {
-            LifeCountDepleted.Emit();
+            return spaceShip;
         }
-        return spaceShip;
+        LifeCountDepleted.Emit();
+        return Weak<PlayerSpaceShip>{};
     }
 
     void Player::AddLifeCount(const unsigned int count) {

@@ -48,6 +48,8 @@ add_executable(SpaceShooterGame
         src/player/Reward.cpp
         include/player/Player.h
         src/player/Player.cpp
+        include/player/PlayerManager.h
+        src/player/PlayerManager.cpp
 )
 
 target_link_libraries(SpaceShooterGame PRIVATE SpaceShooterEngine raylib box2d)
