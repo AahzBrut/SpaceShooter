@@ -12,7 +12,7 @@ namespace SpaceShooter {
     }
 
     Player &PlayerManager::CreateNewPlayer() {
-        players.emplace(players.end(), Player());
+        players.emplace(players.end());
         return players.back();
     }
 

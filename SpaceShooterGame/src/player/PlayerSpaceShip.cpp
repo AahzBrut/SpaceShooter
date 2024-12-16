@@ -68,7 +68,7 @@ namespace SpaceShooter {
         moveInput.y = moveInput.y / length;
     }
 
-    void PlayerSpaceShip::ConsumeInput(float deltaTime) {
+    void PlayerSpaceShip::ConsumeInput([[maybe_unused]] float deltaTime) {
         SetVelocity(Vector2{moveInput.x * speed, moveInput.y * speed});
         moveInput = Vector2{};
     }
