@@ -46,6 +46,8 @@ add_executable(SpaceShooterGame
         src/weapon/FrontalWiper.cpp
         include/player/Reward.h
         src/player/Reward.cpp
+        include/player/Player.h
+        src/player/Player.cpp
 )
 
 target_link_libraries(SpaceShooterGame PRIVATE SpaceShooterEngine raylib box2d)
