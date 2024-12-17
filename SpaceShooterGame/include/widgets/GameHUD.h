@@ -1,5 +1,6 @@
 #pragma once
 #include "widgets/HUD.h"
+#include "widgets/ProgressBar.h"
 #include "widgets/TextWidget.h"
 
 
@@ -13,5 +14,6 @@ namespace SpaceShooter {
 
     private:
         TextWidget frameRateLabel;
+        ProgressBar progressBar;
     };
 }

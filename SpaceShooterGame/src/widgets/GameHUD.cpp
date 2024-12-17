@@ -8,10 +8,12 @@ namespace SpaceShooter {
         : frameRateLabel{"FPS: "} {
         frameRateLabel.SetFontSize(36);
         frameRateLabel.SetPosition({10, 5});
+        progressBar.SetPosition({200, 10});
     }
 
     void GameHUD::Draw() {
         frameRateLabel.Draw();
+        progressBar.Draw();
     }
 
     void GameHUD::Update(const float deltaTime) {
