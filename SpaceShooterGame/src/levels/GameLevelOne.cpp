@@ -10,6 +10,7 @@
 #include "player/Player.h"
 #include "player/PlayerManager.h"
 #include "player/PlayerSpaceShip.h"
+#include "widgets/GameHUD.h"
 
 namespace SpaceShooter {
     GameLevelOne::GameLevelOne(Application *application) : World(application) {}
@@ -29,8 +30,7 @@ namespace SpaceShooter {
         playerSpaceShip = newPlayer.SpawnSpaceship(this);
         playerSpaceShip.lock()->Destroyed.BindAction(GetWeakRef(), &GameLevelOne::OnPlayerShipDestroyed);
 
-        // const auto widget = SpawnHUD<TextWidget>("TEST STRING");
-        // widget.lock()->SetPosition({100, 100});
+        gameHUD = SpawnHUD<GameHUD>();
     }
 
     void GameLevelOne::OnPlayerShipDestroyed([[maybe_unused]] Actor *actor) {

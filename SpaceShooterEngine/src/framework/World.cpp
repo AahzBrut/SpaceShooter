@@ -52,8 +52,9 @@ namespace SpaceShooter {
 
         Update(deltaTime);
 
-        if (hud && hud->IsInitialized()) {
-            hud->Initialize();
+        if (hud) {
+            if (!hud->IsInitialized()) hud->Initialize();
+            hud->Update(deltaTime);
         }
     }
 
@@ -70,9 +71,6 @@ namespace SpaceShooter {
         }
 
         RenderHUD();
-
-        const auto fpsString = std::format("FPS: {}", GetFPS());
-        DrawText(fpsString.c_str(), 10, 10, 32, WHITE);
 
         EndDrawing();
     }
@@ -118,7 +116,7 @@ namespace SpaceShooter {
         }
     }
 
-    bool World::DispatchEvent() {
+    bool World::DispatchEvent() const {
         if (hud) {
             return hud->HandleEvent();
         }

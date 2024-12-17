@@ -26,7 +26,7 @@ namespace SpaceShooter {
         [[nodiscard]] Vector2 GetWindowSize() const;
         void CleanCycle();
         void AddStage(const Shared<GameStage> &newStage);
-        bool DispatchEvent();
+        bool DispatchEvent() const;
 
     private:
         Application *application;

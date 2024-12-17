@@ -6,7 +6,8 @@ namespace SpaceShooter {
     class HUD : public Object {
     public:
         virtual void Draw() = 0;
-        virtual bool HandleEvent() = 0;
+        virtual bool HandleEvent() { return false; }
+        virtual void Update(float deltaTime) {}
 
         void Initialize();
         bool IsInitialized() const { return initialized; }
@@ -17,6 +18,6 @@ namespace SpaceShooter {
     private:
         bool initialized{false};
 
-        virtual void OnInitialize() = 0;
+        virtual void OnInitialize(){}
     };
 }

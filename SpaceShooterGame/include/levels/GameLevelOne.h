@@ -5,6 +5,7 @@
 
 namespace SpaceShooter {
     class PlayerSpaceShip;
+    class GameHUD;
 
     class GameLevelOne final : public World {
     public:
@@ -13,6 +14,7 @@ namespace SpaceShooter {
     private:
         TimerHandler timerIndex{};
         Weak<PlayerSpaceShip> playerSpaceShip;
+        Weak<GameHUD> gameHUD;
 
         void InitStages() override;
         void Initialize() override;
