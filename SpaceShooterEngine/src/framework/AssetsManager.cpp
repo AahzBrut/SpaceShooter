@@ -13,22 +13,15 @@ namespace SpaceShooter {
     }
 
     Shared<Texture2D> AssetsManager::GetTexture(const std::string &path) {
-        if (const auto texture = textures.find(path); texture != textures.end()) {
-            return texture->second;
-        }
-        const auto texture = std::make_shared<Texture2D>(LoadTexture(path.c_str()));
-        textures.insert({path, texture});
-        return texture;
+        return LoadAsset(path, textures, LoadTexture);
     }
 
     void AssetsManager::CleanCycle() {
-        for (auto iterator = textures.begin(); iterator != textures.end();) {
-            if (iterator->second.unique()) {
-                UnloadTexture(*iterator->second);
-                iterator = textures.erase(iterator);
-            } else {
-                ++iterator;
-            }
-        }
+        CleanUnusedAssets(textures, UnloadTexture);
+        CleanUnusedAssets(fonts, UnloadFont);
+    }
+
+    Shared<Font> AssetsManager::GetFont(const std::string &path) {
+        return LoadAsset(path, fonts, LoadFont);
     }
 }

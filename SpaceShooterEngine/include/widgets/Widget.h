@@ -36,7 +36,7 @@ namespace SpaceShooter {
         bool isVisible{true};
 
         virtual void OnDraw() = 0;
-        virtual void OnPositionChanged(const Vector2 &newPosition) = 0;
-        virtual void OnRotationChanged(float newRotation) = 0;
+        virtual void OnPositionChanged(const Vector2 &newPosition){}
+        virtual void OnRotationChanged(float newRotation){}
     };
 }

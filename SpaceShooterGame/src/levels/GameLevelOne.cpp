@@ -28,6 +28,9 @@ namespace SpaceShooter {
         auto newPlayer = PlayerManager::Get().CreateNewPlayer();
         playerSpaceShip = newPlayer.SpawnSpaceship(this);
         playerSpaceShip.lock()->Destroyed.BindAction(GetWeakRef(), &GameLevelOne::OnPlayerShipDestroyed);
+
+        // const auto widget = SpawnHUD<TextWidget>("TEST STRING");
+        // widget.lock()->SetPosition({100, 100});
     }
 
     void GameLevelOne::OnPlayerShipDestroyed([[maybe_unused]] Actor *actor) {
