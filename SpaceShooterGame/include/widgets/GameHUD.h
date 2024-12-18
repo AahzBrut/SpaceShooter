@@ -6,7 +6,7 @@
 
 namespace SpaceShooter {
     class GameHUD final : public HUD {
-        public:
+    public:
         GameHUD();
 
         void Draw() override;
@@ -15,5 +15,10 @@ namespace SpaceShooter {
     private:
         TextWidget frameRateLabel;
         ProgressBar progressBar;
+
+        void SubscribeToPlayersEvents();
+        void OnInitialize() override;
+        void OnPlayerShipHealthChanged(float amount, float health, float maxHealth);
+        void OnPlayerLifeCountChanged(unsigned int lifeCount);
     };
 }

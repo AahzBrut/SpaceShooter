@@ -26,7 +26,7 @@ namespace SpaceShooter {
     }
 
     void GameLevelOne::Initialize() {
-        auto newPlayer = PlayerManager::Get().CreateNewPlayer();
+        auto& newPlayer = PlayerManager::Get().CreateNewPlayer();
         playerSpaceShip = newPlayer.SpawnSpaceship(this);
         playerSpaceShip.lock()->Destroyed.BindAction(GetWeakRef(), &GameLevelOne::OnPlayerShipDestroyed);
 
