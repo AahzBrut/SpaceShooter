@@ -2,16 +2,21 @@
 
 #include <format>
 
+#include "framework/World.h"
 #include "player/PlayerManager.h"
 #include "player/PlayerSpaceShip.h"
 
 
 namespace SpaceShooter {
-    GameHUD::GameHUD()
-        : frameRateLabel{"FPS: "} {
+    GameHUD::GameHUD(World *world)
+        : world{world},
+          frameRateLabel{"FPS: "} {
         frameRateLabel.SetFontSize(36);
         frameRateLabel.SetPosition({10, 5});
-        progressBar.SetPosition({200, 10});
+
+        const auto [_, windowHeight] = world->GetWindowSize();
+        progressBar.SetSize({200, 30});
+        progressBar.SetPosition({20, windowHeight - 40});
     }
 
     void GameHUD::Draw() {

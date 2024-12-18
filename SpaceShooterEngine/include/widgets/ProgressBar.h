@@ -10,6 +10,7 @@ namespace SpaceShooter {
                              const Color &backColor = RED);
 
         void SetValue(const float value) { this->value = value; }
+        void SetSize(const Vector2 &size) { this->size = size; }
 
     private:
         Shared<Font> font;

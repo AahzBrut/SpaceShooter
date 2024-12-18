@@ -5,14 +5,17 @@
 
 
 namespace SpaceShooter {
+    class World;
+
     class GameHUD final : public HUD {
     public:
-        GameHUD();
+        explicit GameHUD(World* world);
 
         void Draw() override;
         void Update(float deltaTime) override;
 
     private:
+        World *world;
         TextWidget frameRateLabel;
         ProgressBar progressBar;
 

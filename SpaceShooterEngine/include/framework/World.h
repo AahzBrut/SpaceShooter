@@ -55,7 +55,7 @@ namespace SpaceShooter {
 
     template<typename HUDType, typename ... Args>
     Weak<HUDType> World::SpawnHUD(Args... args) {
-        Shared<HUDType> newHUD{new HUDType(args...)};
+        Shared<HUDType> newHUD{new HUDType(this, args...)};
         hud = newHUD;
         return newHUD;
     }
