@@ -37,7 +37,7 @@ namespace SpaceShooter {
     }
 
     Weak<Reward> CreateHealthReward(World *world) {
-        return CreateReward(world, "assets/SpaceShooterRedux/PNG/Pickups/playerLife1_blue.png",
+        return CreateReward(world, "assets/SpaceShooterRedux/PNG/Pickups/pill_green.png",
                             RewardHealth);
     }
 

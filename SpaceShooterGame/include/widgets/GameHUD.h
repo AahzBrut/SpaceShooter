@@ -1,5 +1,6 @@
 #pragma once
 #include "widgets/HUD.h"
+#include "widgets/ImageWidget.h"
 #include "widgets/ProgressBar.h"
 #include "widgets/TextWidget.h"
 
@@ -18,6 +19,7 @@ namespace SpaceShooter {
         World *world;
         TextWidget frameRateLabel;
         ProgressBar progressBar;
+        List<ImageWidget> playerLives;
 
         void SubscribeToPlayersEvents();
         void OnInitialize() override;

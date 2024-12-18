@@ -25,7 +25,7 @@ namespace SpaceShooter {
         Delegate<> LifeCountDepleted;
 
     private:
-        unsigned int lifeCount{3};
+        unsigned int lifeCount{4};
         unsigned int score{0};
         Weak<PlayerSpaceShip> spaceShip{};
     };

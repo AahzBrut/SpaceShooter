@@ -13,6 +13,7 @@ namespace SpaceShooter {
             LifeCountChanged.Emit(lifeCount);
             return spaceShip;
         }
+        LifeCountChanged.Emit(lifeCount);
         LifeCountDepleted.Emit();
         return Weak<PlayerSpaceShip>{};
     }

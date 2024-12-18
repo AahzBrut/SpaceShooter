@@ -14,7 +14,7 @@ namespace SpaceShooter {
         frameRateLabel.SetFontSize(36);
         frameRateLabel.SetPosition({10, 5});
 
-        const auto [_, windowHeight] = world->GetWindowSize();
+        const auto [windowWidth, windowHeight] = world->GetWindowSize();
         progressBar.SetSize({200, 30});
         progressBar.SetPosition({20, windowHeight - 40});
     }
@@ -22,6 +22,9 @@ namespace SpaceShooter {
     void GameHUD::Draw() {
         frameRateLabel.Draw();
         progressBar.Draw();
+        for (auto lifeIcon: playerLives) {
+            lifeIcon.Draw();
+        }
     }
 
     void GameHUD::Update(const float deltaTime) {
@@ -42,6 +45,15 @@ namespace SpaceShooter {
     void GameHUD::OnInitialize() {
         if (const auto player = PlayerManager::Get().GetPlayer()) {
             player->LifeCountChanged.BindAction(GetWeakRef(), &GameHUD::OnPlayerLifeCountChanged);
+            const auto [windowWidth, windowHeight] = world->GetWindowSize();
+            for (auto i = 0; i < player->GetLifeCount(); ++i) {
+                playerLives.emplace(
+                    playerLives.end(),
+                    ImageWidget{"assets/SpaceShooterRedux/PNG/Pickups/playerLife1_blue.png"}
+                );
+                auto &lifeIcon = playerLives.at(i);
+                lifeIcon.SetPosition({windowWidth - 40 * (i + 1), windowHeight - 40});
+            }
             SubscribeToPlayersEvents();
         }
     }
@@ -52,5 +64,6 @@ namespace SpaceShooter {
 
     void GameHUD::OnPlayerLifeCountChanged([[maybe_unused]] unsigned int lifeCount) {
         SubscribeToPlayersEvents();
+        playerLives.erase(playerLives.end());
     }
 }

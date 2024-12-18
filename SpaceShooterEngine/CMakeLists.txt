@@ -39,6 +39,8 @@ add_library(SpaceShooterEngine STATIC
         src/widgets/TextWidget.cpp
         include/widgets/ProgressBar.h
         src/widgets/ProgressBar.cpp
+        include/widgets/ImageWidget.h
+        src/widgets/ImageWidget.cpp
 )
 
 target_link_libraries(SpaceShooterEngine PRIVATE box2d raylib)
