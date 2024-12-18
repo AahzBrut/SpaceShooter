@@ -6,11 +6,15 @@
 
 
 namespace SpaceShooter {
-    ProgressBar::ProgressBar(const Vector2 &size, const Color &frontColor, const Color &backColor)
+    ProgressBar::ProgressBar(const Vector2 &size,
+                             const Color &frontColor,
+                             const Color &backColor,
+                             const Color &textColor)
         : font{AssetsManager::Get().GetFont("assets/SpaceShooterRedux/Bonus/kenvector_future.ttf")},
           size{size},
           frontColor{frontColor},
-          backColor{backColor} {}
+          backColor{backColor},
+          textColor{textColor} {}
 
     void ProgressBar::OnDraw() {
         const auto text = std::format("{} %", static_cast<int>(value * 100));
