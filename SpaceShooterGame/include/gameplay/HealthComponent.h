@@ -17,10 +17,11 @@ namespace SpaceShooter {
         Delegate<> Death;
 
     private:
+        float health;
+        float maxHealth;
+
         void TakeDamage(float amount);
         void HealthEmpty();
         void RegenerateHealth(float amount);
-        float health;
-        float maxHealth;
     };
 }

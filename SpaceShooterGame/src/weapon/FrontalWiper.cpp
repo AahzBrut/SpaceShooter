@@ -20,8 +20,10 @@ namespace SpaceShooter {
         shooter4.SetBulletTexture("assets/SpaceShooterRedux/PNG/Lasers/laserGreen11.png");
         shooter5.SetMuzzleOffset({offsetPosition.x + 60, offsetPosition.y});
         shooter5.SetBulletTexture("assets/SpaceShooterRedux/PNG/Lasers/laserGreen11.png");
+        shooter5.SetMuzzleRotation(7.5f);
         shooter6.SetMuzzleOffset({offsetPosition.x - 60, offsetPosition.y});
         shooter6.SetBulletTexture("assets/SpaceShooterRedux/PNG/Lasers/laserGreen11.png");
+        shooter6.SetMuzzleRotation(-7.5f);
     }
 
     void FrontalWiper::IncreaseLevel(const int amount) {

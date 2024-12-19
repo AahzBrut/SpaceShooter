@@ -47,12 +47,9 @@ namespace SpaceShooter {
             player->LifeCountChanged.BindAction(GetWeakRef(), &GameHUD::OnPlayerLifeCountChanged);
             const auto [windowWidth, windowHeight] = world->GetWindowSize();
             for (auto i = 0; i < player->GetLifeCount(); ++i) {
-                playerLives.emplace(
-                    playerLives.end(),
-                    ImageWidget{"assets/SpaceShooterRedux/PNG/Pickups/playerLife1_blue.png"}
-                );
+                playerLives.emplace(playerLives.end(), "assets/SpaceShooterRedux/PNG/Pickups/playerLife1_blue.png");
                 auto &lifeIcon = playerLives.at(i);
-                lifeIcon.SetPosition({windowWidth - 40 * (i + 1), windowHeight - 40});
+                lifeIcon.SetPosition({windowWidth - static_cast<float>(40 * (i + 1)), windowHeight - 40});
             }
             SubscribeToPlayersEvents();
         }

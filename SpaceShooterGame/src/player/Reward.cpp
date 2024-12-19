@@ -3,6 +3,7 @@
 #include <utility>
 
 #include "framework/MathUtility.h"
+#include "player/PlayerManager.h"
 #include "player/PlayerSpaceShip.h"
 #include "weapon/FrontalWiper.h"
 #include "weapon/ThreeWayShooter.h"
@@ -29,9 +30,16 @@ namespace SpaceShooter {
     }
 
     void Reward::OnContactBegin(Actor *actor) {
-        if (const auto player = dynamic_cast<PlayerSpaceShip *>(actor);
-            player != nullptr && !player->IsPendingDestruction()) {
-            rewardFunction(player);
+        if (!actor || actor->IsPendingDestruction()) return;
+
+        const auto player = PlayerManager::Get().GetPlayer();
+        if (!player) return;
+
+        const auto playerShipWeakRef = player->GetSpaceship();
+        if (playerShipWeakRef.expired() || playerShipWeakRef.lock()->IsPendingDestruction()) return;
+
+        if (const auto playerShip = playerShipWeakRef.lock().get(); playerShip->GetUniqueID() == actor->GetUniqueID()) {
+            rewardFunction(playerShip);
             Destroy();
         }
     }
