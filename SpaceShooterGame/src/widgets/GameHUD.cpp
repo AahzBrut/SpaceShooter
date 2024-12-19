@@ -10,18 +10,26 @@
 namespace SpaceShooter {
     GameHUD::GameHUD(World *world)
         : world{world},
-          frameRateLabel{"FPS: "} {
+          frameRateLabel{"FPS: "},
+          playerScoreIcon{"assets/SpaceShooterRedux/PNG/Power-ups/star_gold.png"},
+          playerScoreText{""} {
         frameRateLabel.SetFontSize(36);
         frameRateLabel.SetPosition({10, 5});
 
         const auto [windowWidth, windowHeight] = world->GetWindowSize();
         progressBar.SetSize({200, 30});
         progressBar.SetPosition({20, windowHeight - 40});
+
+        playerScoreText.SetFontSize(36);
+        playerScoreIcon.SetPosition({windowWidth - 220, 10});
+        playerScoreText.SetPosition({windowWidth - 180, 10});
     }
 
     void GameHUD::Draw() {
         frameRateLabel.Draw();
         progressBar.Draw();
+        playerScoreText.Draw();
+        playerScoreIcon.Draw();
         for (auto lifeIcon: playerLives) {
             lifeIcon.Draw();
         }
@@ -42,15 +50,21 @@ namespace SpaceShooter {
         }
     }
 
+    void GameHUD::InitLifeCountWidgets(const Player *const player) {
+        const auto [windowWidth, windowHeight] = world->GetWindowSize();
+        for (auto i = 0; i < player->GetLifeCount(); ++i) {
+            playerLives.emplace(playerLives.end(), "assets/SpaceShooterRedux/PNG/Pickups/playerLife1_blue.png");
+            auto &lifeIcon = playerLives.at(i);
+            lifeIcon.SetPosition({windowWidth - static_cast<float>(40 * (i + 1)), windowHeight - 40});
+        }
+    }
+
     void GameHUD::OnInitialize() {
         if (const auto player = PlayerManager::Get().GetPlayer()) {
+            player->ScoreChanged.BindAction(GetWeakRef(), &GameHUD::OnPLayerScoreChanged);
             player->LifeCountChanged.BindAction(GetWeakRef(), &GameHUD::OnPlayerLifeCountChanged);
-            const auto [windowWidth, windowHeight] = world->GetWindowSize();
-            for (auto i = 0; i < player->GetLifeCount(); ++i) {
-                playerLives.emplace(playerLives.end(), "assets/SpaceShooterRedux/PNG/Pickups/playerLife1_blue.png");
-                auto &lifeIcon = playerLives.at(i);
-                lifeIcon.SetPosition({windowWidth - static_cast<float>(40 * (i + 1)), windowHeight - 40});
-            }
+            OnPLayerScoreChanged(player->GetScore());
+            InitLifeCountWidgets(player);
             SubscribeToPlayersEvents();
         }
     }
@@ -62,5 +76,10 @@ namespace SpaceShooter {
     void GameHUD::OnPlayerLifeCountChanged([[maybe_unused]] unsigned int lifeCount) {
         SubscribeToPlayersEvents();
         playerLives.erase(playerLives.end());
+    }
+
+    void GameHUD::OnPLayerScoreChanged(const unsigned int score) {
+        const auto scoreText = std::format("{:06}", score);
+        playerScoreText.SetText(scoreText);
     }
 }

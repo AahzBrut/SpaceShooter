@@ -25,10 +25,10 @@ namespace SpaceShooter {
         LifeCountChanged.Emit(lifeCount);
     }
 
-    void Player::AddScore(const unsigned int score) {
-        if (score == 0) return;
+    void Player::AddScore(const unsigned int amount) {
+        if (amount == 0) return;
 
-        this->score += score;
-        ScoreChanged.Emit(this->score);
+        score += amount;
+        ScoreChanged.Emit(score);
     }
 }

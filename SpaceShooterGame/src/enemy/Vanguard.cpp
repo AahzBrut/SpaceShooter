@@ -9,6 +9,7 @@ namespace SpaceShooter {
     Vanguard::Vanguard(World *world, const std::string &texturePath, const Vector2 &velocity)
         : EnemySpaceShip(world, texturePath),
           bulletShooter{new BulletShooter{this, 1, EnemyBullet, Player | PlayerBullet}} {
+        SetRewardAmount(100);
         SetRotation(90);
         CenterPivotOffset();
         SetVelocity(velocity);

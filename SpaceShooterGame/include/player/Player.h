@@ -17,7 +17,7 @@ namespace SpaceShooter {
         void AddLifeCount(unsigned int count);
         unsigned int GetLifeCount() const { return lifeCount; }
 
-        void AddScore(unsigned int score);
+        void AddScore(unsigned int amount);
         unsigned int GetScore() const { return score; }
 
         Delegate<unsigned int> LifeCountChanged;

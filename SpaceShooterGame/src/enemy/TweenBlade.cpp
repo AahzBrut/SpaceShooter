@@ -11,6 +11,7 @@ namespace SpaceShooter {
           leftBulletShooter{new BulletShooter{this, 1, EnemyBullet, Player | PlayerBullet}},
           rightBulletShooter{new BulletShooter{this, 1, EnemyBullet, Player | PlayerBullet}} {
         {
+            SetRewardAmount(150);
             SetRotation(90);
             CenterPivotOffset();
             SetVelocity(velocity);

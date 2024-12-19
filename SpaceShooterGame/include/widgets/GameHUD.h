@@ -1,4 +1,5 @@
 #pragma once
+#include "player/Player.h"
 #include "widgets/HUD.h"
 #include "widgets/ImageWidget.h"
 #include "widgets/ProgressBar.h"
@@ -20,10 +21,14 @@ namespace SpaceShooter {
         TextWidget frameRateLabel;
         ProgressBar progressBar;
         List<ImageWidget> playerLives;
+        ImageWidget playerScoreIcon;
+        TextWidget playerScoreText;
 
         void SubscribeToPlayersEvents();
+        void InitLifeCountWidgets(const Player *player);
         void OnInitialize() override;
         void OnPlayerShipHealthChanged(float amount, float health, float maxHealth);
         void OnPlayerLifeCountChanged(unsigned int lifeCount);
+        void OnPLayerScoreChanged(unsigned int score);
     };
 }
