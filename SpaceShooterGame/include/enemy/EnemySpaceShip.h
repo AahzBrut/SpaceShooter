@@ -9,7 +9,8 @@ namespace SpaceShooter {
                        const List<RewardFactoryFunction> &rewards = {
                            CreateHealthReward,
                            CreateThreeWayReward,
-                           CreateFrontalWiperReward
+                           CreateFrontalWiperReward,
+                           CreateLifeReward
                        });
 
         void Update(float deltaTime) override;

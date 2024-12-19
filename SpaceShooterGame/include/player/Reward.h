@@ -29,10 +29,12 @@ namespace SpaceShooter {
     Weak<Reward> CreateHealthReward(World *world);
     Weak<Reward> CreateThreeWayReward(World *world);
     Weak<Reward> CreateFrontalWiperReward(World *world);
+    Weak<Reward> CreateLifeReward(World *world);
 
     Weak<Reward> CreateReward(World *world, const std::string &texturePath, const RewardFunction &rewardFunction);
 
-    void RewardHealth(PlayerSpaceShip *player);
-    void RewardThreeWayShooter(PlayerSpaceShip *player);
-    void RewardFrontalWiper(PlayerSpaceShip *player);
+    void RewardHealth(PlayerSpaceShip *playerShip);
+    void RewardThreeWayShooter(PlayerSpaceShip *playerShip);
+    void RewardFrontalWiper(PlayerSpaceShip *playerShip);
+    void RewardLife(PlayerSpaceShip *playerShip);
 }

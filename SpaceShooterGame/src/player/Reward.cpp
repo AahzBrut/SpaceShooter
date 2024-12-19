@@ -25,7 +25,6 @@ namespace SpaceShooter {
     void Reward::Update(const float deltaTime) {
         Actor::Update(deltaTime);
 
-
         SetPositionOffset(speed * deltaTime * Vector2{0.f, 1.f});
     }
 
@@ -59,19 +58,28 @@ namespace SpaceShooter {
                             RewardFrontalWiper);
     }
 
+    Weak<Reward> CreateLifeReward(World *world) {
+        return CreateReward(world, "assets/SpaceShooterRedux/PNG/Pickups/playerLife1_blue.png",
+                            RewardLife);
+    }
+
     Weak<Reward> CreateReward(World *world, const std::string &texturePath, const RewardFunction &rewardFunction) {
         return world->SpawnActor<Reward>(texturePath, rewardFunction);
     }
 
-    void RewardHealth(PlayerSpaceShip *player) {
-        player->GetHealthComponent().ChangeHealth(-10);
+    void RewardHealth(PlayerSpaceShip *playerShip) {
+        playerShip->GetHealthComponent().ChangeHealth(-10);
     }
 
-    void RewardThreeWayShooter(PlayerSpaceShip *player) {
-        player->SetShooter(std::make_unique<ThreeWayShooter>(player, .1f, Vector2{0.f, 0.f}));
+    void RewardThreeWayShooter(PlayerSpaceShip *playerShip) {
+        playerShip->SetShooter(std::make_unique<ThreeWayShooter>(playerShip, .1f, Vector2{0.f, 0.f}));
     }
 
-    void RewardFrontalWiper(PlayerSpaceShip *player) {
-        player->SetShooter(std::make_unique<FrontalWiper>(player, .1f, Vector2{0.f, 0.f}));
+    void RewardFrontalWiper(PlayerSpaceShip *playerShip) {
+        playerShip->SetShooter(std::make_unique<FrontalWiper>(playerShip, .1f, Vector2{0.f, 0.f}));
+    }
+
+    void RewardLife([[maybe_unused]] PlayerSpaceShip *playerShip) {
+        PlayerManager::Get().GetPlayer()->AddLifeCount(1);
     }
 }

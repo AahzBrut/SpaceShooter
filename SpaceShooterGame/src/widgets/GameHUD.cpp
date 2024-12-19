@@ -75,7 +75,8 @@ namespace SpaceShooter {
 
     void GameHUD::OnPlayerLifeCountChanged([[maybe_unused]] unsigned int lifeCount) {
         SubscribeToPlayersEvents();
-        playerLives.erase(playerLives.end());
+        playerLives.clear();
+        InitLifeCountWidgets(PlayerManager::Get().GetPlayer());
     }
 
     void GameHUD::OnPLayerScoreChanged(const unsigned int score) {
