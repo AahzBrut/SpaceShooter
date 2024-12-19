@@ -42,6 +42,8 @@ add_library(SpaceShooterEngine STATIC
         include/widgets/ImageWidget.h
         src/widgets/ImageWidget.cpp
         src/framework/Object.cpp
+        include/widgets/Button.h
+        src/widgets/Button.cpp
 )
 
 target_link_libraries(SpaceShooterEngine PRIVATE box2d raylib)
