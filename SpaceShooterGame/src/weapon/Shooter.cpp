@@ -9,6 +9,10 @@ namespace SpaceShooter {
         }
     }
 
+    void Shooter::SetLevel(const int amount) {
+        currentLevel = amount;
+    }
+
     Shooter::Shooter(Actor *owner) {
         this->owner = owner;
     }

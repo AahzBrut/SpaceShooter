@@ -29,6 +29,11 @@ namespace SpaceShooter {
         rightShooter->Shoot();
     }
 
+    void Boss::Initialize() {
+        EnemySpaceShip::Initialize();
+        GetHealthComponent().HealthChanged.BindAction(GetWeakRef(), &Boss::OnHealthChanged);
+    }
+
     void Boss::SideMovement() {
         const auto posX = GetTransform().position.x;
         if (const auto bossWidth = GetSize().x; posX > GetWorld()->GetWindowSize().x - bossWidth * 0.5f) {
@@ -36,5 +41,23 @@ namespace SpaceShooter {
         } else if (posX < bossWidth * 0.5f) {
             SetVelocity({speed, 0});
         }
+    }
+
+    void Boss::OnHealthChanged([[maybe_unused]] float amount, const float health, const float maxHealth) {
+        if (const auto healthPercent = health / maxHealth; healthPercent > .4 && healthPercent <= .7) {
+            SetStage(2);
+        } else if (healthPercent > .1 && healthPercent <= .4 ) {
+            SetStage(3);
+        } else if (healthPercent <= .1) {
+            SetStage(4);
+        }
+    }
+
+    // ReSharper disable once CppDFAUnreachableFunctionCall
+    void Boss::SetStage(const int newStage) {
+        stage = newStage;
+        frontalWiper->SetLevel(newStage);
+        threeWayShooterLeft->SetLevel(newStage);
+        threeWayShooterRight->SetLevel(newStage);
     }
 }

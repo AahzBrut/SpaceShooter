@@ -14,6 +14,7 @@ namespace SpaceShooter {
         [[nodiscard]] int GetCurrentLevel() const { return currentLevel; }
         [[nodiscard]] int GetMaxLevel() const { return maxLevel; }
         virtual void IncreaseLevel(int amount);
+        virtual void SetLevel(int amount);
 
     protected:
         explicit Shooter(Actor *owner);

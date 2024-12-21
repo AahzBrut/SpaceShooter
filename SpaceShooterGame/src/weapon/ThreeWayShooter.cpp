@@ -35,6 +35,23 @@ namespace SpaceShooter {
         topLevelRightShooter.IncreaseLevel(amount);
     }
 
+    void ThreeWayShooter::SetLevel(int amount) {
+        Shooter::SetLevel(amount);
+        leftShooter.SetLevel(amount);
+        rightShooter.SetLevel(amount);
+        centerShooter.SetLevel(amount);
+        topLevelLeftShooter.SetLevel(amount);
+        topLevelRightShooter.SetLevel(amount);
+    }
+
+    void ThreeWayShooter::SetLayers(const CollisionLayers selfLayer, const CollisionLayers otherLayer) {
+        leftShooter.SetLayers(selfLayer, otherLayer);
+        rightShooter.SetLayers(selfLayer, otherLayer);
+        centerShooter.SetLayers(selfLayer, otherLayer);
+        topLevelLeftShooter.SetLayers(selfLayer, otherLayer);
+        topLevelRightShooter.SetLayers(selfLayer, otherLayer);
+    }
+
     void ThreeWayShooter::ShootImpl() {
         leftShooter.Shoot();
         centerShooter.Shoot();

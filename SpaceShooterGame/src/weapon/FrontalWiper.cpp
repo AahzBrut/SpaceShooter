@@ -36,6 +36,25 @@ namespace SpaceShooter {
         shooter6.IncreaseLevel(amount);
     }
 
+    void FrontalWiper::SetLevel(const int amount) {
+        Shooter::SetLevel(amount);
+        shooter1.SetLevel(amount);
+        shooter2.SetLevel(amount);
+        shooter3.SetLevel(amount);
+        shooter4.SetLevel(amount);
+        shooter5.SetLevel(amount);
+        shooter6.SetLevel(amount);
+    }
+
+    void FrontalWiper::SetLayers(const CollisionLayers selfLayer, const CollisionLayers otherLayer) {
+        shooter1.SetLayers(selfLayer, otherLayer);
+        shooter2.SetLayers(selfLayer, otherLayer);
+        shooter3.SetLayers(selfLayer, otherLayer);
+        shooter4.SetLayers(selfLayer, otherLayer);
+        shooter5.SetLayers(selfLayer, otherLayer);
+        shooter6.SetLayers(selfLayer, otherLayer);
+    }
+
     void FrontalWiper::ShootImpl() {
         shooter1.Shoot();
         shooter2.Shoot();
