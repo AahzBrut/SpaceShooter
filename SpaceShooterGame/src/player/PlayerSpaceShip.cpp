@@ -19,6 +19,7 @@ namespace SpaceShooter {
         SpaceShip::Update(deltaTime);
         HandleInput();
         ConsumeInput(deltaTime);
+        UpdateInvulnerabilityFlash(deltaTime);
     }
 
     void PlayerSpaceShip::ClampInputOnEdge() {
@@ -42,6 +43,16 @@ namespace SpaceShooter {
             return;
         }
         bulletShooter = std::move(shooter);
+    }
+
+    void PlayerSpaceShip::ApplyDamage(const float amount) {
+        if (!invulnerable) SpaceShip::ApplyDamage(amount);
+    }
+
+    void PlayerSpaceShip::Initialize() {
+        SpaceShip::Initialize();
+        invulnerabilityTimer = TimerManager::Get().SetTimer(GetWeakRef(), &PlayerSpaceShip::UndoInvulnerability,
+                                                            invulnerabilityTime);
     }
 
     void PlayerSpaceShip::HandleInput() {
@@ -71,5 +82,29 @@ namespace SpaceShooter {
     void PlayerSpaceShip::ConsumeInput([[maybe_unused]] float deltaTime) {
         SetVelocity(Vector2{moveInput.x * speed, moveInput.y * speed});
         moveInput = Vector2{};
+    }
+
+    void PlayerSpaceShip::UndoInvulnerability() {
+        SetColor(WHITE);
+        invulnerableFlashDir = -1;
+        invulnerable = false;
+    }
+
+    void PlayerSpaceShip::UpdateInvulnerabilityFlash(const float deltaTime) {
+        if (!invulnerable) return;
+
+        invulnerabilityFlashTimer += deltaTime * invulnerableFlashDir;
+        if (invulnerabilityFlashTimer >= invulnerableFlashPeriod) {
+            invulnerableFlashDir = -1;
+            invulnerabilityFlashTimer = invulnerableFlashPeriod;
+        } else if (invulnerabilityFlashTimer <= 0) {
+            invulnerableFlashDir = 1;
+            invulnerabilityFlashTimer = 0;
+        }
+
+        auto currentColor = GetColor();
+        const auto alfa = 255 * (invulnerabilityFlashTimer / invulnerableFlashPeriod);
+        currentColor.a = static_cast<unsigned char>(alfa);
+        SetColor(currentColor);
     }
 }

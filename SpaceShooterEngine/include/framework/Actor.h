@@ -32,6 +32,7 @@ namespace SpaceShooter {
         void SetScale(float scale);
         void SetScaleOffset(float scale);
         void SetColor(const Color &color);
+        Color GetColor() const { return color; }
         [[nodiscard]] Vector2 GetForwardVector() const;
         [[nodiscard]] Vector2 GetRightVector() const;
         void CenterPivotOffset();

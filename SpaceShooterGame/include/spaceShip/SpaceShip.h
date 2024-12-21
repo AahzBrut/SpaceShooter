@@ -15,7 +15,7 @@ namespace SpaceShooter {
         [[nodiscard]] Vector2 GetVelocity() const { return velocity; }
         void Blink();
         void UpdateBlink(float deltaTime);
-        void ApplyDamage(float amount);
+        virtual void ApplyDamage(float amount);
         HealthComponent &GetHealthComponent() { return healthComponent; }
 
         void OnContactBegin(Actor *actor) override;
