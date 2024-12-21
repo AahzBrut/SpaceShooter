@@ -25,7 +25,6 @@ namespace SpaceShooter {
     }
 
     void Boss::Shoot() {
-        EnemySpaceShip::Shoot();
         leftShooter->Shoot();
         rightShooter->Shoot();
     }
