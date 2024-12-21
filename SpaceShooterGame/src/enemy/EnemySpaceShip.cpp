@@ -35,9 +35,9 @@ namespace SpaceShooter {
     void EnemySpaceShip::OnDeath() {
         SpaceShip::OnDeath();
 
-        if (!rewardFactories.empty()) SpawnReward();
+        if (!rewardFactories.empty() && RandomRange(0, 1) < rewardChance) SpawnReward();
         if (const auto player = PlayerManager::Get().GetPlayer()) {
-            player->AddScore(reward);
+            player->AddScore(rewardScore);
         }
     }
 }

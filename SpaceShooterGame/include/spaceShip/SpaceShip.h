@@ -19,7 +19,7 @@ namespace SpaceShooter {
         HealthComponent &GetHealthComponent() { return healthComponent; }
 
         void OnContactBegin(Actor *actor) override;
-        virtual void Shoot();
+        virtual void Shoot() {}
 
     protected:
         virtual void OnDamageTaken(float amount, float health, float maxHealth);

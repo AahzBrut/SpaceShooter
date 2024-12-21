@@ -52,8 +52,6 @@ namespace SpaceShooter {
         }
     }
 
-    void SpaceShip::Shoot() {}
-
     void SpaceShip::OnDamageTaken(const float amount, const float health, const float maxHealth) {
         Blink();
     }

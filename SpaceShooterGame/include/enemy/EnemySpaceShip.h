@@ -16,11 +16,13 @@ namespace SpaceShooter {
         void Update(float deltaTime) override;
         void OnContactBegin(Actor *actor) override;
         void SpawnReward() const;
-        void SetRewardAmount(const unsigned int amount) { reward = amount; }
+        void SetRewardAmount(const unsigned int amount) { rewardScore = amount; }
+        void SetRewardChance(const float newChance) { rewardChance = newChance; }
 
     private:
         float collisionDamage;
-        unsigned int reward{10};
+        unsigned int rewardScore{10};
+        float rewardChance{.5f};
         List<RewardFactoryFunction> rewardFactories;
 
         void OnDeath() override;

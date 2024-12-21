@@ -2,6 +2,7 @@
 
 #include "enemy/Boss.h"
 #include "framework/World.h"
+#include "weapon/BulletShooter.h"
 
 namespace SpaceShooter {
     BossStage::BossStage(World *world)

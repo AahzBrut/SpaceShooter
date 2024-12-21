@@ -3,11 +3,12 @@
 
 namespace SpaceShooter {
     class HealthComponent {
-        public:
+    public:
         HealthComponent(float health, float maxHealth);
 
         void ChangeHealth(float amount);
 
+        void SetInitialHealth(const float amount) { health = amount; maxHealth = amount; }
         [[nodiscard]] float GetHealth() const { return health; }
         [[nodiscard]] float GetMaxHealth() const { return maxHealth; }
 
