@@ -27,6 +27,6 @@ namespace SpaceShooter {
         int spawnAmount{10};
         int spawnCount{0};
 
-        TimerHandler spawnTimerHandler{};
+        TimerHandle spawnTimerHandler{};
     };
 }

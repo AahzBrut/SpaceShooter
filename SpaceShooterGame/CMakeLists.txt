@@ -56,6 +56,8 @@ add_executable(SpaceShooterGame
         src/levels/MainMenu.cpp
         include/widgets/MainMenuHUD.h
         src/widgets/MainMenuHUD.cpp
+        include/enemy/ChaosStage.h
+        src/enemy/ChaosStage.cpp
 )
 
 target_link_libraries(SpaceShooterGame PRIVATE SpaceShooterEngine raylib box2d)

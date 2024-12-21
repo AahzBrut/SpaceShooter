@@ -24,7 +24,7 @@ namespace SpaceShooter {
         Vector2 leftSpawnPosition{GetWorld()->GetWindowSize().x * 0.5f - spawnSideOffset, -100.f - spawnSideOffset};
         Vector2 rightSpawnPosition{GetWorld()->GetWindowSize().x * 0.5f + spawnSideOffset, -100.f - spawnSideOffset};
 
-        TimerHandler spawnTimer{};
+        TimerHandle spawnTimer{};
 
         void OnStageFinished() override;
         void SpawnHexagon();

@@ -12,7 +12,7 @@ namespace SpaceShooter {
         explicit GameLevelOne(Application *application);
 
     private:
-        TimerHandler timerIndex{};
+        TimerHandle timerIndex{};
         Weak<PlayerSpaceShip> playerSpaceShip;
         Weak<GameHUD> gameHUD;
 

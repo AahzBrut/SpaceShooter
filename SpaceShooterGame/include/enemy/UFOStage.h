@@ -19,7 +19,7 @@ namespace SpaceShooter {
         float spawnInterval{5};
         float speed{200};
 
-        TimerHandler spawnTimer;
+        TimerHandle spawnTimer;
 
         void OnStageFinished() override;
         Vector2 GetRandomSpawnPosition(const Vector2& size);

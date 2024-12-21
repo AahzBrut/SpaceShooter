@@ -2,6 +2,7 @@
 
 #include <memory>
 
+#include "enemy/ChaosStage.h"
 #include "enemy/HexagonStage.h"
 #include "enemy/TweenBladeStage.h"
 #include "enemy/UFOStage.h"
@@ -23,6 +24,8 @@ namespace SpaceShooter {
         AddStage(std::make_shared<HexagonStage>(this));
         AddStage(std::make_shared<WaitStage>(this, 15));
         AddStage(std::make_shared<UFOStage>(this));
+        AddStage(std::make_shared<WaitStage>(this, 5));
+        AddStage(std::make_shared<ChaosStage>(this));
     }
 
     void GameLevelOne::Initialize() {

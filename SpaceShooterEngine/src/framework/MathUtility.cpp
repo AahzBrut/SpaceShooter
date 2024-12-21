@@ -66,6 +66,15 @@ namespace SpaceShooter {
         vector.y /= length;
     }
 
+    Vector2 NormalizedVector(const Vector2 &vector) {
+        Vector2 result = vector;
+        auto length = VectorLength(vector);
+        if (length == 0.0f) {length = 0.00001f;}
+        result.x /= length;
+        result.y /= length;
+        return result;
+    }
+
     float VectorLength(const Vector2 &vector) {
         return std::sqrt(vector.x * vector.x + vector.y * vector.y);
     }

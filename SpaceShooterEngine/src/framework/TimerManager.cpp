@@ -2,7 +2,7 @@
 
 namespace SpaceShooter {
     Unique<TimerManager> TimerManager::instance{nullptr};
-    unsigned int TimerHandler::timerKeyCounter = 0;
+    unsigned int TimerHandle::timerKeyCounter = 0;
 
     Timer::Timer(const Weak<Object> &object,
                  const std::function<void()> &callback,
@@ -46,7 +46,7 @@ namespace SpaceShooter {
         }
     }
 
-    void TimerManager::ClearTimer(const TimerHandler timerHandler) {
+    void TimerManager::ClearTimer(const TimerHandle timerHandler) {
         if (const auto iter = timers.find(timerHandler); iter != timers.end()) {
             iter->second.SetExpired();
         }

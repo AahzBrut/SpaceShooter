@@ -12,6 +12,7 @@ namespace SpaceShooter {
     int RandomIntRange(int min, int max);
     Vector2 RandomUnitVector();
     void NormalizeVector(Vector2& vector);
+    Vector2 NormalizedVector(const Vector2 &vector);
     float VectorLength(const Vector2& vector);
 
     inline bool operator==(const Vector2 &lhs, const Vector2 &rhs) {

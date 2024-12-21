@@ -6,8 +6,8 @@
 
 
 namespace SpaceShooter {
-    struct TimerHandler {
-        TimerHandler() = default;
+    struct TimerHandle {
+        TimerHandle() = default;
         [[nodiscard]] unsigned int GetTimerKey() const { return timerKey; }
 
     private:
@@ -18,10 +18,10 @@ namespace SpaceShooter {
     };
 
     struct TimerHandlerHashFunction {
-        std::size_t operator()(const TimerHandler& key) const { return std::hash<unsigned int>()(key.GetTimerKey()); }
+        std::size_t operator()(const TimerHandle& key) const { return std::hash<unsigned int>()(key.GetTimerKey()); }
     };
 
-    inline bool operator==(const TimerHandler& lhs, const TimerHandler& rhs) { return lhs.GetTimerKey() == rhs.GetTimerKey(); }
+    inline bool operator==(const TimerHandle& lhs, const TimerHandle& rhs) { return lhs.GetTimerKey() == rhs.GetTimerKey(); }
 
     struct Timer {
         Timer(const Weak<Object>& object, const std::function<void()>& callback, float duration, bool repeat);
@@ -46,8 +46,8 @@ namespace SpaceShooter {
         static TimerManager &Get();
 
         template<typename ClassName>
-        TimerHandler SetTimer(const Weak<Object>& object, void (ClassName::*callback)(), float duration, bool repeat = false) {
-            TimerHandler handler{};
+        TimerHandle SetTimer(const Weak<Object>& object, void (ClassName::*callback)(), float duration, bool repeat = false) {
+            TimerHandle handler{};
             timers.emplace(handler, Timer(
                 object,
                 [=] { (static_cast<ClassName *>(object.lock().get())->*callback)(); },
@@ -57,13 +57,13 @@ namespace SpaceShooter {
         }
 
         void UpdateTimers(float deltaTime);
-        void ClearTimer(TimerHandler timerHandler);
+        void ClearTimer(TimerHandle timerHandler);
 
     protected:
         TimerManager() = default;
 
     private:
         static Unique<TimerManager> instance;
-        Dictionary<TimerHandler, Timer, TimerHandlerHashFunction> timers;
+        Dictionary<TimerHandle, Timer, TimerHandlerHashFunction> timers;
     };
 }

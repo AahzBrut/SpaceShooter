@@ -20,8 +20,8 @@ namespace SpaceShooter {
         Vector2 rightSpawnPosition;
         Vector2 spawnPosition;
 
-        TimerHandler spawnTimerHandler;
-        TimerHandler waveTimerHandler;
+        TimerHandle spawnTimerHandler;
+        TimerHandle waveTimerHandler;
 
         int wavesToSpawn;
         int waveCounter;
