@@ -15,6 +15,9 @@ namespace SpaceShooter {
         void Draw() override;
         bool HandleEvent() override;
 
+        Delegate<> StartButtonPressed;
+        Delegate<> QuitButtonPressed;
+
     private:
         World *world;
         ImageWidget backgroundImage;
@@ -24,5 +27,7 @@ namespace SpaceShooter {
         Button quitButton;
 
         void OnInitialize() override;
+        void EmitStartButtonPressed();
+        void EmitQuitButtonPressed();
     };
 }

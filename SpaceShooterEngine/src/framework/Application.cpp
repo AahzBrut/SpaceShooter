@@ -12,7 +12,7 @@
 
 namespace SpaceShooter {
     Application::Application(const int width, const int height, const std::string &title)
-        : currentWorld(nullptr) {
+        : currentWorld{nullptr}, pendingWorld{nullptr} {
         windowSize = Vector2(static_cast<float>(width), static_cast<float>(height));
         InitWindow(width, height, title.c_str());
     }
@@ -22,7 +22,7 @@ namespace SpaceShooter {
         AssetsManager::Get().CleanCycle();
     }
 
-    bool Application::DispatchEvent() {
+    bool Application::DispatchEvent() const {
         if (currentWorld) {
             return currentWorld->DispatchEvent();
         }
@@ -34,7 +34,7 @@ namespace SpaceShooter {
         SetTargetFPS(60);
 
         auto lastAssetsClearTime = GetTime();
-        while (!WindowShouldClose()) {
+        while (!WindowShouldClose() && !quitRequested) {
             const auto deltaTime = GetFrameTime();
             UpdateInternal(deltaTime);
             RenderInternal();
@@ -46,6 +46,7 @@ namespace SpaceShooter {
                 AssetsManager::Get().CleanCycle();
                 if (currentWorld) currentWorld->CleanCycle();
             }
+            // ReSharper disable once CppExpressionWithoutSideEffects
             DispatchEvent();
         }
         CloseWindow();
@@ -67,9 +68,10 @@ namespace SpaceShooter {
         if (currentWorld) {
             currentWorld->InternalUpdate(deltaTime);
         }
+
+        if (pendingWorld && pendingWorld != currentWorld) {
+            currentWorld = pendingWorld;
+            currentWorld->InternalInitialize();
+        }
     }
-
-    void Application::Render() {}
-
-    void Application::Update(float deltaTime) {}
 }

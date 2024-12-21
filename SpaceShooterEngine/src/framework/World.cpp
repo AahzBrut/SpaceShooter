@@ -30,7 +30,6 @@ namespace SpaceShooter {
 
             InitStages();
             StartStages();
-            LOG("Initializing world\n");
         }
     }
 
@@ -94,7 +93,6 @@ namespace SpaceShooter {
     }
 
     void World::AllStagesFinished() {
-        LOG("All Stages Finished");
     }
 
     void World::StartStages() {
@@ -106,7 +104,6 @@ namespace SpaceShooter {
     }
 
     void World::NextStage() {
-        LOG("Next stage\n");
         currentStage = stages.erase(currentStage);
         if (currentStage != stages.end()) {
             currentStage->get()->StartStage();

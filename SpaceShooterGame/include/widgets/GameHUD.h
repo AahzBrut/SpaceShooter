@@ -1,6 +1,5 @@
 #pragma once
 #include "player/Player.h"
-#include "widgets/Button.h"
 #include "widgets/HUD.h"
 #include "widgets/ImageWidget.h"
 #include "widgets/ProgressBar.h"
@@ -16,6 +15,7 @@ namespace SpaceShooter {
 
         void Draw() override;
         void Update(float deltaTime) override;
+        bool HandleEvent() override;
 
     private:
         World *world;
@@ -24,7 +24,6 @@ namespace SpaceShooter {
         List<ImageWidget> playerLives;
         ImageWidget playerScoreIcon;
         TextWidget playerScoreText;
-        Button button;
 
         void SubscribeToPlayersEvents();
         void InitLifeCountWidgets(const Player *player);

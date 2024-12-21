@@ -22,7 +22,7 @@ namespace SpaceShooter {
 
     void Actor::SetTexture(const std::string &texturePath) {
         texture = AssetsManager::Get().GetTexture(texturePath);
-        textureRect = Rectangle(0, 0, texture->width, texture->height); // NOLINT(*-narrowing-conversions)
+        textureRect = Rectangle(0.f, 0.f, static_cast<float>(texture->width), static_cast<float>(texture->height));
         size = Vector2(textureRect.width * transform.scale, textureRect.height * transform.scale);
     }
 

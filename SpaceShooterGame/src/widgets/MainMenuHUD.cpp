@@ -41,5 +41,15 @@ namespace SpaceShooter {
         startButton.SetPosition({(windowSize.x - startButton.GetSize().x) * 0.5f, 300});
         quitButton.SetSize({300, 60});
         quitButton.SetPosition({(windowSize.x - quitButton.GetSize().x) * 0.5f, 450});
+        startButton.ButtonClicked.BindAction(GetWeakRef(), &MainMenuHUD::EmitStartButtonPressed);
+        quitButton.ButtonClicked.BindAction(GetWeakRef(), &MainMenuHUD::EmitQuitButtonPressed);
+    }
+
+    void MainMenuHUD::EmitStartButtonPressed() {
+        StartButtonPressed.Emit();
+    }
+
+    void MainMenuHUD::EmitQuitButtonPressed() {
+        QuitButtonPressed.Emit();
     }
 }

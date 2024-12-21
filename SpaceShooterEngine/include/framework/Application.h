@@ -8,8 +8,9 @@ namespace SpaceShooter {
         Application(int width, int height, const std::string &title);
         virtual ~Application();
 
-        bool DispatchEvent();
+        bool DispatchEvent() const;
         void Run();
+        void Quit() { quitRequested = true; }
 
         template<typename WorldType>
         Weak<WorldType> LoadWorld();
@@ -17,20 +18,21 @@ namespace SpaceShooter {
 
     private:
         Shared<World> currentWorld;
+        Shared<World> pendingWorld;
         double cleanInterval{2.5f};
         Vector2 windowSize{};
+        bool quitRequested{false};
 
         void UpdateInternal(float deltaTime);
         void RenderInternal() const;
-        virtual void Render();
-        virtual void Update(float deltaTime);
+        virtual void Render() {}
+        virtual void Update(float deltaTime) {}
     };
 
     template<typename WorldType>
     Weak<WorldType> Application::LoadWorld() {
         Shared<WorldType> newWorld{new WorldType{this}};
-        currentWorld = newWorld;
-        currentWorld->InternalInitialize();
+        pendingWorld = newWorld;
         return newWorld;
     }
 }

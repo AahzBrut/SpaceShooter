@@ -23,8 +23,6 @@ namespace SpaceShooter {
         playerScoreText.SetFontSize(36);
         playerScoreIcon.SetPosition({windowWidth - 220, 10});
         playerScoreText.SetPosition({windowWidth - 180, 10});
-
-        button.SetPosition({200, 200});
     }
 
     void GameHUD::Draw() {
@@ -32,7 +30,6 @@ namespace SpaceShooter {
         progressBar.Draw();
         playerScoreText.Draw();
         playerScoreIcon.Draw();
-        button.Draw();
         for (auto lifeIcon: playerLives) {
             lifeIcon.Draw();
         }
@@ -41,7 +38,10 @@ namespace SpaceShooter {
     void GameHUD::Update(const float deltaTime) {
         const auto frameRate = GetFPS();
         frameRateLabel.SetText(std::format("FPS: {}", frameRate));
-        button.HandleEvent();
+    }
+
+    bool GameHUD::HandleEvent() {
+        return HUD::HandleEvent();
     }
 
     void GameHUD::SubscribeToPlayersEvents() {

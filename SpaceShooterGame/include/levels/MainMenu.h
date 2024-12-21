@@ -1,9 +1,10 @@
 #pragma once
 #include "framework/World.h"
-#include "widgets/MainMenuHUD.h"
 
 
 namespace SpaceShooter {
+    class MainMenuHUD;
+
     class MainMenu final : public World {
     public:
         explicit MainMenu(Application *application);
@@ -12,5 +13,7 @@ namespace SpaceShooter {
         Weak<MainMenuHUD> menuHUD;
 
         void Initialize() override;
+        void StartGame();
+        void QuitGame();
     };
 }

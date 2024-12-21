@@ -15,6 +15,9 @@ namespace SpaceShooter {
         void InternalInitialize();
         void InternalUpdate(float deltaTime);
 
+        Application *GetApplication() { return application; }
+        const Application *GetApplication() const { return application; }
+
         template<typename ActorType, typename... Args>
         Weak<ActorType> SpawnActor(Args... args);
 
@@ -53,7 +56,7 @@ namespace SpaceShooter {
         return actor;
     }
 
-    template<typename HUDType, typename ... Args>
+    template<typename HUDType, typename... Args>
     Weak<HUDType> World::SpawnHUD(Args... args) {
         Shared<HUDType> newHUD{new HUDType(this, args...)};
         hud = newHUD;
