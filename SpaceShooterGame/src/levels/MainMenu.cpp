@@ -1,6 +1,5 @@
 #include "levels/MainMenu.h"
 
-#include "EntryPoint.h"
 #include "framework/Application.h"
 #include "levels/GameLevelOne.h"
 #include "widgets/MainMenuHUD.h"

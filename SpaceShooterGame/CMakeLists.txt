@@ -58,6 +58,10 @@ add_executable(SpaceShooterGame
         src/widgets/MainMenuHUD.cpp
         include/enemy/ChaosStage.h
         src/enemy/ChaosStage.cpp
+        include/enemy/Boss.h
+        include/enemy/BossStage.h
+        src/enemy/Boss.cpp
+        src/enemy/BossStage.cpp
 )
 
 target_link_libraries(SpaceShooterGame PRIVATE SpaceShooterEngine raylib box2d)
