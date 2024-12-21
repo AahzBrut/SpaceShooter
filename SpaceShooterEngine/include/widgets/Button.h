@@ -11,6 +11,8 @@ namespace SpaceShooter {
 
         void SetText(const std::string &newText) { text = newText; }
         void SetFontSize(const float newFontSize) { fontSize = newFontSize; }
+        void SetSize(const Vector2& newSize) { size = newSize; }
+        Vector2 GetSize() const { return size; }
         bool HandleEvent() override;
 
         Delegate<> ButtonClicked;
@@ -18,6 +20,7 @@ namespace SpaceShooter {
     private:
         std::string text;
         Shared<Texture> texture;
+        Vector2 size{0,0};
         Shared<Font> font;
         float fontSize{16};
         Color textColor{WHITE};

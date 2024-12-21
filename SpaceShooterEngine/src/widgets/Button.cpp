@@ -9,15 +9,14 @@ namespace SpaceShooter {
           texture{AssetsManager::Get().GetTexture(texturePath)},
           font{AssetsManager::Get().GetFont("assets/SpaceShooterRedux/Bonus/kenvector_future.ttf")} {
         activeColor = defaultColor;
+        size = Vector2{static_cast<float>(texture->width), static_cast<float>(texture->height)};
     }
 
     bool Button::HandleEvent() {
-        const auto textureWidth = static_cast<float>(texture->width);
-        const auto textureHeight = static_cast<float>(texture->height);
         const auto [mouseX, mouseY] = GetMousePosition();
         const auto [minX, minY] = GetPosition();
-        const auto maxX = minX + textureWidth;
-        const auto maxY = minY + textureHeight;
+        const auto maxX = minX + size.x;
+        const auto maxY = minY + size.y;
         if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
             if (mouseX >= minX && mouseX <= maxX && mouseY >= minY && mouseY <= maxY && isButtonDown) {
                 ButtonClicked.Emit();
@@ -44,15 +43,15 @@ namespace SpaceShooter {
         const auto textureWidth = static_cast<float>(texture->width);
         const auto textureHeight = static_cast<float>(texture->height);
         const auto [x, y] = GetPosition();
-        const auto destRect = Rectangle(x, y, textureWidth, textureHeight);
+        const auto destRect = Rectangle(x, y, size.x, size.y);
         DrawTexturePro(*texture, {0, 0, textureWidth, textureHeight},
                        destRect,
                        {0, 0}, GetRotation(),
                        activeColor);
 
         const auto [textWidth, textHeight] = MeasureTextEx(*font, text.c_str(), fontSize, 2);
-        const auto offsetX = x + (textureWidth - textWidth) * 0.5f;
-        const auto offsetY = y + (textureHeight - textHeight) * 0.5f;
+        const auto offsetX = x + (size.x - textWidth) * 0.5f;
+        const auto offsetY = y + (size.y - textHeight) * 0.5f;
         DrawTextPro(*font, text.c_str(), {offsetX, offsetY}, {0, 0}, GetRotation(), fontSize, 2, textColor);
     }
 
