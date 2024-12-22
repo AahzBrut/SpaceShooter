@@ -12,7 +12,7 @@ namespace SpaceShooter {
     }
 
     Player &PlayerManager::CreateNewPlayer() {
-        players.emplace(players.end(), Player{});
+        players.emplace(players.end());
         return players.back();
     }
 
@@ -28,5 +28,11 @@ namespace SpaceShooter {
             return &players[index];
         }
         return nullptr;
+    }
+
+    void PlayerManager::DeletePlayer(const int index) {
+        if (index >= 0 && index < players.size()) {
+            players.erase(players.begin() + index);
+        }
     }
 }

@@ -12,7 +12,21 @@ namespace SpaceShooter {
         : world{world},
           frameRateLabel{"FPS: "},
           playerScoreIcon{"assets/SpaceShooterRedux/PNG/Power-ups/star_gold.png"},
-          playerScoreText{""} {
+          playerScoreText{""},
+          winLooseText{""},
+          finalScoreText{""},
+          restartButton{"Restart"},
+          quitButton{"Quit"} {
+        winLooseText.SetFontSize(64);
+        winLooseText.SetVisible(false);
+        finalScoreText.SetFontSize(48);
+        finalScoreText.SetVisible(false);
+        finalScoreText.SetColor(RED);
+        restartButton.SetFontSize(32);
+        restartButton.SetVisible(false);
+        quitButton.SetFontSize(32);
+        quitButton.SetVisible(false);
+
         frameRateLabel.SetFontSize(36);
         frameRateLabel.SetPosition({10, 5});
 
@@ -33,6 +47,11 @@ namespace SpaceShooter {
         for (auto lifeIcon: playerLives) {
             lifeIcon.Draw();
         }
+
+        winLooseText.Draw();
+        finalScoreText.Draw();
+        restartButton.Draw();
+        quitButton.Draw();
     }
 
     void GameHUD::Update(const float deltaTime) {
@@ -41,7 +60,19 @@ namespace SpaceShooter {
     }
 
     bool GameHUD::HandleEvent() {
+        winLooseText.HandleEvent();
+        finalScoreText.HandleEvent();
+        restartButton.HandleEvent();
+        quitButton.HandleEvent();
         return HUD::HandleEvent();
+    }
+
+    void GameHUD::OnQuitButtonClicked() {
+        QuitButtonPressed.Emit();
+    }
+
+    void GameHUD::OnRestartButtonClicked() {
+        RestartButtonPressed.Emit();
     }
 
     void GameHUD::SubscribeToPlayersEvents() {
@@ -70,6 +101,9 @@ namespace SpaceShooter {
             OnPLayerScoreChanged(player->GetScore());
             InitLifeCountWidgets(player);
             SubscribeToPlayersEvents();
+
+            restartButton.ButtonClicked.BindAction(GetWeakRef(), &GameHUD::OnRestartButtonClicked);
+            quitButton.ButtonClicked.BindAction(GetWeakRef(), &GameHUD::OnQuitButtonClicked);
         }
     }
 
@@ -86,5 +120,26 @@ namespace SpaceShooter {
     void GameHUD::OnPLayerScoreChanged(const unsigned int score) {
         const auto scoreText = std::format("{:06}", score);
         playerScoreText.SetText(scoreText);
+    }
+
+    void GameHUD::GameFinished(const bool playerWon) {
+        winLooseText.SetVisible(true);
+        finalScoreText.SetVisible(true);
+        restartButton.SetVisible(true);
+        quitButton.SetVisible(true);
+
+        if (playerWon) {
+            winLooseText.SetText("You Won!");
+        } else {
+            winLooseText.SetText("You Loose!");
+        }
+        finalScoreText.SetText(std::format("{:06}", PlayerManager::Get().GetPlayer()->GetScore()));
+
+        const auto [windowWidth, windowHeight] = world->GetWindowSize();
+
+        winLooseText.SetPosition({120, windowHeight * .2f});
+        finalScoreText.SetPosition({200, windowHeight *.3f});
+        restartButton.SetPosition({200, windowHeight *.4f});
+        quitButton.SetPosition({200, windowHeight *.5f});
     }
 }

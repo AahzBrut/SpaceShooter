@@ -10,7 +10,8 @@ namespace SpaceShooter {
 
         Player& CreateNewPlayer();
         Player* GetPlayer(int index = 0);
-        const Player* GetPlayer(int index = 0) const;
+        [[nodiscard]] const Player* GetPlayer(int index = 0) const;
+        void DeletePlayer(int index = 0);
 
     protected:
         PlayerManager() = default;

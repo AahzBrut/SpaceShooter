@@ -13,6 +13,7 @@ namespace SpaceShooter {
     }
 
     bool Button::HandleEvent() {
+        if (!IsVisible()) return false;
         const auto [mouseX, mouseY] = GetMousePosition();
         const auto [minX, minY] = GetPosition();
         const auto maxX = minX + size.x;

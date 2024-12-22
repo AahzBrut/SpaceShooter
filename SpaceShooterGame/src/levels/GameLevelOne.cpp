@@ -8,7 +8,9 @@
 #include "enemy/TweenBladeStage.h"
 #include "enemy/UFOStage.h"
 #include "enemy/VanguardStage.h"
+#include "framework/Application.h"
 #include "gameplay/WaitStage.h"
+#include "levels/MainMenu.h"
 #include "player/Player.h"
 #include "player/PlayerManager.h"
 #include "player/PlayerSpaceShip.h"
@@ -16,6 +18,15 @@
 
 namespace SpaceShooter {
     GameLevelOne::GameLevelOne(Application *application) : World(application) {}
+
+    void GameLevelOne::OnQuitButtonPressed() {
+        GetApplication()->Quit();
+    }
+
+    void GameLevelOne::OnRestartButtonPressed() {
+        PlayerManager::Get().DeletePlayer();
+        GetApplication()->LoadWorld<MainMenu>();
+    }
 
     void GameLevelOne::InitStages() {
         AddStage(std::make_shared<BossStage>(this));
@@ -37,6 +48,12 @@ namespace SpaceShooter {
         playerSpaceShip.lock()->Destroyed.BindAction(GetWeakRef(), &GameLevelOne::OnPlayerShipDestroyed);
 
         gameHUD = SpawnHUD<GameHUD>();
+        gameHUD.lock()->RestartButtonPressed.BindAction(GetWeakRef(), &GameLevelOne::OnRestartButtonPressed);
+        gameHUD.lock()->QuitButtonPressed.BindAction(GetWeakRef(), &GameLevelOne::OnQuitButtonPressed);
+    }
+
+    void GameLevelOne::AllStagesFinished() {
+        gameHUD.lock()->GameFinished(true);
     }
 
     void GameLevelOne::OnPlayerShipDestroyed([[maybe_unused]] Actor *actor) {
@@ -48,7 +65,7 @@ namespace SpaceShooter {
         }
     }
 
-    void GameLevelOne::GameOver() {
-        LOG("GAME OVER");
+    void GameLevelOne::GameOver() const {
+        gameHUD.lock()->GameFinished(false);
     }
 }

@@ -16,9 +16,12 @@ namespace SpaceShooter {
         Weak<PlayerSpaceShip> playerSpaceShip;
         Weak<GameHUD> gameHUD;
 
+        void OnQuitButtonPressed();
+        void OnRestartButtonPressed();
         void InitStages() override;
         void Initialize() override;
+        void AllStagesFinished() override;
         void OnPlayerShipDestroyed(Actor* actor);
-        void GameOver();
+        void GameOver() const;
     };
 }
