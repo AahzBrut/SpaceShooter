@@ -44,6 +44,8 @@ add_library(SpaceShooterEngine STATIC
         src/framework/Object.cpp
         include/widgets/Button.h
         src/widgets/Button.cpp
+        include/framework/ScrollingBackground.h
+        src/framework/ScrollingBackground.cpp
 )
 
 target_link_libraries(SpaceShooterEngine PRIVATE box2d raylib)

@@ -9,6 +9,7 @@
 #include "enemy/UFOStage.h"
 #include "enemy/VanguardStage.h"
 #include "framework/Application.h"
+#include "framework/ScrollingBackground.h"
 #include "gameplay/WaitStage.h"
 #include "levels/MainMenu.h"
 #include "player/Player.h"
@@ -43,6 +44,8 @@ namespace SpaceShooter {
     }
 
     void GameLevelOne::Initialize() {
+        SpawnActor<ScrollingBackground>();
+
         auto& newPlayer = PlayerManager::Get().CreateNewPlayer();
         playerSpaceShip = newPlayer.SpawnSpaceship(this);
         playerSpaceShip.lock()->Destroyed.BindAction(GetWeakRef(), &GameLevelOne::OnPlayerShipDestroyed);

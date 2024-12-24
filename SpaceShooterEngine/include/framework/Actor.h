@@ -20,7 +20,6 @@ namespace SpaceShooter {
         void SetTexture(const std::string &texturePath);
         void InitializeInternal();
         void UpdateInternal(float deltaTime);
-        void Render() const;
 
         [[nodiscard]] Vector2 Position() const;
         void SetPosition(const Vector2 &position);
@@ -42,9 +41,12 @@ namespace SpaceShooter {
         [[nodiscard]] World *GetWorld() const { return world; }
         [[nodiscard]] bool IsOutOfWindowBounds(float allowance = 10) const;
         [[nodiscard]] Vector2 GetSize() const { return size; }
+        void SetSize(const Vector2 &newSize) { size = newSize; }
         void SetPhysicsEnabled(bool enablePhysics);
         void UpdatePhysicsBodyTransform() const;
+        const Texture2D &GetTexture() const { return *texture; }
 
+        virtual void Render() const;
         virtual void Initialize() {}
         virtual void Update(float deltaTime) {}
         virtual void OnContactBegin(Actor *actor) {}
