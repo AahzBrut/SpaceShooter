@@ -9,6 +9,7 @@
 #include "enemy/UFOStage.h"
 #include "enemy/VanguardStage.h"
 #include "framework/Application.h"
+#include "framework/BackgroundLayer.h"
 #include "framework/ScrollingBackground.h"
 #include "gameplay/WaitStage.h"
 #include "levels/MainMenu.h"
@@ -45,8 +46,22 @@ namespace SpaceShooter {
 
     void GameLevelOne::Initialize() {
         SpawnActor<ScrollingBackground>();
+        SpawnActor<BackgroundLayer>(List<std::string>{
+            "assets/SpaceShooterRedux/PNG/Meteors/meteorBrown_med1.png",
+            "assets/SpaceShooterRedux/PNG/Meteors/meteorBrown_med3.png",
+            "assets/SpaceShooterRedux/PNG/Meteors/meteorBrown_small1.png",
+            "assets/SpaceShooterRedux/PNG/Meteors/meteorBrown_small2.png",
+            "assets/SpaceShooterRedux/PNG/Meteors/meteorBrown_tiny1.png",
+            "assets/SpaceShooterRedux/PNG/Meteors/meteorBrown_tiny2.png",
+            "assets/SpaceShooterRedux/PNG/Meteors/meteorGrey_med1.png",
+            "assets/SpaceShooterRedux/PNG/Meteors/meteorGrey_med2.png",
+            "assets/SpaceShooterRedux/PNG/Meteors/meteorGrey_small1.png",
+            "assets/SpaceShooterRedux/PNG/Meteors/meteorGrey_small2.png",
+            "assets/SpaceShooterRedux/PNG/Meteors/meteorGrey_tiny1.png",
+            "assets/SpaceShooterRedux/PNG/Meteors/meteorGrey_tiny2.png"
+        });
 
-        auto& newPlayer = PlayerManager::Get().CreateNewPlayer();
+        auto &newPlayer = PlayerManager::Get().CreateNewPlayer();
         playerSpaceShip = newPlayer.SpawnSpaceship(this);
         playerSpaceShip.lock()->Destroyed.BindAction(GetWeakRef(), &GameLevelOne::OnPlayerShipDestroyed);
 
