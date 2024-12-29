@@ -21,6 +21,7 @@ namespace SpaceShooter {
     void AudioManager::Update() {
         for (auto iterator = sounds.begin(); iterator != sounds.end();) {
             if (!IsSoundPlaying(iterator->second)) {
+                UnloadSoundAlias(iterator->second);
                 iterator = sounds.erase(iterator);
             } else {
                 ++iterator;
