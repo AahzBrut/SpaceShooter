@@ -13,6 +13,8 @@ namespace SpaceShooter {
         void Initialize() override;
         void SetVelocity(const Vector2 &velocity);
         [[nodiscard]] Vector2 GetVelocity() const { return velocity; }
+        void SetDestructionSound(const std::string &soundPath);
+
         void Blink();
         void UpdateBlink(float deltaTime);
         virtual void ApplyDamage(float amount);
@@ -31,5 +33,6 @@ namespace SpaceShooter {
         float blinkTime{0};
         float blinkDuration{0.15f};
         Color blinkColorOffset{255, 0, 0, 255};
+        Shared<Sound> destructionSound{nullptr};
     };
 }

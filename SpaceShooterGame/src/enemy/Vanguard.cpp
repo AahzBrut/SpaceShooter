@@ -14,6 +14,7 @@ namespace SpaceShooter {
         CenterPivotOffset();
         SetVelocity(velocity);
         bulletShooter->SetMuzzleOffset(Vector2{0, 30});
+        SetDestructionSound("assets/SpaceShooterRedux/Bonus/sfx_lose.ogg");
     }
 
     void Vanguard::Shoot() {

@@ -48,6 +48,8 @@ add_library(SpaceShooterEngine STATIC
         src/framework/ScrollingBackground.cpp
         include/framework/BackgroundLayer.h
         src/framework/BackgroundLayer.cpp
+        include/audio/AudioManager.h
+        src/audio/AudioManager.cpp
 )
 
 target_link_libraries(SpaceShooterEngine PRIVATE box2d raylib)

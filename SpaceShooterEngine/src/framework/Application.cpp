@@ -32,7 +32,7 @@ namespace SpaceShooter {
 
     void Application::Run() {
         SetTargetFPS(60);
-
+        InitAudioDevice();
         auto lastAssetsClearTime = GetTime();
         while (!WindowShouldClose() && !quitRequested) {
             const auto deltaTime = GetFrameTime();
@@ -49,6 +49,7 @@ namespace SpaceShooter {
             // ReSharper disable once CppExpressionWithoutSideEffects
             DispatchEvent();
         }
+        CloseAudioDevice();
         CloseWindow();
     }
 

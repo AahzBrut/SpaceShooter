@@ -1,5 +1,7 @@
 #include "weapon/Shooter.h"
 
+#include "framework/AssetsManager.h"
+
 namespace SpaceShooter {
     void Shooter::IncreaseLevel(const int amount) {
         if (currentLevel + amount <= maxLevel) {
@@ -11,6 +13,10 @@ namespace SpaceShooter {
 
     void Shooter::SetLevel(const int amount) {
         currentLevel = amount;
+    }
+
+    void Shooter::SetShotSound(const std::string &soundPath) {
+        shotSound = AssetsManager::Get().GetSound(soundPath);
     }
 
     Shooter::Shooter(Actor *owner) {

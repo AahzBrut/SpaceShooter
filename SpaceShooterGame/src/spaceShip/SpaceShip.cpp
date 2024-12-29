@@ -1,5 +1,7 @@
 #include "spaceShip/SpaceShip.h"
 
+#include "audio/AudioManager.h"
+#include "framework/AssetsManager.h"
 #include "framework/MathUtility.h"
 #include "vfx/Explosion.h"
 #include "weapon/Bullet.h"
@@ -25,6 +27,10 @@ namespace SpaceShooter {
 
     void SpaceShip::SetVelocity(const Vector2 &velocity) {
         this->velocity = velocity;
+    }
+
+    void SpaceShip::SetDestructionSound(const std::string &soundPath) {
+        destructionSound = AssetsManager::Get().GetSound(soundPath);
     }
 
     void SpaceShip::Blink() {
@@ -57,6 +63,7 @@ namespace SpaceShooter {
     }
 
     void SpaceShip::OnDeath() {
+        if (destructionSound) AudioManager::Get().PlaySoundEffect(*destructionSound);
         const auto exp = new Explosion();
         exp->Spawn(GetWorld(), Position());
         Destroy();

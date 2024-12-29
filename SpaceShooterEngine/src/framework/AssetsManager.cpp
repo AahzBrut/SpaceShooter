@@ -19,9 +19,14 @@ namespace SpaceShooter {
     void AssetsManager::CleanCycle() {
         CleanUnusedAssets(textures, UnloadTexture);
         CleanUnusedAssets(fonts, UnloadFont);
+        CleanUnusedAssets(sounds, UnloadSound);
     }
 
     Shared<Font> AssetsManager::GetFont(const std::string &path) {
         return LoadAsset(path, fonts, LoadFont);
+    }
+
+    Shared<Sound> AssetsManager::GetSound(const std::string &path) {
+        return LoadAsset(path, sounds, LoadSound);
     }
 }

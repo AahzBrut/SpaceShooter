@@ -15,8 +15,11 @@ namespace SpaceShooter {
         [[nodiscard]] int GetMaxLevel() const { return maxLevel; }
         virtual void IncreaseLevel(int amount);
         virtual void SetLevel(int amount);
+        void SetShotSound(const std::string &soundPath);
 
     protected:
+        Shared<Sound> shotSound{nullptr};
+
         explicit Shooter(Actor *owner);
 
     private:

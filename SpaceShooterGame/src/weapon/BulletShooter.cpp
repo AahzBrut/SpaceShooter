@@ -1,5 +1,6 @@
 #include "weapon/BulletShooter.h"
 
+#include "audio/AudioManager.h"
 #include "framework/MathUtility.h"
 #include "framework/World.h"
 #include "weapon/Bullet.h"
@@ -20,6 +21,7 @@ namespace SpaceShooter {
     }
 
     void BulletShooter::ShootImpl() {
+        if (shotSound) AudioManager::Get().PlaySoundEffect(*shotSound);
         lastShootTime = static_cast<float>(GetTime());
         const Weak<Bullet> newBullet = GetOwner()->GetWorld()->SpawnActor<Bullet>(
             GetOwner(), bulletLayer, bulletMaskLayer);
