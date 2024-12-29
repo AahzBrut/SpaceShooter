@@ -9,12 +9,14 @@ namespace SpaceShooter {
     public:
         static AudioManager &Get();
 
-        void PlaySoundEffect(const Sound &sound);
+        void PlaySoundEffect(const Shared<Sound> &sound);
+        void Update();
 
     protected:
         AudioManager() = default;
 
     private:
         static Unique<AudioManager> instance;
+        List<Sound> sounds{};
     };
 }

@@ -63,7 +63,7 @@ namespace SpaceShooter {
     }
 
     void SpaceShip::OnDeath() {
-        if (destructionSound) AudioManager::Get().PlaySoundEffect(*destructionSound);
+        if (destructionSound) AudioManager::Get().PlaySoundEffect(destructionSound);
         const auto exp = new Explosion();
         exp->Spawn(GetWorld(), Position());
         Destroy();

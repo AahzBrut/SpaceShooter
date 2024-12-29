@@ -14,7 +14,6 @@ namespace SpaceShooter {
           bulletShooter{new BulletShooter(this, 0.1f, PlayerBullet, Enemy | EnemyBullet)} {
         SetRotation(-90);
         CenterPivotOffset();
-        bulletShooter->SetShotSound("assets/SpaceShooterRedux/SFX/Shots/mini_shoot.ogg");
     }
 
     void PlayerSpaceShip::Update(const float deltaTime) {

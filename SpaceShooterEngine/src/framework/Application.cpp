@@ -4,6 +4,7 @@
 #include <raylib.h>
 #include <string>
 
+#include "audio/AudioManager.h"
 #include "framework/AssetsManager.h"
 #include "framework/PhysicsSystem.h"
 #include "framework/TimerManager.h"
@@ -41,6 +42,7 @@ namespace SpaceShooter {
 
             TimerManager::Get().UpdateTimers(deltaTime);
             PhysicsSystem::Get().Update(deltaTime);
+            AudioManager::Get().Update();
             if (GetTime() - lastAssetsClearTime > cleanInterval) {
                 lastAssetsClearTime = GetTime();
                 AssetsManager::Get().CleanCycle();

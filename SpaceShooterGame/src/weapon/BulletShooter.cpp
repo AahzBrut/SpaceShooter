@@ -14,14 +14,15 @@ namespace SpaceShooter {
           bulletLayer{bulletLayer},
           bulletMaskLayer{bulletMaskLayer} {
         this->coolDownTimeout = coolDownTimeout;
-    }
+        SetShotSound("assets/SpaceShooterRedux/SFX/Shots/mini_shoot.ogg");
+ }
 
     bool BulletShooter::IsOnCooldown() {
         return lastShootTime + coolDownTimeout / static_cast<float>(GetCurrentLevel() + 1) > GetTime();
     }
 
     void BulletShooter::ShootImpl() {
-        if (shotSound) AudioManager::Get().PlaySoundEffect(*shotSound);
+        if (shotSound) AudioManager::Get().PlaySoundEffect(shotSound);
         lastShootTime = static_cast<float>(GetTime());
         const Weak<Bullet> newBullet = GetOwner()->GetWorld()->SpawnActor<Bullet>(
             GetOwner(), bulletLayer, bulletMaskLayer);
