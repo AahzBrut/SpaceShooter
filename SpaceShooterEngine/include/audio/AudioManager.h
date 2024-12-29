@@ -17,6 +17,6 @@ namespace SpaceShooter {
 
     private:
         static Unique<AudioManager> instance;
-        List<Sound> sounds{};
+        List<Pair<Weak<Sound>, Sound>> sounds{};
     };
 }

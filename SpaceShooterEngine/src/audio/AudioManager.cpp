@@ -14,13 +14,13 @@ namespace SpaceShooter {
     }
 
     void AudioManager::PlaySoundEffect(const Shared<Sound> &sound) {
-        sounds.push_back(LoadSoundAlias(*sound));
-        PlaySound(sounds.back());
+        sounds.emplace_back(sound, LoadSoundAlias(*sound));
+        PlaySound(sounds.back().second);
     }
 
     void AudioManager::Update() {
         for (auto iterator = sounds.begin(); iterator != sounds.end();) {
-            if (!IsSoundPlaying(*iterator)) {
+            if (!IsSoundPlaying(iterator->second)) {
                 iterator = sounds.erase(iterator);
             } else {
                 ++iterator;

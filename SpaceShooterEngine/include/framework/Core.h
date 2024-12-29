@@ -21,6 +21,9 @@ template<> struct std::equal_to<b2BodyId> {
 };
 
 namespace SpaceShooter {
+    template<typename K, typename V>
+    using Pair = std::pair<K, V>;
+
     template<typename T>
     using Unique = std::unique_ptr<T>;
 
