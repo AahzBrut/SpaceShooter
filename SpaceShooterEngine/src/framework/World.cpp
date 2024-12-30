@@ -2,8 +2,10 @@
 
 #include <format>
 
+#include "audio/AudioManager.h"
 #include "framework/Actor.h"
 #include "framework/Application.h"
+#include "framework/AssetsManager.h"
 #include "framework/Core.h"
 #include "gameplay/GameStage.h"
 #include "widgets/HUD.h"
@@ -21,6 +23,8 @@ namespace SpaceShooter {
         for (auto iterator = childActors.begin(); iterator < childActors.end();) {
             iterator = childActors.erase(iterator);
         }
+        AudioManager::Get().CleanCycle();
+        AssetsManager::Get().CleanCycle();
     }
 
     void World::InternalInitialize() {
